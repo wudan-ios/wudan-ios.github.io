@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一个孤独的搬码猿" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="代码简单易懂，属于自己练手的代码，还在学习，写的不好，希望勿喷1、头文件123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSUME_NONNULL_BEGINtypede">
+<meta name="keywords" content="iOS, Swift, Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS自定义控件：一个简易的Combobox">
+<meta property="og:url" content="https://wudan-ios.github.io/2018/08/18/iOS自定义控件：一个简易的Combobox/index.html">
+<meta property="og:site_name" content="一个孤独的搬码猿">
+<meta property="og:description" content="代码简单易懂，属于自己练手的代码，还在学习，写的不好，希望勿喷1、头文件123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSUME_NONNULL_BEGINtypede">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-72958ace35bcee4e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-a1266d179a4f81d9.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-10T02:10:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS自定义控件：一个简易的Combobox">
+<meta name="twitter:description" content="代码简单易懂，属于自己练手的代码，还在学习，写的不好，希望勿喷1、头文件123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSUME_NONNULL_BEGINtypede">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-72958ace35bcee4e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wudan-ios.github.io/2018/08/18/iOS自定义控件：一个简易的Combobox/">
+
+
+
+
+
+  <title>iOS自定义控件：一个简易的Combobox | 一个孤独的搬码猿</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一个孤独的搬码猿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虽然代码虐我千百遍，我对代码如初恋。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2018/08/18/iOS自定义控件：一个简易的Combobox/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wudan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/HeaderImage.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个孤独的搬码猿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS自定义控件：一个简易的Combobox</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T10:12:00+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/18/iOS自定义控件：一个简易的Combobox/" class="leancloud_visitors" data-flag-title="iOS自定义控件：一个简易的Combobox">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-72958ace35bcee4e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用图"></p>
+<p>代码简单易懂，属于自己练手的代码，还在学习，写的不好，希望勿喷<br>1、头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, WDComboBoxControlDirection) &#123;</span><br><span class="line">    WDComboBoxControlDirectionTop,</span><br><span class="line">    WDComboBoxControlDirectionLeading,</span><br><span class="line">    WDComboBoxControlDirectionTrailing,</span><br><span class="line">    WDComboBoxControlDirectionBottom,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@protocol WDComboBoxControlDataSource &lt;NSObject&gt;</span><br><span class="line">@optional</span><br><span class="line">/** &lt; 数据数组 &gt; */</span><br><span class="line">- (NSArray&lt;NSArray&lt;NSString *&gt; *&gt; *)dataSourceOfColunm;</span><br><span class="line">@required</span><br><span class="line">/** &lt; 标题数组 &gt; */</span><br><span class="line">- (NSArray&lt;NSString *&gt; *)titleOfSection;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@protocol WDComboBoxControlDelegate &lt;NSObject&gt;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 点击事件</span><br><span class="line"> </span><br><span class="line"> @param indexPath indexPath description</span><br><span class="line"> @param title title description</span><br><span class="line"> @param sourceView sourceView description</span><br><span class="line"> */</span><br><span class="line">- (void)selectedAtIndexPath:(NSIndexPath *)indexPath resultTitle:(NSString *)title fromSourceView:(UIView *)sourceView;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@interface WDComboBoxControl : UIView</span><br><span class="line"></span><br><span class="line">@property (nonatomic, weak) id &lt;WDComboBoxControlDataSource&gt; dataSource;</span><br><span class="line">@property (nonatomic, weak) id &lt;WDComboBoxControlDelegate&gt; delegate;</span><br><span class="line">/** &lt; 背景按钮，可以定义需要的属性 &gt; */</span><br><span class="line">@property (nonatomic, strong) UIButton *backgroundButton;</span><br><span class="line">/** &lt; 内容TableView，也可以定义一些属性 &gt; */</span><br><span class="line">@property (nonatomic, strong) UITableView *tableView;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 初始化方法</span><br><span class="line"></span><br><span class="line"> @param height 显示内容高度</span><br><span class="line"> @param view 参考View</span><br><span class="line"> @return return value description</span><br><span class="line"> */</span><br><span class="line">- (instancetype)initViewWithMaxHeight:(CGFloat)height fromView:(UIView *)view showDirection:(WDComboBoxControlDirection)direction;</span><br><span class="line">/**</span><br><span class="line"> 显示页面</span><br><span class="line"> */</span><br><span class="line">- (void)showInView;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure></p>
+<p>2、实现文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;WDComboBoxControl.h&quot;</span><br><span class="line"></span><br><span class="line">@interface WDComboBoxControl () &lt;UITableViewDelegate, UITableViewDataSource&gt;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, assign) CGFloat viewHeight;</span><br><span class="line">@property (nonatomic, strong) NSArray&lt;NSArray&lt;NSString *&gt; *&gt; * dataArray;</span><br><span class="line">@property (nonatomic, strong) NSArray&lt;NSString *&gt; * titleArray;</span><br><span class="line">@property (nonatomic, strong) UIView *sourceView;</span><br><span class="line">@property (nonatomic, assign) WDComboBoxControlDirection direction;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation WDComboBoxControl</span><br><span class="line"></span><br><span class="line">#pragma mark =============== 初始化页面 ===============</span><br><span class="line">- (instancetype)initViewWithMaxHeight:(CGFloat)height fromView:(UIView *)view showDirection:(WDComboBoxControlDirection)direction &#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">        _viewHeight = height;</span><br><span class="line">        _sourceView = view;</span><br><span class="line">        _direction = direction;</span><br><span class="line">        [self setupSubViewsPropertys];</span><br><span class="line">        [self setupSubViewsConstraints];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== 显示页面 ===============</span><br><span class="line">- (void)showInView &#123;</span><br><span class="line">    self.frame = UIScreen.mainScreen.bounds;</span><br><span class="line">    [UIApplication.sharedApplication.delegate.window addSubview:self];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== 让页面消失 ===============</span><br><span class="line">- (void)dismisssView &#123;</span><br><span class="line">    [self removeFromSuperview];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== 获取数据源 ===============</span><br><span class="line">- (void)setDataSource:(id&lt;WDComboBoxControlDataSource&gt;)dataSource &#123;</span><br><span class="line">    _dataSource = dataSource;</span><br><span class="line">    if (self.dataSource &amp;&amp; [self.dataSource respondsToSelector:@selector(dataSourceOfColunm)]) &#123;</span><br><span class="line">        self.dataArray = [self.dataSource dataSourceOfColunm];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (self.dataArray &amp;&amp; [self.dataSource respondsToSelector:@selector(titleOfSection)]) &#123;</span><br><span class="line">        self.titleArray =  [self.dataSource titleOfSection];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [self.tableView reloadData];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== Add controls, set properties ===============</span><br><span class="line">- (void)setupSubViewsPropertys &#123;</span><br><span class="line">    self.backgroundButton = [[UIButton alloc] init];</span><br><span class="line">    self.backgroundButton.backgroundColor = UIColor.clearColor;</span><br><span class="line">    [self.backgroundButton addTarget:self action:@selector(dismisssView) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [self addSubview:self.backgroundButton];</span><br><span class="line">    </span><br><span class="line">    self.tableView = [[UITableView alloc] init];</span><br><span class="line">    self.tableView.delegate = self;</span><br><span class="line">    self.tableView.dataSource = self;</span><br><span class="line">    self.tableView.tableFooterView = [[UIView alloc] init];</span><br><span class="line">    self.tableView.layer.borderColor = UIColor.lightGrayColor.CGColor;</span><br><span class="line">    self.tableView.layer.borderWidth = 0.5;</span><br><span class="line">    self.tableView.estimatedRowHeight = 45;</span><br><span class="line">    self.tableView.layer.cornerRadius = 5;</span><br><span class="line">    self.tableView.rowHeight = UITableViewAutomaticDimension;</span><br><span class="line">    [self addSubview:self.tableView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== Setting control layout constraints ===============</span><br><span class="line">- (void)setupSubViewsConstraints &#123;</span><br><span class="line">    self.backgroundButton.frame = UIScreen.mainScreen.bounds;</span><br><span class="line">    </span><br><span class="line">    switch (self.direction) &#123;</span><br><span class="line">        case WDComboBoxControlDirectionBottom:&#123;</span><br><span class="line">            self.tableView.frame = CGRectMake(CGRectGetMinX(self.sourceView.frame),</span><br><span class="line">                                              CGRectGetMaxY(self.sourceView.frame),</span><br><span class="line">                                              self.sourceView.frame.size.width,</span><br><span class="line">                                              self.viewHeight);</span><br><span class="line">        &#125;</span><br><span class="line">            break;</span><br><span class="line">        case WDComboBoxControlDirectionTop:&#123;</span><br><span class="line">            self.tableView.frame = CGRectMake(CGRectGetMinX(self.sourceView.frame),</span><br><span class="line">                                              CGRectGetMaxY(self.sourceView.frame) - self.viewHeight - self.sourceView.frame.size.height,</span><br><span class="line">                                              self.sourceView.frame.size.width,</span><br><span class="line">                                              self.viewHeight);</span><br><span class="line">        &#125;</span><br><span class="line">            break;</span><br><span class="line">        case WDComboBoxControlDirectionLeading:&#123;</span><br><span class="line">            self.tableView.frame = CGRectMake(CGRectGetMinX(self.sourceView.frame) - self.sourceView.frame.size.width,</span><br><span class="line">                                              CGRectGetMinY(self.sourceView.frame),</span><br><span class="line">                                              self.sourceView.frame.size.width,</span><br><span class="line">                                              self.viewHeight);</span><br><span class="line">        &#125;</span><br><span class="line">            break;</span><br><span class="line">        case WDComboBoxControlDirectionTrailing:&#123;</span><br><span class="line">            self.tableView.frame = CGRectMake(CGRectGetMinX(self.sourceView.frame) + self.sourceView.frame.size.width,</span><br><span class="line">                                              CGRectGetMinY(self.sourceView.frame),</span><br><span class="line">                                              self.sourceView.frame.size.width,</span><br><span class="line">                                              self.viewHeight);</span><br><span class="line">        &#125;</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            break;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== UITableViewDelegate, UITableViewDataSource ===============</span><br><span class="line">- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section &#123;</span><br><span class="line">    return self.titleArray[section];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView &#123;</span><br><span class="line">    return self.dataArray.count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section &#123;</span><br><span class="line">    return [self.dataArray[section] count];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    </span><br><span class="line">    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;cell&quot;];</span><br><span class="line">    if (!cell) &#123;</span><br><span class="line">        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@&quot;cell&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    cell.textLabel.text = self.dataArray[indexPath.section][indexPath.row];</span><br><span class="line">    cell.textLabel.numberOfLines = 0;</span><br><span class="line">    </span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(selectedAtIndexPath:resultTitle: fromSourceView:)]) &#123;</span><br><span class="line">        [self.delegate selectedAtIndexPath:indexPath resultTitle:self.dataArray[indexPath.section][indexPath.row] fromSourceView:self.sourceView];</span><br><span class="line">        [self dismisssView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<p>3、使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">// 1、导入头文件</span><br><span class="line">#import &quot;WDComboBoxControl.h&quot;</span><br><span class="line">// 2、遵循代理和数据源</span><br><span class="line">&lt;WDComboBoxControlDataSource, WDComboBoxControlDelegate&gt;</span><br><span class="line">// 3、实现方法</span><br><span class="line">#pragma mark =============== WDComBoxControlDataSource ===============</span><br><span class="line">- (NSArray&lt;NSString *&gt; *)titleOfSection;</span><br><span class="line">- (NSArray&lt;NSArray&lt;NSString *&gt; *&gt; *)dataSourceOfColunm;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== WDComBoxControlDelegate ===============</span><br><span class="line">- (void)selectedAtIndexPath:(NSIndexPath *)indexPath resultTitle:(NSString *)title fromSourceView:(UIView *)sourceView;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 下面是实例：</span><br><span class="line">@property (nonatomic, strong) UIButton *button;</span><br><span class="line">@property (nonatomic, strong) UIButton *button2;</span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    // Do any additional setup after loading the view.</span><br><span class="line">    </span><br><span class="line">    UIButton *button = [[UIButton alloc] init];</span><br><span class="line">    [button setTitleColor:UIColor.blackColor forState:UIControlStateNormal];</span><br><span class="line">    [button addTarget:self action:@selector(buttonShow:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [self.view addSubview:button];</span><br><span class="line">    button.layer.borderColor = UIColor.lightGrayColor.CGColor;</span><br><span class="line">    button.layer.borderWidth = 0.5;</span><br><span class="line">    [button setTitle:@&quot;按钮&quot; forState:UIControlStateNormal];</span><br><span class="line">    [button mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line">        make.centerX.mas_equalTo(self.view);</span><br><span class="line">        make.top.mas_equalTo(self.wdNavigationBar.mas_bottom);</span><br><span class="line">        make.width.mas_equalTo(300);</span><br><span class="line"></span><br><span class="line">    &#125;];</span><br><span class="line">    self.button = button;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    UIButton *button2 = [[UIButton alloc] init];</span><br><span class="line">    [button2 setTitleColor:UIColor.blackColor forState:UIControlStateNormal];</span><br><span class="line">    [button2 addTarget:self action:@selector(buttonShow:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [self.view addSubview:button2];</span><br><span class="line">    button2.layer.borderColor = UIColor.lightGrayColor.CGColor;</span><br><span class="line">    button2.layer.borderWidth = 0.5;</span><br><span class="line">    [button2 setTitle:@&quot;按钮2&quot; forState:UIControlStateNormal];</span><br><span class="line">    button2.bounds = CGRectMake(0, 0, 300, 50);</span><br><span class="line">    button2.center = self.view.center;</span><br><span class="line">    self.button2 = button2;</span><br><span class="line">&#125;</span><br><span class="line">- (void)buttonShow:(UIButton *)sender &#123;</span><br><span class="line">    WDComboBoxControl *view = [[WDComboBoxControl alloc] initViewWithMaxHeight:400 fromView:sender showDirection:WDComboBoxControlDirectionBottom];</span><br><span class="line">    view.dataSource = self;</span><br><span class="line">    view.delegate = self;</span><br><span class="line">    view.backgroundButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];</span><br><span class="line">    [view showInView];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== WDComBoxControlDataSource ===============</span><br><span class="line">- (NSArray&lt;NSString *&gt; *)titleOfSection &#123;</span><br><span class="line">    return @[@&quot;安徽省&quot;, @&quot;浙江省&quot;, @&quot;江苏省&quot;, @&quot;安徽省&quot;, @&quot;浙江省&quot;, @&quot;江苏省&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSArray&lt;NSArray&lt;NSString *&gt; *&gt; *)dataSourceOfColunm &#123;</span><br><span class="line">    return @[@[@&quot;合肥&quot;, @&quot;芜湖&quot;, @&quot;安庆&quot;],</span><br><span class="line">             @[@&quot;南京&quot;, @&quot;苏州&quot;, @&quot;无锡&quot;],</span><br><span class="line">             @[@&quot;杭州&quot;, @&quot;宁波&quot;, @&quot;温州&quot;],</span><br><span class="line">             @[@&quot;合肥&quot;, @&quot;芜湖&quot;, @&quot;安庆&quot;],</span><br><span class="line">             @[@&quot;南京&quot;, @&quot;苏州&quot;, @&quot;无锡&quot;],</span><br><span class="line">             @[@&quot;杭州&quot;, @&quot;宁波&quot;, @&quot;温州&quot;]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== WDComBoxControlDelegate ===============</span><br><span class="line">- (void)selectedAtIndexPath:(NSIndexPath *)indexPath resultTitle:(NSString *)title fromSourceView:(UIView *)sourceView &#123;</span><br><span class="line">    UIButton *sender = (UIButton *)sourceView;</span><br><span class="line">    [sender setTitle:title forState:UIControlStateNormal];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4、效果图</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3334769-a1266d179a4f81d9.gif?imageMogr2/auto-orient/strip" alt="效果图"></p>
+<p>5、Demo地址（代码都在这里了，就不弄个Demo了，这个可以自定义的地方还有很多，TableView和背景的Button都可以，随心所欲吧！）</p>
+
+      
+    </div>
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/15/数据存储：归档、解档/" rel="next" title="数据存储：归档、解档">
+                <i class="fa fa-chevron-left"></i> 数据存储：归档、解档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/20/数据存储：KeyChain/" rel="prev" title="数据存储：KeyChain">
+                数据存储：KeyChain <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjQxMS8xODk1OA"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/HeaderImage.png" alt="wudan">
+            
+              <p class="site-author-name" itemprop="name">wudan</p>
+              <p class="site-description motion-element" itemprop="description">一只孤独的搬码猿，iOS开发的小菜。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wudan-ios" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6688638997" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/3ac0dc8a6a68" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wudan</span>
+<!--
+  
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">27.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+-->
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共27.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </div></footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("kEALmoqFpNRmWSOUDeGrEA1A-gzGzoHsz", "DzKgNH2UfSQaCGpT76P6QuVI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

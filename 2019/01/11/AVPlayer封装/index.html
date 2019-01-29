@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一个孤独的搬码猿" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="最近在写关于音视频播放的案例，所以就趁机会研究了一下AVPlayer的内容。我封装的目前只能播放网络音视频。还未添加缓存，以后找机会研究一下再更新。代码中提供了音视频的上一曲、下一曲、暂停、开始、停止、单曲播放、顺序播放、随机播放等功能。代码写的不好，仅供参考~ 代码接口文件1234567891011121314151617181920212223242526272829303132333435">
+<meta name="keywords" content="iOS, Swift, Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AVPlayer封装">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/01/11/AVPlayer封装/index.html">
+<meta property="og:site_name" content="一个孤独的搬码猿">
+<meta property="og:description" content="最近在写关于音视频播放的案例，所以就趁机会研究了一下AVPlayer的内容。我封装的目前只能播放网络音视频。还未添加缓存，以后找机会研究一下再更新。代码中提供了音视频的上一曲、下一曲、暂停、开始、停止、单曲播放、顺序播放、随机播放等功能。代码写的不好，仅供参考~ 代码接口文件1234567891011121314151617181920212223242526272829303132333435">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-066df343391a04f5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-11T07:45:56.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AVPlayer封装">
+<meta name="twitter:description" content="最近在写关于音视频播放的案例，所以就趁机会研究了一下AVPlayer的内容。我封装的目前只能播放网络音视频。还未添加缓存，以后找机会研究一下再更新。代码中提供了音视频的上一曲、下一曲、暂停、开始、停止、单曲播放、顺序播放、随机播放等功能。代码写的不好，仅供参考~ 代码接口文件1234567891011121314151617181920212223242526272829303132333435">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-066df343391a04f5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/01/11/AVPlayer封装/">
+
+
+
+
+
+  <title>AVPlayer封装 | 一个孤独的搬码猿</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一个孤独的搬码猿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虽然代码虐我千百遍，我对代码如初恋。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/01/11/AVPlayer封装/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wudan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/HeaderImage.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个孤独的搬码猿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AVPlayer封装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-11T15:41:50+08:00">
+                2019-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/11/AVPlayer封装/" class="leancloud_visitors" data-flag-title="AVPlayer封装">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-066df343391a04f5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="60920ddb4ccdca50074568b5ea54679f.jpg"></p>
+<p>最近在写关于音视频播放的案例，所以就趁机会研究了一下AVPlayer的内容。我封装的目前只能播放网络音视频。还未添加缓存，以后找机会研究一下再更新。代码中提供了音视频的上一曲、下一曲、暂停、开始、停止、单曲播放、顺序播放、随机播放等功能。代码写的不好，仅供参考~</p>
+<h3 id="代码接口文件"><a href="#代码接口文件" class="headerlink" title="代码接口文件"></a>代码接口文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line">#import &lt;AVFoundation/AVFoundation.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">// 当前播放器的播放形式</span><br><span class="line">typedef NS_ENUM(NSInteger, MediaPlayType) &#123;</span><br><span class="line">    MediaPlayTypeCycle,   ///&lt; 顺序</span><br><span class="line">    MediaPlayTypeSingle,  ///&lt; 单曲循环</span><br><span class="line">    MediaPlayTypeRandom   ///&lt; 随机播放</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 当前播放器的播放状态</span><br><span class="line">typedef NS_ENUM(NSInteger, MediaPlayStatus) &#123;</span><br><span class="line">    MediaPlayStatusStop,        ///&lt; 停止播放</span><br><span class="line">    MediaPlayStatusPause,       ///&lt; 暂停播放</span><br><span class="line">    MediaPlayStatusPlaying      ///&lt; 正在播放</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 媒体加载状态</span><br><span class="line">typedef NS_ENUM(NSInteger, MediaLoadStatus) &#123;</span><br><span class="line">    MediaLoadStatusReadyToPlay,  ///&lt; 准备播放</span><br><span class="line">    MediaLoadStatusUnknown,      ///&lt; 未知</span><br><span class="line">    MediaPlayStatusFailed        ///&lt; 失败</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@class MediaPlyerManager;</span><br><span class="line"></span><br><span class="line">@protocol MediaPlyerManagerDelegate &lt;NSObject&gt;</span><br><span class="line">@optional</span><br><span class="line">// 数据加载状态 根据状态进行播放或其他操作</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager playerItemStatus:(MediaLoadStatus)status;</span><br><span class="line">// 缓冲进度</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager netBufferValue:(CGFloat)value;</span><br><span class="line">// 缓冲是否足够播放</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager bufferHasEnough:(BOOL)enough;</span><br><span class="line">// 当前播放的时间</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager currentPlayTime:(NSString *)time currentPlayTimeValue:(CGFloat)value;</span><br><span class="line">// 播放总时间</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager mediaEndTime:(NSString *)time mediaEndTimeValue:(CGFloat)value;</span><br><span class="line">// 播放结束</span><br><span class="line">- (void)MediaPlayerCurrentMediaPlayFinish:(MediaPlyerManager *)playerManager;</span><br><span class="line">// 播放状态</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager playeStatus:(MediaPlayStatus)status;</span><br><span class="line">// 获取数据切换时获取正在播放的URL和当前的index</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager currentUrl:(NSString *)url currentIndex:(NSInteger)index;</span><br><span class="line">// 为了配合手机后台播放 实时获取播放的进度，总的时间，当前的index&lt;通过index获取图片等信息&gt;</span><br><span class="line">- (void)MediaPlayer:(MediaPlyerManager *)playerManager currentProgressValue:(CGFloat)value totalValue:(CGFloat)totalValue currentIndex:(NSInteger)index;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">typedef MediaPlyerManager *(^playerCurrentTime)(NSString *time);</span><br><span class="line"></span><br><span class="line">@interface MediaPlyerManager : NSObject</span><br><span class="line">@property (nonatomic, strong, readonly) AVPlayer                  *mediaPlayer;          ///&lt; 播放器</span><br><span class="line">@property (nonatomic, strong, readonly) AVPlayerItem              *meidaPlayerItem;      ///&lt; 播放器的CurrentItem</span><br><span class="line">@property (nonatomic, strong, readonly) NSMutableArray&lt;NSString*&gt; *dataUrlArray;         ///&lt; 正在播放的列表数据</span><br><span class="line">@property (nonatomic, assign, readonly) MediaPlayType              playType;             ///&lt; 当前播放类型</span><br><span class="line">@property (nonatomic, assign, readonly) MediaPlayStatus            playStatus;           ///&lt; 当前播放状态</span><br><span class="line">@property (nonatomic, assign, readonly) NSInteger                  currentIndex;         ///&lt; 当前播放的索引</span><br><span class="line">@property (nonatomic, assign, readonly) BOOL                       isPlaying;            ///&lt; 是否在播放</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat                    curentPlayTimeValue;  ///&lt; 当前播放时间值</span><br><span class="line">@property (nonatomic, copy, readonly) NSString                    *curentPlayTime;       ///&lt; 当前播放时间</span><br><span class="line">@property (nonatomic, assign, readonly) CGFloat                    endPlayTimeValue;     ///&lt; 当前播放时间值</span><br><span class="line">@property (nonatomic, copy, readonly) NSString                    *endPlayTime;          ///&lt; 当前播放时间</span><br><span class="line">+ (instancetype)defaultManager;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 列表播放 ⚠️&lt;默认不自动播放&gt;</span><br><span class="line"></span><br><span class="line"> @param urls 文件路径数组</span><br><span class="line"> @param delegate 回调代理</span><br><span class="line"> @return MediaPlyerManager</span><br><span class="line"> */</span><br><span class="line">- (MediaPlyerManager *)playerWithUrls:(NSArray&lt;NSString *&gt; *)urls actionWithDelegate:(id&lt;MediaPlyerManagerDelegate&gt;)delegate;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 单个音视频播放 ⚠️&lt;默认不自动播放&gt;</span><br><span class="line"></span><br><span class="line"> @param url 文件路径</span><br><span class="line"> @param delegate 回调代理</span><br><span class="line"> @return MediaPlyerManager</span><br><span class="line"> */</span><br><span class="line">- (MediaPlyerManager *)playerWithUrl:(NSString *)url actionWithDelegate:(id&lt;MediaPlyerManagerDelegate&gt;)delegate;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    开始播放</span><br><span class="line"> */</span><br><span class="line">- (void)play;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    暂停播放</span><br><span class="line"> */</span><br><span class="line">- (void)pause;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    停止播放</span><br><span class="line"> */</span><br><span class="line">- (void)stop;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    下一曲</span><br><span class="line"> */</span><br><span class="line">- (void)next;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    上一曲</span><br><span class="line"> */</span><br><span class="line">- (void)previous;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 指定进度开始播放</span><br><span class="line"></span><br><span class="line"> @param progress 进度百分比</span><br><span class="line"> */</span><br><span class="line">- (void)setupPlayerSeekToProgress:(CGFloat)progress;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 制定播放类型</span><br><span class="line"></span><br><span class="line"> @param type 类型</span><br><span class="line"> */</span><br><span class="line">- (void)setupMediaPlayerType:(MediaPlayType)type;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 指定播放的index</span><br><span class="line"></span><br><span class="line"> @param index 索引</span><br><span class="line"> */</span><br><span class="line">- (void)setupPlayerIndex:(NSInteger)index;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 添加数据</span><br><span class="line"></span><br><span class="line"> @param files 文件数组</span><br><span class="line"> @param index 索引</span><br><span class="line"> */</span><br><span class="line">- (void)insertMediaFile:(NSArray&lt;NSString *&gt; *)files atIndex:(NSInteger)index;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    移除全部数据</span><br><span class="line"> */</span><br><span class="line">- (void)removeAllFiles;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 移除索引中的单个数据</span><br><span class="line"></span><br><span class="line"> @param index 索引</span><br><span class="line"> */</span><br><span class="line">- (void)removeObjectAtIndex:(NSInteger)index;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 设置锁屏样式</span><br><span class="line"></span><br><span class="line"> @param coverImage 专辑图片</span><br><span class="line"> @param size 显示大小</span><br><span class="line"> @param title 标题</span><br><span class="line"> @param author 专辑作者</span><br><span class="line"> @param album 专辑名称</span><br><span class="line"> @param currentTime 当前播放时间</span><br><span class="line"> @param duration 播放总时长</span><br><span class="line"> */</span><br><span class="line">- (void)setupLockScreenPlayInfo:(UIImage *)coverImage</span><br><span class="line">                      imageSize:(CGSize)size</span><br><span class="line">                          title:(NSString *)title</span><br><span class="line">                         ahthor:(NSString *)author</span><br><span class="line">                         album:(NSString *)album</span><br><span class="line">                currentPlayTime:(CGFloat)currentTime</span><br><span class="line">                       duration:(CGFloat)duration;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<h3 id="代码实现文件"><a href="#代码实现文件" class="headerlink" title="代码实现文件"></a>代码实现文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;MediaPlyerManager.h&quot;</span><br><span class="line">#import &lt;MediaPlayer/MediaPlayer.h&gt;</span><br><span class="line"></span><br><span class="line">@interface MediaPlyerManager ()</span><br><span class="line">@property (nonatomic, strong, readwrite) NSMutableArray&lt;NSString *&gt; *dataUrlArray;</span><br><span class="line">@property (nonatomic, strong, readwrite) AVPlayer                  *mediaPlayer;</span><br><span class="line">@property (nonatomic, assign, readwrite) BOOL                      isPlaying;</span><br><span class="line">@property (nonatomic, strong, readwrite) AVPlayerItem              *meidaPlayerItem;</span><br><span class="line">@property (nonatomic, assign, readwrite) MediaPlayType             playeType;</span><br><span class="line">@property (nonatomic, assign, readwrite) NSInteger                 currentIndex;</span><br><span class="line">@property (nonatomic, assign, readwrite) MediaPlayStatus           playStatus;</span><br><span class="line">@property (nonatomic, assign, readwrite) CGFloat                   curentPlayTimeValue;</span><br><span class="line">@property (nonatomic, copy, readwrite  ) NSString                  *curentPlayTime;</span><br><span class="line">@property (nonatomic, assign, readwrite) CGFloat                   endPlayTimeValue;</span><br><span class="line">@property (nonatomic, copy, readwrite  ) NSString                  *endPlayTime;</span><br><span class="line">@property (nonatomic, weak             ) id &lt;MediaPlyerManagerDelegate&gt; delegate;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation MediaPlyerManager</span><br><span class="line"></span><br><span class="line">+ (instancetype)defaultManager &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    static MediaPlyerManager *manger;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        manger = [[MediaPlyerManager alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    return manger;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 初始化</span><br><span class="line"></span><br><span class="line">- (MediaPlyerManager *)playerWithUrl:(NSString *)url actionWithDelegate:(id&lt;MediaPlyerManagerDelegate&gt;)delegate &#123;</span><br><span class="line">    [self playerWithUrls:@[url] actionWithDelegate:delegate];</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (MediaPlyerManager *)playerWithUrls:(NSArray&lt;NSString *&gt; *)urls actionWithDelegate:(id&lt;MediaPlyerManagerDelegate&gt;)delegate &#123;</span><br><span class="line">    self.delegate         = delegate;</span><br><span class="line">    self.currentIndex     = 0;</span><br><span class="line">    self.dataUrlArray     = [NSMutableArray array];</span><br><span class="line">    NSMutableArray *array = [NSMutableArray arrayWithCapacity:urls.count];</span><br><span class="line">    for (NSString *urlStr in urls) &#123;</span><br><span class="line">        [array addObject:[self createPlayerItemWithUrl:urlStr]];</span><br><span class="line">        [self.dataUrlArray addObject:urlStr];</span><br><span class="line">    &#125;</span><br><span class="line">    self.playeType = MediaPlayTypeCycle;</span><br><span class="line">    self.mediaPlayer = [[AVPlayer alloc] initWithPlayerItem:array.firstObject];</span><br><span class="line">    self.meidaPlayerItem = self.mediaPlayer.currentItem;</span><br><span class="line">    [self getCurrentIndex:self.currentIndex];</span><br><span class="line">    [self addObserver];</span><br><span class="line">    </span><br><span class="line">    __weak typeof(self) weakself = self;</span><br><span class="line">    [self.mediaPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) &#123;</span><br><span class="line">        NSString *currentString = [weakself getStringFromCMTime:time];</span><br><span class="line">        weakself.curentPlayTime = currentString;</span><br><span class="line">        weakself.curentPlayTimeValue = (CGFloat)time.value/time.timescale;        </span><br><span class="line">#pragma mark - 获取当前播放时间</span><br><span class="line">        if (weakself.delegate &amp;&amp; [weakself.delegate respondsToSelector:@selector(MediaPlayer:currentPlayTime:currentPlayTimeValue:)]) &#123;</span><br><span class="line">            [weakself.delegate MediaPlayer:weakself currentPlayTime:currentString currentPlayTimeValue:(CGFloat)time.value/time.timescale];</span><br><span class="line">        &#125;</span><br><span class="line">#pragma mark - 实时获取播放信息</span><br><span class="line">        if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:currentProgressValue:totalValue:currentIndex:)]) &#123;</span><br><span class="line">            [weakself.delegate MediaPlayer:weakself currentProgressValue:weakself.curentPlayTimeValue totalValue:weakself.endPlayTimeValue currentIndex:weakself.currentIndex];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 播放结束</span><br><span class="line"></span><br><span class="line">- (void)playFinish:(NSNotification *)notification &#123;</span><br><span class="line">    if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayerCurrentMediaPlayFinish:)]) &#123;</span><br><span class="line">        [self.delegate MediaPlayerCurrentMediaPlayFinish:self];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (self.playeType == MediaPlayTypeSingle) &#123;</span><br><span class="line">        [self.mediaPlayer seekToTime:kCMTimeZero];</span><br><span class="line">        [self play];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (self.currentIndex &lt; self.dataUrlArray.count - 1) &#123;</span><br><span class="line">            self.currentIndex += 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            self.currentIndex = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        [self.mediaPlayer replaceCurrentItemWithPlayerItem:[self createPlayerItemWithUrl:self.dataUrlArray[self.currentIndex]]];</span><br><span class="line">        self.meidaPlayerItem = self.mediaPlayer.currentItem;</span><br><span class="line">        [self getCurrentIndex:self.currentIndex];</span><br><span class="line">        [self play];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - KVO</span><br><span class="line"></span><br><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath</span><br><span class="line">                      ofObject:(id)object</span><br><span class="line">                        change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change</span><br><span class="line">                       context:(void *)context &#123;</span><br><span class="line">    </span><br><span class="line">    AVPlayerItem *playerItem = object;</span><br><span class="line">    if ([keyPath isEqualToString:@&quot;status&quot;]) &#123;</span><br><span class="line">        MediaLoadStatus status = [change[@&quot;new&quot;] integerValue];</span><br><span class="line">#pragma mark - 获取媒体加载状态</span><br><span class="line">        if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:playerItemStatus:)]) &#123;</span><br><span class="line">            [self.delegate MediaPlayer:self playerItemStatus:status];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else if ([keyPath isEqualToString:@&quot;loadedTimeRanges&quot;]) &#123;</span><br><span class="line">        NSArray * timeRanges         = playerItem.loadedTimeRanges;</span><br><span class="line">        CMTimeRange timeRange        = [timeRanges.firstObject CMTimeRangeValue];</span><br><span class="line">        NSTimeInterval totalLoadTime = CMTimeGetSeconds(timeRange.start) \</span><br><span class="line">                                                + CMTimeGetSeconds(timeRange.duration);</span><br><span class="line">        NSTimeInterval duration      = CMTimeGetSeconds(playerItem.duration);</span><br><span class="line">        NSTimeInterval scale         = totalLoadTime/duration;</span><br><span class="line">        </span><br><span class="line">#pragma mark - 获取媒体总时间</span><br><span class="line">        if ((CGFloat)duration/scale &gt;= 0) &#123;</span><br><span class="line">            self.endPlayTime = [self getStringFromCMTime:playerItem.duration];</span><br><span class="line">            self.endPlayTimeValue = (CGFloat)duration/scale;</span><br><span class="line">            if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:mediaEndTime:mediaEndTimeValue:)]) &#123;</span><br><span class="line">                [self.delegate MediaPlayer:self mediaEndTime:[self getStringFromCMTime:playerItem.duration] mediaEndTimeValue:(CGFloat)duration/scale];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">#pragma mark - 缓冲百分比</span><br><span class="line">        if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:netBufferValue:)]) &#123;</span><br><span class="line">            [self.delegate MediaPlayer:self netBufferValue:scale];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else if ([keyPath isEqualToString:@&quot;playbackBufferEmpty&quot;]) &#123;</span><br><span class="line">        </span><br><span class="line">#pragma mark - 缓冲不足够播放</span><br><span class="line">        if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:bufferHasEnough:)]) &#123;</span><br><span class="line">            [self.delegate MediaPlayer:self bufferHasEnough:false];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else if ([keyPath isEqualToString:@&quot;playbackLikelyToKeepUp&quot;]) &#123;</span><br><span class="line">        </span><br><span class="line">#pragma mark - 缓冲足够播放</span><br><span class="line">        if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:bufferHasEnough:)]) &#123;</span><br><span class="line">            [self.delegate MediaPlayer:self bufferHasEnough:true];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#pragma mark - 开始播放</span><br><span class="line"></span><br><span class="line">- (void)play &#123;</span><br><span class="line">    [self.mediaPlayer play];</span><br><span class="line">    [self getPlayStatus:MediaPlayStatusPlaying];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 暂停播放</span><br><span class="line"></span><br><span class="line">- (void)pause &#123;</span><br><span class="line">    [self.mediaPlayer pause];</span><br><span class="line">    [self getPlayStatus:MediaPlayStatusPause];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 停止播放</span><br><span class="line"></span><br><span class="line">- (void)stop &#123;</span><br><span class="line">    [self.mediaPlayer replaceCurrentItemWithPlayerItem:nil];</span><br><span class="line">    [self getPlayStatus:MediaPlayStatusStop];</span><br><span class="line">    [self removeObserver];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 下一个</span><br><span class="line"></span><br><span class="line">- (void)next &#123;</span><br><span class="line">    if (self.playeType == MediaPlayTypeRandom) &#123;</span><br><span class="line">        self.currentIndex = (NSInteger)arc4random_uniform((int32_t)(self.dataUrlArray.count - 1));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (self.currentIndex == self.dataUrlArray.count - 1) &#123;</span><br><span class="line">            self.currentIndex = 0;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            self.currentIndex += 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    [self.mediaPlayer replaceCurrentItemWithPlayerItem:[self createPlayerItemWithUrl:self.dataUrlArray[self.currentIndex]]];</span><br><span class="line">    self.meidaPlayerItem = self.mediaPlayer.currentItem;</span><br><span class="line">    [self getCurrentIndex:self.currentIndex];</span><br><span class="line">    [self addObserver];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 上一个</span><br><span class="line"></span><br><span class="line">- (void)previous &#123;</span><br><span class="line">    if (self.playeType == MediaPlayTypeRandom) &#123;</span><br><span class="line">        self.currentIndex = (NSInteger)arc4random_uniform((int32_t)(self.dataUrlArray.count - 1));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (self.currentIndex == 0) &#123;</span><br><span class="line">            self.currentIndex = self.dataUrlArray.count - 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            self.currentIndex -= 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    [self.mediaPlayer replaceCurrentItemWithPlayerItem:[self createPlayerItemWithUrl:self.dataUrlArray[self.currentIndex]]];</span><br><span class="line">    self.meidaPlayerItem = self.mediaPlayer.currentItem;</span><br><span class="line">    [self getCurrentIndex:self.currentIndex];</span><br><span class="line">    [self addObserver];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 播放状态</span><br><span class="line"></span><br><span class="line">- (void)getPlayStatus:(MediaPlayStatus)status &#123;</span><br><span class="line">    if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:playeStatus:)]) &#123;</span><br><span class="line">        [self.delegate MediaPlayer:self playeStatus:status];</span><br><span class="line">    &#125;</span><br><span class="line">    self.playStatus = status;</span><br><span class="line"></span><br><span class="line">    if (status == MediaPlayStatusPlaying) &#123;</span><br><span class="line">        self.isPlaying = true;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        self.isPlaying = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 根据index进行回调</span><br><span class="line"></span><br><span class="line">- (void)getCurrentIndex:(NSInteger)index &#123;</span><br><span class="line">    if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(MediaPlayer:currentUrl:currentIndex:)]) &#123;</span><br><span class="line">        [self.delegate MediaPlayer:self currentUrl:self.dataUrlArray[index] currentIndex:index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 设置播放进度百分比</span><br><span class="line"></span><br><span class="line">- (void)setupPlayerSeekToProgress:(CGFloat)progress &#123;</span><br><span class="line">    float timeValue = progress * CMTimeGetSeconds(self.mediaPlayer.currentItem.duration);</span><br><span class="line">    [self.mediaPlayer seekToTime:CMTimeMake(timeValue, 1)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 设置播放形式</span><br><span class="line"></span><br><span class="line">- (void)setupMediaPlayerType:(MediaPlayType)type &#123;</span><br><span class="line">    self.playeType = type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 播放指定index的媒体</span><br><span class="line"></span><br><span class="line">- (void)setupPlayerIndex:(NSInteger)index &#123;</span><br><span class="line">    if (index &gt; (self.dataUrlArray.count - 1)) &#123;</span><br><span class="line">        @throw [NSException exceptionWithName:@&quot;越界错误&quot; reason:@&quot;index 不能超出URL数组的长度&quot; userInfo:nil];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    self.currentIndex = index;</span><br><span class="line">    [self.mediaPlayer replaceCurrentItemWithPlayerItem:[self createPlayerItemWithUrl:self.dataUrlArray[self.currentIndex]]];</span><br><span class="line">    self.meidaPlayerItem = self.mediaPlayer.currentItem;</span><br><span class="line">    [self getCurrentIndex:self.currentIndex];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 插入数据</span><br><span class="line"></span><br><span class="line">- (void)insertMediaFile:(NSArray&lt;NSString *&gt; *)files atIndex:(NSInteger)index &#123;</span><br><span class="line">    for (NSString *urlStr in files) &#123;</span><br><span class="line">        NSInteger i = [files indexOfObject:urlStr];</span><br><span class="line">        [self.dataUrlArray insertObject:urlStr atIndex:index + i];</span><br><span class="line">    &#125;</span><br><span class="line">    if (index &lt; self.currentIndex) &#123;</span><br><span class="line">        self.currentIndex += 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 删除数据</span><br><span class="line"></span><br><span class="line">- (void)removeAllFiles &#123;</span><br><span class="line">    [self stop];</span><br><span class="line">    [self.dataUrlArray removeAllObjects];</span><br><span class="line">    self.dataUrlArray = [NSMutableArray array];</span><br><span class="line">    self.currentIndex = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)removeObjectAtIndex:(NSInteger)index &#123;</span><br><span class="line">    if (self.dataUrlArray.count == 1) &#123;</span><br><span class="line">        [self removeAllFiles];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [self.dataUrlArray removeObjectAtIndex:index];</span><br><span class="line">        if (index == self.currentIndex) &#123;</span><br><span class="line">            if (index == 0) &#123;</span><br><span class="line">                self.currentIndex = 0;</span><br><span class="line">                [self next];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                self.currentIndex -= 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (self.currentIndex &gt; index) &#123;</span><br><span class="line">                self.currentIndex -= 1;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - Utils</span><br><span class="line"></span><br><span class="line">- (NSString *)getStringFromCMTime:(CMTime)time &#123;</span><br><span class="line">    float currentTimeValue       = (CGFloat)time.value/time.timescale;</span><br><span class="line">    NSDate * currentDate         = [NSDate dateWithTimeIntervalSince1970:currentTimeValue];</span><br><span class="line">    NSCalendar *calendar         = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];</span><br><span class="line">    NSInteger unitFlags          = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;</span><br><span class="line">    NSDateComponents *components = [calendar components:unitFlags fromDate:currentDate];</span><br><span class="line">    if (currentTimeValue &gt;= 3600 ) &#123;</span><br><span class="line">        return [NSString stringWithFormat:@&quot;%02ld:%02ld:%02ld&quot;, (long)components.hour, (long)components.minute, (long)components.second];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return [NSString stringWithFormat:@&quot;%02ld:%02ld&quot;, (long)components.minute, (long)components.second];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)addObserver &#123;</span><br><span class="line">    // 监控状态属性</span><br><span class="line">    [self.meidaPlayerItem addObserver:self</span><br><span class="line">                           forKeyPath:@&quot;status&quot;</span><br><span class="line">                              options:(NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew)</span><br><span class="line">                              context:nil];</span><br><span class="line">    </span><br><span class="line">    // 监控缓冲加载情况属性</span><br><span class="line">    [self.meidaPlayerItem addObserver:self</span><br><span class="line">                           forKeyPath:@&quot;loadedTimeRanges&quot;</span><br><span class="line">                              options:(NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew)</span><br><span class="line">                              context:nil];</span><br><span class="line">    </span><br><span class="line">    // 监听缓冲不足够播放</span><br><span class="line">    [self.meidaPlayerItem addObserver:self</span><br><span class="line">                           forKeyPath:@&quot;playbackBufferEmpty&quot;</span><br><span class="line">                              options:NSKeyValueObservingOptionNew</span><br><span class="line">                              context:nil];</span><br><span class="line">    </span><br><span class="line">    // 监听缓冲足够播放</span><br><span class="line">    [self.meidaPlayerItem addObserver:self</span><br><span class="line">                           forKeyPath:@&quot;playbackLikelyToKeepUp&quot;</span><br><span class="line">                              options:NSKeyValueObservingOptionNew</span><br><span class="line">                              context:nil];</span><br><span class="line">    </span><br><span class="line">    // 获取是否播放结束</span><br><span class="line">    [[NSNotificationCenter defaultCenter] addObserver:self</span><br><span class="line">                                             selector:@selector(playFinish:)</span><br><span class="line">                                                 name:AVPlayerItemDidPlayToEndTimeNotification</span><br><span class="line">                                               object:self.meidaPlayerItem];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)removeObserver &#123;</span><br><span class="line">    [[NSNotificationCenter defaultCenter] removeObserver:self];</span><br><span class="line">    @try &#123;</span><br><span class="line">        [self.meidaPlayerItem removeObserver:self forKeyPath:@&quot;loadedTimeRanges&quot;];</span><br><span class="line">        [self.meidaPlayerItem removeObserver:self forKeyPath:@&quot;playbackBufferEmpty&quot;];</span><br><span class="line">        [self.meidaPlayerItem removeObserver:self forKeyPath:@&quot;playbackLikelyToKeepUp&quot;];</span><br><span class="line">        [self.meidaPlayerItem removeObserver:self forKeyPath:@&quot;status&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    @catch(NSException *exception) &#123;</span><br><span class="line">        NSLog(@&quot;%@&quot;, exception);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 设置锁屏样式</span><br><span class="line"></span><br><span class="line">- (void)setupLockScreenPlayInfo:(UIImage *)coverImage</span><br><span class="line">                      imageSize:(CGSize)size</span><br><span class="line">                          title:(NSString *)title</span><br><span class="line">                         ahthor:(NSString *)author</span><br><span class="line">                          album:(NSString *)album</span><br><span class="line">                currentPlayTime:(CGFloat)currentTime</span><br><span class="line">                       duration:(CGFloat)duration &#123;</span><br><span class="line">    </span><br><span class="line">    Class playingInfoCenter = NSClassFromString(@&quot;MPNowPlayingInfoCenter&quot;);</span><br><span class="line">    if (playingInfoCenter) &#123;</span><br><span class="line">        NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];</span><br><span class="line">        MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithBoundsSize:size requestHandler:^UIImage * _Nonnull(CGSize size) &#123;</span><br><span class="line">            return coverImage;</span><br><span class="line">        &#125;];</span><br><span class="line">        [songInfo setObject:title forKey:MPMediaItemPropertyTitle];</span><br><span class="line">        [songInfo setObject:author forKey:MPMediaItemPropertyArtist];</span><br><span class="line">        [songInfo setObject:album forKey:MPMediaItemPropertyAlbumTitle];</span><br><span class="line">        [songInfo setObject:albumArt forKey:MPMediaItemPropertyArtwork];</span><br><span class="line">        [songInfo setObject:[NSNumber numberWithDouble:currentTime] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];</span><br><span class="line">        [songInfo setObject:[NSNumber numberWithDouble:duration] forKey:MPMediaItemPropertyPlaybackDuration];</span><br><span class="line">        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (AVPlayerItem *)createPlayerItemWithUrl:(NSString *)url &#123;</span><br><span class="line">    return [AVPlayerItem playerItemWithURL:[NSURL URLWithString:url]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h3 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h3><p>本来相同使用AVQueuePlayer来进行列表播放的，但是当做单曲循环的时候遇到问题：通过通知监听播放完成，在通知的方法里进行具体操作，但是设置无效，直接播放的还是下一个文件。如果有人知道如何解决，帮忙回复一下。</p>
+
+      
+    </div>
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/03/RxSwift学习日常（基础介绍）/" rel="next" title="RxSwift学习日常">
+                <i class="fa fa-chevron-left"></i> RxSwift学习日常
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/24/开发技巧/" rel="prev" title="iOS开发技巧-不断更新中">
+                iOS开发技巧-不断更新中 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjQxMS8xODk1OA"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/HeaderImage.png" alt="wudan">
+            
+              <p class="site-author-name" itemprop="name">wudan</p>
+              <p class="site-description motion-element" itemprop="description">一只孤独的搬码猿，iOS开发的小菜。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wudan-ios" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6688638997" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/3ac0dc8a6a68" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码接口文件"><span class="nav-number">1.</span> <span class="nav-text">代码接口文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现文件"><span class="nav-number">2.</span> <span class="nav-text">代码实现文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提问"><span class="nav-number">3.</span> <span class="nav-text">提问</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wudan</span>
+<!--
+  
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">27.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+-->
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共27.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </div></footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("kEALmoqFpNRmWSOUDeGrEA1A-gzGzoHsz", "DzKgNH2UfSQaCGpT76P6QuVI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一个孤独的搬码猿" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="系统SDK介绍 访问联系人，并选择信息 拨号 发送短信 发送邮件 本地通知  接口文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283">
+<meta name="keywords" content="iOS, Swift, Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统SDK介绍-01">
+<meta property="og:url" content="https://wudan-ios.github.io/2018/11/08/系统基础应用-01/index.html">
+<meta property="og:site_name" content="一个孤独的搬码猿">
+<meta property="og:description" content="系统SDK介绍 访问联系人，并选择信息 拨号 发送短信 发送邮件 本地通知  接口文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-08T00:30:36.261Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统SDK介绍-01">
+<meta name="twitter:description" content="系统SDK介绍 访问联系人，并选择信息 拨号 发送短信 发送邮件 本地通知  接口文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wudan-ios.github.io/2018/11/08/系统基础应用-01/">
+
+
+
+
+
+  <title>系统SDK介绍-01 | 一个孤独的搬码猿</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一个孤独的搬码猿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虽然代码虐我千百遍，我对代码如初恋。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2018/11/08/系统基础应用-01/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wudan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/HeaderImage.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个孤独的搬码猿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">系统SDK介绍-01</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T08:29:33+08:00">
+                2018-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/08/系统基础应用-01/" class="leancloud_visitors" data-flag-title="系统SDK介绍-01">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="系统SDK介绍"><a href="#系统SDK介绍" class="headerlink" title="系统SDK介绍"></a>系统SDK介绍</h3><ol>
+<li>访问联系人，并选择信息</li>
+<li>拨号</li>
+<li>发送短信</li>
+<li>发送邮件</li>
+<li>本地通知</li>
+</ol>
+<h4 id="接口文件"><a href="#接口文件" class="headerlink" title="接口文件"></a>接口文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line">#import &lt;ContactsUI/ContactsUI.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@interface LZSystemSDKManager : NSObject</span><br><span class="line"></span><br><span class="line">+ (instancetype)manager;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 选择联系人  先添加权限</span><br><span class="line"></span><br><span class="line"> @param result 选择的信息</span><br><span class="line"> */</span><br><span class="line">- (void)lz_selecteContactResulet:(void(^)(CNContact *obj))result API_AVAILABLE(ios(9.0));</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 发送邮件</span><br><span class="line"></span><br><span class="line"> @param toRecipients 收件人群组</span><br><span class="line"> @param ccRecipients 抄送人群组</span><br><span class="line"> @param bccRecipients 密送人群组</span><br><span class="line"> @param theme 主题</span><br><span class="line"> @param emailContent 正文内容</span><br><span class="line"> @param isHTML 是否是HTML格式</span><br><span class="line"> @param result 发送结果</span><br><span class="line"> */</span><br><span class="line">- (void)lz_postEmialWithToRecipients:(NSArray&lt;NSString *&gt; *)toRecipients</span><br><span class="line">                        ccRecipients:(NSArray&lt;NSString *&gt; *)ccRecipients</span><br><span class="line">                       bccRecipients:(NSArray&lt;NSString *&gt; *)bccRecipients</span><br><span class="line">                               theme:(NSString *)theme</span><br><span class="line">                        emailContent:(NSString *)emailContent</span><br><span class="line">                              isHTML:(BOOL)isHTML</span><br><span class="line">                               reslt:(void(^)(NSInteger))result;</span><br><span class="line">/**</span><br><span class="line"> 发送短信</span><br><span class="line"></span><br><span class="line"> @param toRecipients 收件人群组</span><br><span class="line"> @param content 内容</span><br><span class="line"> @param result 发送结果</span><br><span class="line"> */</span><br><span class="line">- (void)lz_sendMessageWithToRecipients:(NSArray&lt;NSString *&gt; *)toRecipients</span><br><span class="line">                               content:(NSString *)content</span><br><span class="line">                               reslt:(void(^)(NSInteger))result;</span><br><span class="line">/**</span><br><span class="line"> 拨号</span><br><span class="line"></span><br><span class="line"> @param phoneNum 号码</span><br><span class="line"> */</span><br><span class="line">- (void)lz_dailPhone:(NSString *)phoneNum;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 开启定位服务</span><br><span class="line"></span><br><span class="line"> @param localResult 定位获取信息</span><br><span class="line"> */</span><br><span class="line">- (void)lz_openLocationService:(void(^)(id info))localResult;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> IOS 10的通知   推送消息 支持的音频  图片 &lt;= 10M  视频 &lt;= 50M </span><br><span class="line"> </span><br><span class="line"> @param body 消息内容</span><br><span class="line"> @param promptTone 提示音</span><br><span class="line"> @param soundName 音频</span><br><span class="line"> @param imageName 图片</span><br><span class="line"> @param movieName 视频</span><br><span class="line"> @param identifier 消息标识</span><br><span class="line"> */</span><br><span class="line">-(void)lz_pushNotification_IOS_10_Title:(NSString *)title</span><br><span class="line">                               subtitle:(NSString *)subtitle</span><br><span class="line">                                   body:(NSString *)body</span><br><span class="line">                             promptTone:(NSString *)promptTone</span><br><span class="line">                              soundName:(NSString *)soundName</span><br><span class="line">                              imageName:(NSString *)imageName</span><br><span class="line">                              movieName:(NSString *)movieName</span><br><span class="line">                           timeInterval:(NSTimeInterval)TimeInterval</span><br><span class="line">                                repeats:(BOOL)repeats</span><br><span class="line">                             Identifier:(NSString *)identifier API_AVAILABLE(ios(10.0));</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> IOS 10前的通知</span><br><span class="line"></span><br><span class="line"> @param timeInterval 延迟时间</span><br><span class="line"> @param repeatInterval 重复提醒次数</span><br><span class="line"> @param alertBody 内容</span><br><span class="line"> @param alertTitle 标题</span><br><span class="line"> @param alertAction 滑动文字</span><br><span class="line"> @param alertLaunchImage alertLaunchImage</span><br><span class="line"> @param soundName 声音 为空则为系统声音</span><br><span class="line"> @param userInfo 字典参数</span><br><span class="line"> */</span><br><span class="line">- (void)lz_pushNotifationWithTimeInterval:(NSTimeInterval)timeInterval</span><br><span class="line">                           repeatInterval:(NSInteger)repeatInterval</span><br><span class="line">                                alertBody:(NSString *)alertBody</span><br><span class="line">                               alertTitle:(NSString *)alertTitle</span><br><span class="line">                              alertAction:(NSString *)alertAction</span><br><span class="line">                         alertLaunchImage:(NSString *)alertLaunchImage</span><br><span class="line">                                soundName:(NSString *)soundName</span><br><span class="line">                                 userInfo:(NSDictionary *)userInfo;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<h4 id="实现文件"><a href="#实现文件" class="headerlink" title="实现文件"></a>实现文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;LZSystemSDKManager.h&quot;</span><br><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line">#import &lt;MessageUI/MessageUI.h&gt;</span><br><span class="line">#import &lt;CoreLocation/CoreLocation.h&gt;</span><br><span class="line">#import &lt;UserNotifications/UserNotifications.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#define kRootViewController  UIApplication.sharedApplication.delegate.window.rootViewController</span><br><span class="line"></span><br><span class="line">@interface LZSystemSDKManager () &lt;  CNContactPickerDelegate,</span><br><span class="line">                                    MFMailComposeViewControllerDelegate,</span><br><span class="line">                                    MFMessageComposeViewControllerDelegate,</span><br><span class="line">                                    CLLocationManagerDelegate&gt;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy) void (^selectContactResult)(CNContact *obj) API_AVAILABLE(ios(9.0));</span><br><span class="line">@property (nonatomic, copy) void (^postEmailResult)(NSInteger obj);</span><br><span class="line">@property (nonatomic, copy) void (^sendMessageResult)(NSInteger obj);</span><br><span class="line">@property (nonatomic, copy) void (^locakResult)(id info);</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation LZSystemSDKManager</span><br><span class="line"></span><br><span class="line">+ (instancetype)manager &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    static LZSystemSDKManager *manager;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        manager = [[LZSystemSDKManager alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    return manager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 选择联系人信息</span><br><span class="line">- (void)lz_selecteContactResulet:(void(^)(CNContact *obj))result API_AVAILABLE(ios(9.0)) &#123;</span><br><span class="line">    self.selectContactResult = result;</span><br><span class="line"></span><br><span class="line">    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];</span><br><span class="line">    if (status == CNAuthorizationStatusNotDetermined) &#123;</span><br><span class="line">        CNContactStore *store = [[CNContactStore alloc] init];</span><br><span class="line">        [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) &#123;</span><br><span class="line">            if (error) &#123;</span><br><span class="line">                [self showHUDTitle:@&quot;未获取访问权限&quot; info:@&quot;请前往设置中打开访问权限&quot;];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                CNContactPickerViewController * picker = [CNContactPickerViewController new];</span><br><span class="line">                picker.delegate = self;</span><br><span class="line">                picker.displayedPropertyKeys = @[CNContactPhoneNumbersKey];</span><br><span class="line">                [kRootViewController presentViewController: picker  animated:YES completion:nil];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (status == CNAuthorizationStatusAuthorized) &#123;</span><br><span class="line">        CNContactPickerViewController * picker = [CNContactPickerViewController new];</span><br><span class="line">        picker.delegate = self;</span><br><span class="line">        picker.displayedPropertyKeys = @[CNContactPhoneNumbersKey];</span><br><span class="line">        [kRootViewController presentViewController: picker  animated:YES completion:nil];</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        [self showHUDTitle:@&quot;未获取访问权限&quot; info:@&quot;请前往设置中打开访问权限&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - CNContactPickerDelegate</span><br><span class="line">-  (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty API_AVAILABLE(ios(9.0)) &#123;</span><br><span class="line">    CNContact *contact = contactProperty.contact;</span><br><span class="line">    self.selectContactResult(contact);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 发送邮件</span><br><span class="line">- (void)lz_postEmialWithToRecipients:(NSArray&lt;NSString *&gt; *)toRecipients</span><br><span class="line">                        ccRecipients:(NSArray&lt;NSString *&gt; *)ccRecipients</span><br><span class="line">                       bccRecipients:(NSArray&lt;NSString *&gt; *)bccRecipients</span><br><span class="line">                               theme:(NSString *)theme</span><br><span class="line">                        emailContent:(NSString *)emailContent</span><br><span class="line">                              isHTML:(BOOL)isHTML</span><br><span class="line">                               reslt:(nonnull void (^)(NSInteger))result &#123;</span><br><span class="line">    </span><br><span class="line">    self.postEmailResult = result;</span><br><span class="line">    MFMailComposeViewController *mailCompose = [[MFMailComposeViewController alloc] init];</span><br><span class="line">    mailCompose.mailComposeDelegate = self;</span><br><span class="line">    [mailCompose setToRecipients:toRecipients];</span><br><span class="line">    [mailCompose setCcRecipients:ccRecipients];</span><br><span class="line">    [mailCompose setBccRecipients:bccRecipients];</span><br><span class="line">    [mailCompose setSubject:theme];</span><br><span class="line">    [mailCompose setMessageBody:emailContent isHTML:isHTML];</span><br><span class="line">    [kRootViewController presentViewController:mailCompose animated:YES completion:nil];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - MFMailComposeViewControllerDelegate的代理方法：</span><br><span class="line">-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error &#123;</span><br><span class="line">    [controller dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">     self.postEmailResult(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#pragma mark - 发送短信</span><br><span class="line">- (void)lz_sendMessageWithToRecipients:(NSArray&lt;NSString *&gt; *)toRecipients content:(NSString *)content reslt:(nonnull void (^)(NSInteger))result &#123;</span><br><span class="line">    self.sendMessageResult = result;</span><br><span class="line">        MFMessageComposeViewController *messageVC = [[MFMessageComposeViewController alloc] init];</span><br><span class="line">    messageVC.recipients = toRecipients;</span><br><span class="line">    messageVC.body = content;</span><br><span class="line">    messageVC.messageComposeDelegate = self;</span><br><span class="line">    [kRootViewController presentViewController:messageVC animated:YES completion:nil];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - MFMessageComposeViewControllerDelegate</span><br><span class="line">- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result &#123;</span><br><span class="line">    [controller dismissViewControllerAnimated:true completion:nil];</span><br><span class="line">    self.sendMessageResult(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 拨号</span><br><span class="line">- (void)lz_dailPhone:(NSString *)phoneNum &#123;</span><br><span class="line">    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@&quot;tel:%@&quot;,phoneNum]]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 定位服务</span><br><span class="line">- (void)lz_openLocationService:(void(^)(id info))localResult &#123;</span><br><span class="line">    self.locakResult = localResult;</span><br><span class="line">    CLLocationManager *localManager = [[CLLocationManager alloc] init];</span><br><span class="line">    localManager.delegate = self;</span><br><span class="line">    localManager.desiredAccuracy = kCLLocationAccuracyBest;</span><br><span class="line">    localManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;</span><br><span class="line">    [localManager requestWhenInUseAuthorization];</span><br><span class="line">    </span><br><span class="line">    if ([CLLocationManager locationServicesEnabled] ||</span><br><span class="line">        [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||</span><br><span class="line">        [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) &#123;</span><br><span class="line">        </span><br><span class="line">        [localManager startUpdatingLocation];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [self showHUDTitle:@&quot;未获取定位权限&quot; info:@&quot;请前往设置中打开定位权限&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark CLLocationManagerDelegate</span><br><span class="line">- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations &#123;</span><br><span class="line">    </span><br><span class="line">    CLLocation *currLocation = [locations lastObject];</span><br><span class="line">    CLLocation *infLocation = [[CLLocation alloc] initWithLatitude:currLocation.coordinate.latitude longitude:currLocation.coordinate.longitude];</span><br><span class="line">    </span><br><span class="line">    CLGeocoder *geocoder=[[CLGeocoder alloc]init];</span><br><span class="line">    </span><br><span class="line">    [geocoder reverseGeocodeLocation:infLocation completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) &#123;</span><br><span class="line">        if (error !=nil || placemarks.count == 0) &#123;</span><br><span class="line">            NSLog(@&quot;%@&quot;,error);</span><br><span class="line">            self.locakResult(nil);</span><br><span class="line">            return ;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        NSDictionary *infoDic = @&#123;@&quot;country&quot;:placemarks.firstObject.country,</span><br><span class="line">                                  @&quot;administrativeArea&quot;:placemarks.firstObject.administrativeArea,</span><br><span class="line">                                  @&quot;locality&quot;:placemarks.firstObject.locality,</span><br><span class="line">                                  @&quot;subLocality&quot;:placemarks.firstObject.subLocality,</span><br><span class="line">                                  @&quot;thoroughfare&quot;:placemarks.firstObject.thoroughfare,</span><br><span class="line">                                  @&quot;name&quot;:placemarks.firstObject.name</span><br><span class="line">                                  &#125;;</span><br><span class="line">        self.locakResult(infoDic);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error &#123;</span><br><span class="line">    [self showHUDTitle:@&quot;未获取定位权限&quot; info:@&quot;请前往设置中打开定位权限&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 提示框</span><br><span class="line">- (void)showHUDTitle:(NSString *)title info:(NSString *)info &#123;</span><br><span class="line">    </span><br><span class="line">    UIAlertController *alterController = [UIAlertController alertControllerWithTitle:title message:info</span><br><span class="line">                                                                      preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">    UIAlertAction *cancal = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:nil];</span><br><span class="line">    UIAlertAction *sure = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];</span><br><span class="line">        if ([[UIApplication sharedApplication] canOpenURL:url]) &#123;</span><br><span class="line">            if (@available(iOS 10.0, *)) &#123;</span><br><span class="line">                [[UIApplication sharedApplication] openURL:url options:@&#123;&#125; completionHandler:nil];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    [alterController addAction:cancal];</span><br><span class="line">    [alterController addAction:sure];</span><br><span class="line">    </span><br><span class="line">    [kRootViewController presentViewController:alterController animated:true completion:nil];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - IOS 10前的通知</span><br><span class="line">- (void)lz_pushNotifationWithTimeInterval:(NSTimeInterval)timeInterval</span><br><span class="line">                           repeatInterval:(NSInteger)repeatInterval</span><br><span class="line">                                alertBody:(NSString *)alertBody</span><br><span class="line">                               alertTitle:(NSString *)alertTitle</span><br><span class="line">                              alertAction:(NSString *)alertAction</span><br><span class="line">                         alertLaunchImage:(NSString *)alertLaunchImage</span><br><span class="line">                                soundName:(NSString *)soundName</span><br><span class="line">                                 userInfo:(NSDictionary *)userInfo &#123;</span><br><span class="line">    // 定义本地通知对象</span><br><span class="line">    UILocalNotification *notification = [[UILocalNotification alloc] init];</span><br><span class="line">    // 设置调用时间</span><br><span class="line">    notification.timeZone = [NSTimeZone localTimeZone];</span><br><span class="line">    //通知触发的时间，10s以后</span><br><span class="line">    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:timeInterval];</span><br><span class="line">    // 通知重复次数</span><br><span class="line">    notification.repeatInterval = repeatInterval;</span><br><span class="line">    // 当前日历，使用前最好设置时区等信息以便能够自动同步时间</span><br><span class="line">    notification.repeatCalendar = [NSCalendar currentCalendar];</span><br><span class="line">    </span><br><span class="line">    //设置通知属性</span><br><span class="line">    // 通知主体</span><br><span class="line">    notification.alertBody = alertBody;</span><br><span class="line">    if (@available(iOS 8.2, *)) &#123;</span><br><span class="line">        notification.alertTitle = alertTitle;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // Fallback on earlier versions</span><br><span class="line">    &#125;</span><br><span class="line">    // 应用程序图标右上角显示的消息数</span><br><span class="line">    notification.applicationIconBadgeNumber += 1;</span><br><span class="line">    // 待机界面的滑动动作提示</span><br><span class="line">    notification.alertAction = alertAction;</span><br><span class="line">    // 通过点击通知打开应用时的启动图片,这里使用程序启动图片</span><br><span class="line">    notification.alertLaunchImage = alertLaunchImage;</span><br><span class="line">    // 收到通知时播放的声音，默认消息声音</span><br><span class="line">    notification.soundName = soundName.length == 0 ? UILocalNotificationDefaultSoundName : soundName;</span><br><span class="line">    </span><br><span class="line">    //设置用户信息</span><br><span class="line">    notification.userInfo = userInfo;</span><br><span class="line">    </span><br><span class="line">    //调用通知</span><br><span class="line">    [[UIApplication sharedApplication] scheduleLocalNotification:notification];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - IOS 10的通知</span><br><span class="line">-(void)lz_pushNotification_IOS_10_Title:(NSString *)title</span><br><span class="line">                               subtitle:(NSString *)subtitle</span><br><span class="line">                                   body:(NSString *)body</span><br><span class="line">                             promptTone:(NSString *)promptTone</span><br><span class="line">                              soundName:(NSString *)soundName</span><br><span class="line">                              imageName:(NSString *)imageName</span><br><span class="line">                              movieName:(NSString *)movieName</span><br><span class="line">                           timeInterval:(NSTimeInterval)TimeInterval</span><br><span class="line">                                repeats:(BOOL)repeats</span><br><span class="line">                             Identifier:(NSString *)identifier API_AVAILABLE(ios(10.0)) &#123;</span><br><span class="line">    </span><br><span class="line">    //获取通知中心用来激活新建的通知</span><br><span class="line">    UNUserNotificationCenter * center  = [UNUserNotificationCenter currentNotificationCenter];</span><br><span class="line">    UNMutableNotificationContent * content = [[UNMutableNotificationContent alloc] init];</span><br><span class="line">    content.title = title;</span><br><span class="line">    content.subtitle = subtitle;</span><br><span class="line">    content.body = body;</span><br><span class="line">    </span><br><span class="line">    //通知的提示音</span><br><span class="line">    if ([promptTone containsString:@&quot;.&quot;]) &#123;</span><br><span class="line">        UNNotificationSound *sound = [UNNotificationSound soundNamed:promptTone];</span><br><span class="line">        content.sound = sound;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    __block UNNotificationAttachment *imageAtt;</span><br><span class="line">    __block UNNotificationAttachment *movieAtt;</span><br><span class="line">    __block UNNotificationAttachment *soundAtt;</span><br><span class="line">    </span><br><span class="line">    if ([imageName containsString:@&quot;.&quot;]) &#123;</span><br><span class="line">        [self addNotificationAttachmentContent:content attachmentName:imageName options:nil withCompletion:^(NSError *error, UNNotificationAttachment *notificationAtt) &#123;</span><br><span class="line">            imageAtt = [notificationAtt copy];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if ([soundName containsString:@&quot;.&quot;]) &#123;</span><br><span class="line">        [self addNotificationAttachmentContent:content attachmentName:soundName options:nil withCompletion:^(NSError *error, UNNotificationAttachment *notificationAtt) &#123;</span><br><span class="line">            soundAtt = [notificationAtt copy];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if ([movieName containsString:@&quot;.&quot;]) &#123;</span><br><span class="line">        // 在这里截取视频的第10s为视频的缩略图 ：UNNotificationAttachmentOptionsThumbnailTimeKey</span><br><span class="line">        [self addNotificationAttachmentContent:content attachmentName:movieName options:@&#123;@&quot;UNNotificationAttachmentOptionsThumbnailTimeKey&quot;:@10&#125; withCompletion:^(NSError *error, UNNotificationAttachment *notificationAtt) &#123;</span><br><span class="line">            movieAtt = [notificationAtt copy];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    NSMutableArray * array = [NSMutableArray array];</span><br><span class="line">    </span><br><span class="line">    if (imageAtt) &#123;</span><br><span class="line">        [array addObject:imageAtt];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (soundAtt) &#123;</span><br><span class="line">        [array addObject:soundAtt];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (movieAtt) &#123;</span><br><span class="line">        [array addObject:movieAtt];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    content.attachments = array;</span><br><span class="line">    </span><br><span class="line">    //添加通知下拉动作按钮</span><br><span class="line">    NSMutableArray * actionMutableArray = [NSMutableArray array];</span><br><span class="line">    UNNotificationAction * actionA = [UNNotificationAction actionWithIdentifier:@&quot;identifierNeedUnlock&quot; title:@&quot;进入应用&quot; options:UNNotificationActionOptionAuthenticationRequired];</span><br><span class="line">    UNNotificationAction * actionB = [UNNotificationAction actionWithIdentifier:@&quot;identifierRed&quot; title:@&quot;忽略&quot; options:UNNotificationActionOptionDestructive];</span><br><span class="line">    [actionMutableArray addObjectsFromArray:@[actionA,actionB]];</span><br><span class="line">    </span><br><span class="line">    if (actionMutableArray.count &gt; 1) &#123;</span><br><span class="line">        UNNotificationCategory * category = [UNNotificationCategory categoryWithIdentifier:@&quot;categoryNoOperationAction&quot; actions:actionMutableArray intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];</span><br><span class="line">        [center setNotificationCategories:[NSSet setWithObjects:category, nil]];</span><br><span class="line">        content.categoryIdentifier = @&quot;categoryNoOperationAction&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // UNTimeIntervalNotificationTrigger   延时推送</span><br><span class="line">    // UNCalendarNotificationTrigger       定时推送</span><br><span class="line">    // UNLocationNotificationTrigger       位置变化推送</span><br><span class="line">    BOOL repeat = (TimeInterval &gt; 60 &amp;&amp; repeats) ? true : false;</span><br><span class="line">    UNTimeIntervalNotificationTrigger * tirgger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:TimeInterval repeats:repeat];</span><br><span class="line">    </span><br><span class="line">    //建立通知请求</span><br><span class="line">    UNNotificationRequest * request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:tirgger];</span><br><span class="line">    </span><br><span class="line">    //将建立的通知请求添加到通知中心</span><br><span class="line">    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@&quot;%@本地推送 :( 报错 %@&quot;,identifier, error);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 增加通知附件</span><br><span class="line"> </span><br><span class="line"> @param content 通知内容</span><br><span class="line"> @param attachmentName 附件名称</span><br><span class="line"> @param options 相关选项</span><br><span class="line"> @param completion 结果回调</span><br><span class="line"> */</span><br><span class="line">-(void)addNotificationAttachmentContent:(UNMutableNotificationContent *)content attachmentName:(NSString *)attachmentName  options:(NSDictionary *)options withCompletion:(void(^)(NSError * error , UNNotificationAttachment * notificationAtt))completion  API_AVAILABLE(ios(10.0)) &#123;</span><br><span class="line">    </span><br><span class="line">    NSArray * arr = [attachmentName componentsSeparatedByString:@&quot;.&quot;];</span><br><span class="line">    </span><br><span class="line">    NSError * error;</span><br><span class="line">    </span><br><span class="line">    NSString * path = [[NSBundle mainBundle]pathForResource:arr[0] ofType:arr[1]];</span><br><span class="line">    </span><br><span class="line">    UNNotificationAttachment * attachment = [UNNotificationAttachment attachmentWithIdentifier:[NSString stringWithFormat:@&quot;notificationAtt_%@&quot;,arr[1]] URL:[NSURL fileURLWithPath:path] options:options error:&amp;error];</span><br><span class="line">    </span><br><span class="line">    if (error) &#123;</span><br><span class="line">        NSLog(@&quot;attachment error %@&quot;, error);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    completion(error,attachment);</span><br><span class="line">    content.launchImageName = attachmentName;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/30/iOS系统封装：QQ侧边菜单/" rel="next" title="iOS系统封装：QQ侧边菜单">
+                <i class="fa fa-chevron-left"></i> iOS系统封装：QQ侧边菜单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/08/系统SDK封装-02/" rel="prev" title="系统SDK介绍-02">
+                系统SDK介绍-02 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjQxMS8xODk1OA"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/HeaderImage.png" alt="wudan">
+            
+              <p class="site-author-name" itemprop="name">wudan</p>
+              <p class="site-description motion-element" itemprop="description">一只孤独的搬码猿，iOS开发的小菜。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wudan-ios" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6688638997" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/3ac0dc8a6a68" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统SDK介绍"><span class="nav-number">1.</span> <span class="nav-text">系统SDK介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#接口文件"><span class="nav-number">1.1.</span> <span class="nav-text">接口文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现文件"><span class="nav-number">1.2.</span> <span class="nav-text">实现文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wudan</span>
+<!--
+  
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">27.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+-->
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共27.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </div></footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("kEALmoqFpNRmWSOUDeGrEA1A-gzGzoHsz", "DzKgNH2UfSQaCGpT76P6QuVI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
