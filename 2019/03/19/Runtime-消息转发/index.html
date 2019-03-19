@@ -88,18 +88,20 @@
 
 
 
-<meta name="description" content="KeyChain是利用系统钥匙串进行简单的信息存取。类似于UserDefault;  接口文件 123456789101112131415161718192021222324252627282930313233#import &amp;lt;Foundation/Foundation.h&amp;gt;NS_ASSUME_NONNULL_BEGIN@interface LZKeyChainManager : NS">
+<meta name="description" content="iOS 方法的动态解析和消息转发 以创建的Message类为示例Message.h1234567@interface Message : NSObject- (void)sendMessage:(NSString *)message;+ (void)sendClassMessage:(NSString *)message;@end Message.m123@implementation Mess">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据存储：KeyChain">
-<meta property="og:url" content="https://wudan-ios.github.io/2018/08/20/数据存储：KeyChain/index.html">
+<meta property="og:title" content="Runtime-消息转发">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/03/19/Runtime-消息转发/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
-<meta property="og:description" content="KeyChain是利用系统钥匙串进行简单的信息存取。类似于UserDefault;  接口文件 123456789101112131415161718192021222324252627282930313233#import &amp;lt;Foundation/Foundation.h&amp;gt;NS_ASSUME_NONNULL_BEGIN@interface LZKeyChainManager : NS">
+<meta property="og:description" content="iOS 方法的动态解析和消息转发 以创建的Message类为示例Message.h1234567@interface Message : NSObject- (void)sendMessage:(NSString *)message;+ (void)sendClassMessage:(NSString *)message;@end Message.m123@implementation Mess">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-20T02:10:00.000Z">
+<meta property="og:image" content="http://poldw0h4y.bkt.clouddn.com/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2019-03-19T05:15:51.093Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据存储：KeyChain">
-<meta name="twitter:description" content="KeyChain是利用系统钥匙串进行简单的信息存取。类似于UserDefault;  接口文件 123456789101112131415161718192021222324252627282930313233#import &amp;lt;Foundation/Foundation.h&amp;gt;NS_ASSUME_NONNULL_BEGIN@interface LZKeyChainManager : NS">
+<meta name="twitter:title" content="Runtime-消息转发">
+<meta name="twitter:description" content="iOS 方法的动态解析和消息转发 以创建的Message类为示例Message.h1234567@interface Message : NSObject- (void)sendMessage:(NSString *)message;+ (void)sendClassMessage:(NSString *)message;@end Message.m123@implementation Mess">
+<meta name="twitter:image" content="http://poldw0h4y.bkt.clouddn.com/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://wudan-ios.github.io/2018/08/20/数据存储：KeyChain/">
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/03/19/Runtime-消息转发/">
 
 
 
 
 
-  <title>数据存储：KeyChain | 一个孤独的搬码猿</title>
+  <title>Runtime-消息转发 | 一个孤独的搬码猿</title>
   
 
 
@@ -252,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2018/08/20/数据存储：KeyChain/">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/03/19/Runtime-消息转发/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wudan">
@@ -269,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据存储：KeyChain</h1>
+          <h1 class="post-title" itemprop="name headline">Runtime-消息转发</h1>
         
 
         <div class="post-meta">
@@ -281,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-20T10:10:00+08:00">
-                2018-08-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-19T13:15:50+08:00">
+                2019-03-19
               </time>
             
 
@@ -299,7 +301,7 @@
 
           
           
-             <span id="/2018/08/20/数据存储：KeyChain/" class="leancloud_visitors" data-flag-title="数据存储：KeyChain">
+             <span id="/2019/03/19/Runtime-消息转发/" class="leancloud_visitors" data-flag-title="Runtime-消息转发">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -325,7 +327,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  271
+                  737
                 </span>
               
 
@@ -341,7 +343,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -362,14 +364,33 @@
       
 
       
-        <p>KeyChain是利用系统钥匙串进行简单的信息存取。类似于UserDefault;</p>
+        <p><img src="http://poldw0h4y.bkt.clouddn.com/%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="消息转发流程图"></p>
+<p>iOS 方法的动态解析和消息转发</p>
+<p>以创建的Message类为示例<br>Message.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@interface Message : NSObject</span><br><span class="line"></span><br><span class="line">- (void)sendMessage:(NSString *)message;</span><br><span class="line"></span><br><span class="line">+ (void)sendClassMessage:(NSString *)message;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<p>Message.m<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@implementation Message</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<h3 id="动态方法解析"><a href="#动态方法解析" class="headerlink" title="动态方法解析"></a>动态方法解析</h3><p>征询接收者所属的类，是否需要动态添加类方法或实例方法，来处理这个未找到的方法。</p>
 <ol>
-<li><p>接口文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@interface LZKeyChainManager : NSObject</span><br><span class="line"></span><br><span class="line">+ (instancetype)manager;</span><br><span class="line">/**</span><br><span class="line"> 写入数据</span><br><span class="line"></span><br><span class="line"> @param service 名称</span><br><span class="line"> @param data 数据</span><br><span class="line"> */</span><br><span class="line">- (void)save:(NSString *)service data:(id)data;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 查询数据</span><br><span class="line"></span><br><span class="line"> @param service s名称</span><br><span class="line"> @return return value description</span><br><span class="line"> */</span><br><span class="line">- (id)load:(NSString *)service;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 删除</span><br><span class="line"></span><br><span class="line"> @param service 名称</span><br><span class="line"> */</span><br><span class="line">- (void)deleteInfo:(NSString *)service;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<li>首先判断是否实现了 <code>resolveInstanceMethod</code>，如果没有实现，进入下一步处理；</li>
+<li>如果实现了，调用 <code>resolveInstanceMethod</code>，获取返回值；</li>
+<li>如果返回值为 YES，表示 <code>resolveInstanceMethod</code> 声称它已经提供了 <code>selector</code> 的实现，因此再次查找 method list，如果找到对应的 <code>IMP</code>，则返回该实现，否则提示警告信息，进入下一步处理；</li>
+<li>如果返回值为 NO，进入下一步处理；<h4 id="1-对象方法"><a href="#1-对象方法" class="headerlink" title="1. 对象方法"></a>1. 对象方法</h4>通过<code>+ (BOOL)resolveInstanceMethod:(SEL)sel;</code>方法进行解析<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel &#123;</span><br><span class="line">    if (sel == @selector(sendMessage:)) &#123;</span><br><span class="line">        class_addMethod([self class], sel, (IMP)innerSenderMessageMetod, &quot;v@:@&quot;);</span><br><span class="line">        return YES;</span><br><span class="line">    &#125;</span><br><span class="line">    return [super resolveInstanceMethod:sel];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void innerSenderMessageMetod(id obj, SEL _cmd) &#123;</span><br><span class="line">    NSLog(@&quot;对象方法，动态解析&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>实现文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;LZKeyChainManager.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation LZKeyChainManager</span><br><span class="line"></span><br><span class="line">+ (instancetype)manager &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    static LZKeyChainManager *manager;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        manager = [[LZKeyChainManager alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    return manager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSMutableDictionary *)getKeychainQuery:(NSString *)service &#123;</span><br><span class="line">    </span><br><span class="line">    return [NSMutableDictionary dictionaryWithObjectsAndKeys:(id)kSecClassGenericPassword,(id)kSecClass,</span><br><span class="line">            service, (id)kSecAttrService,</span><br><span class="line">            service, (id)kSecAttrAccount,</span><br><span class="line">            (id)kSecAttrAccessibleAfterFirstUnlock,(id)kSecAttrAccessible,</span><br><span class="line">            nil];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 写入</span><br><span class="line">- (void)save:(NSString *)service data:(id)data &#123;</span><br><span class="line"></span><br><span class="line">    NSMutableDictionary *keychainQuery = [self getKeychainQuery:service];</span><br><span class="line">    SecItemDelete((CFDictionaryRef)keychainQuery);</span><br><span class="line">    [keychainQuery setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(id)kSecValueData];</span><br><span class="line">    SecItemAdd((CFDictionaryRef)keychainQuery, NULL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#pragma mark - 读取</span><br><span class="line">- (id)load:(NSString *)service &#123;</span><br><span class="line">    </span><br><span class="line">    id ret = nil;</span><br><span class="line">    NSMutableDictionary *keychainQuery = [self getKeychainQuery:service];</span><br><span class="line">    [keychainQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];</span><br><span class="line">    [keychainQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];</span><br><span class="line">    CFDataRef keyData = NULL;</span><br><span class="line">    if (SecItemCopyMatching((CFDictionaryRef)keychainQuery, (CFTypeRef *)&amp;keyData) == noErr) &#123;</span><br><span class="line">        @try &#123;</span><br><span class="line">            ret = [NSKeyedUnarchiver unarchiveObjectWithData:(__bridge NSData *)keyData];</span><br><span class="line">        &#125; @catch (NSException *e) &#123;</span><br><span class="line">            NSLog(@&quot;Unarchive of %@ failed: %@&quot;, service, e);</span><br><span class="line">        &#125; @finally &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (keyData)</span><br><span class="line">        CFRelease(keyData);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 删除</span><br><span class="line">- (void)deleteInfo:(NSString *)service &#123;</span><br><span class="line">    NSMutableDictionary *keychainQuery = [self getKeychainQuery:service];</span><br><span class="line">    SecItemDelete((CFDictionaryRef)keychainQuery);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></li>
 </ol>
+<h4 id="2-类方法"><a href="#2-类方法" class="headerlink" title="2. 类方法"></a>2. 类方法</h4><p>通过<code>+ (BOOL)resolveClassMethod:(SEL)sel;</code>方法进行解析<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (BOOL)resolveClassMethod:(SEL)sel &#123;</span><br><span class="line">    if (sel == @selector(sendClassMessage:)) &#123;</span><br><span class="line">        class_addMethod(object_getClass(self), sel, (IMP)innerSenderClassMessageMetod, &quot;v@:@&quot;);</span><br><span class="line">        return YES;</span><br><span class="line">    &#125;</span><br><span class="line">    return [super resolveClassMethod:sel];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void innerSenderClassMessageMetod(id obj, SEL _cmd) &#123;</span><br><span class="line">    NSLog(@&quot;类方法，动态解析&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>如果没有动态添加方法，则会进入此阶段，此时询问是否要将这条消息转发给其他的对象，来处理这个方法。如果返回nil，即表示不转发给其他对象，此时会进入第3阶段<br>创建了一个备用类<code>MessageTemp</code><br>MessageTemp.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface MessageTemp : NSObject</span><br><span class="line"></span><br><span class="line">- (void)sendMessage:(NSString *)message;</span><br><span class="line">- (void)sendClassMessage:(NSString *)message;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<p>MessageTemp.m<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@implementation MessageTemp</span><br><span class="line">- (void)sendMessage:(NSString *)message &#123;</span><br><span class="line">    NSLog(@&quot;备用Message，解析对象方法&quot;);</span><br><span class="line">&#125;</span><br><span class="line">- (void)sendClassMessage:(NSString *)message &#123;</span><br><span class="line">    NSLog(@&quot;备用Message，解析类方法&quot;);</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-对象方法-1"><a href="#1-对象方法-1" class="headerlink" title="1. 对象方法"></a>1. 对象方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (id)forwardingTargetForSelector:(SEL)aSelector &#123;</span><br><span class="line">    if (aSelector == @selector(sendMessage:)) &#123;</span><br><span class="line">        return [MessageTemp new];</span><br><span class="line">    &#125;</span><br><span class="line">    return [super forwardingTargetForSelector:aSelector];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-类方法-1"><a href="#2-类方法-1" class="headerlink" title="2. 类方法"></a>2. 类方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+ (id)forwardingTargetForSelector:(SEL)aSelector &#123;</span><br><span class="line">    if (aSelector == @selector(sendClassMessage:)) &#123;</span><br><span class="line">        return [MessageTemp new];</span><br><span class="line">    &#125;</span><br><span class="line">    return [super forwardingTargetForSelector:aSelector];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="消息转发"><a href="#消息转发" class="headerlink" title="消息转发"></a>消息转发</h3><p>当 <code>forwardingTargetForSelector:</code> 方法未做出任何响应的话，会来到消息转发流程。消息转发时会首先调用 <code>methodSignatureForSelector:</code> 方法，在方法内部生成 <code>NSMethodSignature</code> 类型的方法签名对象。在生成签名对象时，可以指定 <code>target</code> 和 <code>SEL</code>，可以将这两个参数换成其他参数，将消息转发给其他对象。</p>
+<h4 id="1-对象方法-2"><a href="#1-对象方法-2" class="headerlink" title="1. 对象方法"></a>1. 对象方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation &#123;</span><br><span class="line">    if ([anInvocation selector] == @selector(sendMessage:)) &#123;</span><br><span class="line">        [anInvocation invokeWithTarget:[MessageTemp new]];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [super forwardInvocation:anInvocation];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector &#123;</span><br><span class="line">    if (aSelector == @selector(sendMessage:)) &#123;</span><br><span class="line">        return [NSMethodSignature signatureWithObjCTypes:&quot;v@:@&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    return [super methodSignatureForSelector:aSelector];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-类方法-2"><a href="#2-类方法-2" class="headerlink" title="2. 类方法"></a>2. 类方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+ (void)forwardInvocation:(NSInvocation *)anInvocation &#123;</span><br><span class="line">    if ([anInvocation selector] == @selector(sendClassMessage:)) &#123;</span><br><span class="line">        [anInvocation invokeWithTarget:[MessageTemp new]];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [super forwardInvocation:anInvocation];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector &#123;</span><br><span class="line">    if (aSelector == @selector(sendClassMessage:)) &#123;</span><br><span class="line">        return [NSMethodSignature signatureWithObjCTypes:&quot;v@:@&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    return [super methodSignatureForSelector:aSelector];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>适用于把操作给另外一个类来实现</li>
+<li>利用分类，防止应用程序因为未处理消息而崩溃</li>
+<li>Jspatch </li>
+<li>Aspects</li>
+<li>BlocksKit</li>
+</ul>
 
       
     </div>
@@ -404,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/18/iOS自定义控件：一个简易的Combobox/" rel="next" title="iOS自定义控件：一个简易的Combobox">
-                <i class="fa fa-chevron-left"></i> iOS自定义控件：一个简易的Combobox
+              <a href="/2019/03/13/代码块(Snippet)/" rel="next" title="iOS代码块(Snippet)">
+                <i class="fa fa-chevron-left"></i> iOS代码块(Snippet)
               </a>
             
           </div>
@@ -413,10 +434,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/29/iOS自定义控件：分段选择器-Swift/" rel="prev" title="iOS自定义控件：分段选择器-Swift">
-                iOS自定义控件：分段选择器-Swift <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -473,8 +490,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -547,6 +573,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态方法解析"><span class="nav-number">1.</span> <span class="nav-text">动态方法解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-对象方法"><span class="nav-number">1.1.</span> <span class="nav-text">1. 对象方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-类方法"><span class="nav-number">1.2.</span> <span class="nav-text">2. 类方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">2.</span> <span class="nav-text">重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-对象方法-1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 对象方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-类方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">2. 类方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息转发"><span class="nav-number">3.</span> <span class="nav-text">消息转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-对象方法-2"><span class="nav-number">3.1.</span> <span class="nav-text">1. 对象方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-类方法-2"><span class="nav-number">3.2.</span> <span class="nav-text">2. 类方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">4.</span> <span class="nav-text">应用场景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
