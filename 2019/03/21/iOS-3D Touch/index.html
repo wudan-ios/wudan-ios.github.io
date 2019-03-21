@@ -88,21 +88,20 @@
 
 
 
-<meta name="description" content="最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中DZNEmptyDataSet是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）一、封装代码：利用UIScrollView的分类实现1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSU">
+<meta name="description" content="桌面图标点击需要在AppDelegate里面进行代码编写。1、创建方式123456789101112131415161718192021/** type  唯一标示r符    *  localizedTitle 标题    *  localizedSubtitle 副标题    *  icon UIApplicationShortcutIcon对象    *  userInfo 传递信息">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS自定义控件：空数据占位图">
-<meta property="og:url" content="https://wudan-ios.github.io/2018/08/10/iOS自定义控件：空数据占位图/index.html">
+<meta property="og:title" content="一个孤独的搬码猿">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/03/21/iOS-3D Touch/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
-<meta property="og:description" content="最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中DZNEmptyDataSet是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）一、封装代码：利用UIScrollView的分类实现1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSU">
+<meta property="og:description" content="桌面图标点击需要在AppDelegate里面进行代码编写。1、创建方式123456789101112131415161718192021/** type  唯一标示r符    *  localizedTitle 标题    *  localizedSubtitle 副标题    *  icon UIApplicationShortcutIcon对象    *  userInfo 传递信息">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-9a4a4958fdf67cb6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-9aecbb692ded171f.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-10-20T02:10:00.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-f28947056b8dfe49.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-21T01:51:50.656Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS自定义控件：空数据占位图">
-<meta name="twitter:description" content="最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中DZNEmptyDataSet是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）一、封装代码：利用UIScrollView的分类实现1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSU">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-9a4a4958fdf67cb6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="一个孤独的搬码猿">
+<meta name="twitter:description" content="桌面图标点击需要在AppDelegate里面进行代码编写。1、创建方式123456789101112131415161718192021/** type  唯一标示r符    *  localizedTitle 标题    *  localizedSubtitle 副标题    *  icon UIApplicationShortcutIcon对象    *  userInfo 传递信息">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-f28947056b8dfe49.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -132,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://wudan-ios.github.io/2018/08/10/iOS自定义控件：空数据占位图/">
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/03/21/iOS-3D Touch/">
 
 
 
 
 
-  <title>iOS自定义控件：空数据占位图 | 一个孤独的搬码猿</title>
+  <title> | 一个孤独的搬码猿</title>
   
 
 
@@ -255,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2018/08/10/iOS自定义控件：空数据占位图/">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/03/21/iOS-3D Touch/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wudan">
@@ -272,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS自定义控件：空数据占位图</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -284,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T10:12:00+08:00">
-                2018-08-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T09:51:49+08:00">
+                2019-03-21
               </time>
             
 
@@ -302,7 +301,7 @@
 
           
           
-             <span id="/2018/08/10/iOS自定义控件：空数据占位图/" class="leancloud_visitors" data-flag-title="iOS自定义控件：空数据占位图">
+             <span id="/2019/03/21/iOS-3D Touch/" class="leancloud_visitors" data-flag-title="">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -328,7 +327,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  506
+                  421
                 </span>
               
 
@@ -365,13 +364,16 @@
       
 
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-9a4a4958fdf67cb6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼图.jpg"></p>
-<p>最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中<a href="https://link.jianshu.com/?t=https://github.com/dzenbot/DZNEmptyDataSet" target="_blank" rel="noopener">DZNEmptyDataSet</a>是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）<br>一、封装代码：利用UIScrollView的分类实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@interface UIScrollView (WD_NoData)</span><br><span class="line">// 需要显示的占位页面</span><br><span class="line">@property (nonatomic, strong) UIView *noDataView;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure></p>
-<p>实现代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UIScrollView+WD_NoData.h&quot;</span><br><span class="line">#import &lt;objc/runtime.h&gt;</span><br><span class="line"></span><br><span class="line">static char *noDataViewKey = &quot;noDataViewKey&quot;;</span><br><span class="line"></span><br><span class="line">@implementation UIScrollView (WD_NoData)</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 交换方法</span><br><span class="line"></span><br><span class="line"> @param sel1 原方法</span><br><span class="line"> @param sel2 自定义方法</span><br><span class="line"> @param cls 类</span><br><span class="line"> */</span><br><span class="line">void exchangeSelector(SEL sel1, SEL sel2, Class cls) &#123;</span><br><span class="line">    Class class = [cls class];</span><br><span class="line">    Method originalMethod = class_getInstanceMethod(class, sel1);</span><br><span class="line">    Method swizzledMethod = class_getInstanceMethod(class, sel2);</span><br><span class="line">    BOOL success = class_addMethod(class, sel1, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));</span><br><span class="line">    if (success) &#123;</span><br><span class="line">        class_replaceMethod(class, sel2, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        method_exchangeImplementations(originalMethod, swizzledMethod);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== Setter ===============</span><br><span class="line">- (void)setNoDataView:(UIView *)noDataView &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        exchangeSelector(@selector(reloadData), @selector(wd_reloadData), [self class]);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    objc_setAssociatedObject(self, noDataViewKey, noDataView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== Getter ===============</span><br><span class="line">- (UIView *)noDataView &#123;</span><br><span class="line">    UIView *noDataView = objc_getAssociatedObject(self, noDataViewKey);</span><br><span class="line">    noDataView.frame = self.frame;</span><br><span class="line">    return noDataView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)wd_reloadData &#123;</span><br><span class="line">    [self wd_reloadData];</span><br><span class="line">    [self wd_checkData];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== 获取数据 ===============</span><br><span class="line">- (void)wd_checkData &#123;</span><br><span class="line">    NSInteger items = 0;</span><br><span class="line">    </span><br><span class="line">    if (![self respondsToSelector:@selector(dataSource)]) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // UITableView support</span><br><span class="line">    if ([self isKindOfClass:[UITableView class]]) &#123;</span><br><span class="line">        </span><br><span class="line">        UITableView *tableView = (UITableView *)self;</span><br><span class="line">        id &lt;UITableViewDataSource&gt; dataSource = tableView.dataSource;</span><br><span class="line">        </span><br><span class="line">        NSInteger sections = 1;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]) &#123;</span><br><span class="line">            sections = [dataSource numberOfSectionsInTableView:tableView];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(tableView:numberOfRowsInSection:)]) &#123;</span><br><span class="line">            for (NSInteger section = 0; section &lt; sections; section++) &#123;</span><br><span class="line">                items += [dataSource tableView:tableView numberOfRowsInSection:section];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // UICollectionView support</span><br><span class="line">    else if ([self isKindOfClass:[UICollectionView class]]) &#123;</span><br><span class="line">        </span><br><span class="line">        UICollectionView *collectionView = (UICollectionView *)self;</span><br><span class="line">        id &lt;UICollectionViewDataSource&gt; dataSource = collectionView.dataSource;</span><br><span class="line">        </span><br><span class="line">        NSInteger sections = 1;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) &#123;</span><br><span class="line">            sections = [dataSource numberOfSectionsInCollectionView:collectionView];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(collectionView:numberOfItemsInSection:)]) &#123;</span><br><span class="line">            for (NSInteger section = 0; section &lt; sections; section++) &#123;</span><br><span class="line">                items += [dataSource collectionView:collectionView numberOfItemsInSection:section];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if ( items == 0 ) &#123;</span><br><span class="line">        [self.superview addSubview:self.noDataView];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [self.noDataView removeFromSuperview];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>二、使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UIScrollView+WD_NoData.h&quot;</span><br><span class="line">// 自定义页面</span><br><span class="line">#import &quot;WDTestEmptyView.h&quot;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//示例的视图</span><br><span class="line"> WDTestEmptyView *view = [NSBundle.mainBundle loadNibNamed:@&quot;WDTestEmptyView&quot; owner:self options:nil].firstObject;</span><br><span class="line">// 设置视图</span><br><span class="line">self.tableView.noDataView = view;</span><br></pre></td></tr></table></figure>
-<p>三、效果图</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3334769-9aecbb692ded171f.gif?imageMogr2/auto-orient/strip" alt="效果图.gif"></p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-f28947056b8dfe49.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
+<h3 id="桌面图标点击"><a href="#桌面图标点击" class="headerlink" title="桌面图标点击"></a>桌面图标点击</h3><p>需要在<code>AppDelegate</code>里面进行代码编写。<br>1、创建方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/** type  唯一标示r符</span><br><span class="line">    *  localizedTitle 标题</span><br><span class="line">    *  localizedSubtitle 副标题</span><br><span class="line">    *  icon UIApplicationShortcutIcon对象</span><br><span class="line">    *  userInfo 传递信息</span><br><span class="line">    */</span><br><span class="line">    </span><br><span class="line">   // 使用系统提供的图标生成UIApplicationShortcutIcon对象</span><br><span class="line">   UIApplicationShortcutItem *shoreItem1 = [[UIApplicationShortcutItem alloc] initWithType:@&quot;type1&quot;</span><br><span class="line">                                                                            localizedTitle:@&quot;标题&quot;</span><br><span class="line">                                                                         localizedSubtitle:@&quot;副标题&quot;</span><br><span class="line">                                                                                      icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeCompose]</span><br><span class="line">                                                                                  userInfo:nil];</span><br><span class="line">   </span><br><span class="line">   // 使用自定义图片生成UIApplicationShortcutIcon对象</span><br><span class="line">   UIApplicationShortcutItem *shoreItem2 = [[UIApplicationShortcutItem alloc] initWithType:@&quot;type2&quot;</span><br><span class="line">                                                                            localizedTitle:@&quot;标题2&quot;</span><br><span class="line">                                                                         localizedSubtitle:@&quot;副标题2&quot;</span><br><span class="line">                                                                                      icon:[UIApplicationShortcutIcon iconWithTemplateImageName:@&quot;验证码&quot;]</span><br><span class="line">                                                                                  userInfo:nil];</span><br><span class="line">   [UIApplication sharedApplication].shortcutItems = @[shoreItem1, shoreItem2];</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注：系统的UIApplicationShortcutIcon样式，自己去研究吧！<a href="https://developer.apple.com/documentation/uikit/uiapplicationshortcuticontype?language=objc" target="_blank" rel="noopener">点击这个是官方地址</a></p>
+</blockquote>
+<p>2、点击回调，可以根据<code>shortcutItem.type</code> 进行判断点击的是哪个item<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler &#123;</span><br><span class="line">    NSLog(@&quot;点击了%@&quot;, shortcutItem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="应用内，点击进行页面操作"><a href="#应用内，点击进行页面操作" class="headerlink" title="应用内，点击进行页面操作"></a>应用内，点击进行页面操作</h3><p>1、遵循代理<code>UIViewControllerPreviewingDelegate</code></p>
+<p>2、判断设备是否支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable)&#123;</span><br><span class="line">    [self registerForPreviewingWithDelegate:self sourceView:self.view];</span><br><span class="line">    NSLog(@&quot;3D Touch  可用!&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    NSLog(@&quot;3D Touch  不可用!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、实现代理方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (nullable UIViewController *)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext viewControllerForLocation:(CGPoint)location &#123;</span><br><span class="line">    NextViewController *vc = [[NextViewController alloc] init];</span><br><span class="line">    return vc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)previewingContext:(id&lt;UIViewControllerPreviewing&gt;)previewingContext commitViewController:(UIViewController *)viewControllerToCommit &#123;</span><br><span class="line">    [self showViewController:viewControllerToCommit sender:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4、在需要显示的页面里面调用<code>- (NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems</code>添加Items<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems &#123;</span><br><span class="line">    UIPreviewAction *action1 = [UIPreviewAction actionWithTitle:@&quot;标题1&quot; style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</span><br><span class="line">        NSLog(@&quot;click---标题1&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    UIPreviewAction *action2 = [UIPreviewAction actionWithTitle:@&quot;标题2&quot; style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</span><br><span class="line">        NSLog(@&quot;click---标题2&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    UIPreviewAction *action3 = [UIPreviewAction actionWithTitle:@&quot;标题3&quot; style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</span><br><span class="line">        NSLog(@&quot;click---标题3&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    NSArray *actions = @[action1,action2,action3];</span><br><span class="line">    return actions;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -406,8 +408,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/10/数据存储：NSUserDefault/" rel="next" title="数据存储：NSUserDefaults">
-                <i class="fa fa-chevron-left"></i> 数据存储：NSUserDefaults
+              <a href="/2019/03/19/Runtime-消息转发/" rel="next" title="Runtime-消息转发">
+                <i class="fa fa-chevron-left"></i> Runtime-消息转发
               </a>
             
           </div>
@@ -415,10 +417,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/15/数据存储：归档、解档/" rel="prev" title="数据存储：归档、解档">
-                数据存储：归档、解档 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,8 +473,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -549,6 +556,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#桌面图标点击"><span class="nav-number">1.</span> <span class="nav-text">桌面图标点击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用内，点击进行页面操作"><span class="nav-number">2.</span> <span class="nav-text">应用内，点击进行页面操作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
