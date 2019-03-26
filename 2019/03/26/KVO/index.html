@@ -88,18 +88,20 @@
 
 
 
-<meta name="description" content="一、CALayer的常用属性  1、@propertyCGPoint position;图层中心点的位置，类似与UIView的center；用来设置CALayer在父层中的位置；以父层的左上角为原点（0，0）  2、 @property CGPoint anchorPoint;称『定位点』、『锚点』，该描述是相对于x、y位置比例而言的默认在图像中心点（0.5、0.5）的位置；决定着CALayer身">
+<meta name="description" content="类的单个属性观察观察值的4中模式123456/** *  NSKeyValueObservingOptionNew     新值 *  NSKeyValueObservingOptionOld     旧值 *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知 *  NSKeyValueObservingOptionPrior   改变之前发送通知">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CALayer的属性和使用(未完结)">
-<meta property="og:url" content="https://wudan-ios.github.io/2018/11/23/CALayer的属性和使用(未完结)/index.html">
+<meta property="og:title" content="KVO">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/03/26/KVO/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
-<meta property="og:description" content="一、CALayer的常用属性  1、@propertyCGPoint position;图层中心点的位置，类似与UIView的center；用来设置CALayer在父层中的位置；以父层的左上角为原点（0，0）  2、 @property CGPoint anchorPoint;称『定位点』、『锚点』，该描述是相对于x、y位置比例而言的默认在图像中心点（0.5、0.5）的位置；决定着CALayer身">
+<meta property="og:description" content="类的单个属性观察观察值的4中模式123456/** *  NSKeyValueObservingOptionNew     新值 *  NSKeyValueObservingOptionOld     旧值 *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知 *  NSKeyValueObservingOptionPrior   改变之前发送通知">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-23T08:24:37.392Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-0c2f7bf66b38a01a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-26T02:45:40.608Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CALayer的属性和使用(未完结)">
-<meta name="twitter:description" content="一、CALayer的常用属性  1、@propertyCGPoint position;图层中心点的位置，类似与UIView的center；用来设置CALayer在父层中的位置；以父层的左上角为原点（0，0）  2、 @property CGPoint anchorPoint;称『定位点』、『锚点』，该描述是相对于x、y位置比例而言的默认在图像中心点（0.5、0.5）的位置；决定着CALayer身">
+<meta name="twitter:title" content="KVO">
+<meta name="twitter:description" content="类的单个属性观察观察值的4中模式123456/** *  NSKeyValueObservingOptionNew     新值 *  NSKeyValueObservingOptionOld     旧值 *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知 *  NSKeyValueObservingOptionPrior   改变之前发送通知">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-0c2f7bf66b38a01a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://wudan-ios.github.io/2018/11/23/CALayer的属性和使用(未完结)/">
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/03/26/KVO/">
 
 
 
 
 
-  <title>CALayer的属性和使用(未完结) | 一个孤独的搬码猿</title>
+  <title>KVO | 一个孤独的搬码猿</title>
   
 
 
@@ -252,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2018/11/23/CALayer的属性和使用(未完结)/">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/03/26/KVO/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wudan">
@@ -269,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CALayer的属性和使用(未完结)</h1>
+          <h1 class="post-title" itemprop="name headline">KVO</h1>
         
 
         <div class="post-meta">
@@ -281,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-23T16:19:32+08:00">
-                2018-11-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-26T10:45:39+08:00">
+                2019-03-26
               </time>
             
 
@@ -299,7 +301,7 @@
 
           
           
-             <span id="/2018/11/23/CALayer的属性和使用(未完结)/" class="leancloud_visitors" data-flag-title="CALayer的属性和使用(未完结)">
+             <span id="/2019/03/26/KVO/" class="leancloud_visitors" data-flag-title="KVO">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -325,7 +327,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  492
                 </span>
               
 
@@ -341,7 +343,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  2
                 </span>
               
             </div>
@@ -362,192 +364,22 @@
       
 
       
-        <h2 id="一、CALayer的常用属性"><a href="#一、CALayer的常用属性" class="headerlink" title="一、CALayer的常用属性"></a>一、CALayer的常用属性</h2><blockquote>
-<ul>
-<li><p>1、@propertyCGPoint position;<br>图层中心点的位置，类似与UIView的center；用来设置CALayer在父层中的位置；以父层的左上角为原点（0，0）</p>
-</li>
-<li><p>2、 @property CGPoint anchorPoint;<br>称『定位点』、『锚点』，该描述是相对于x、y位置比例而言的默认在图像中心点（0.5、0.5）的位置；决定着CALayer身上的哪个点会再position属性所指的位置，以自己的左上角为原点（0，0）；它的x、y取值范围都是0~1</p>
-</li>
-<li><p>3、 @property(nullable) CGColorRef backgroundColor<br>图层背景颜色</p>
-</li>
-<li><p>4、 @property(nullable) CGColorRef borderColor<br>图层边框颜色</p>
-</li>
-<li><p>5、 @property CGFloat borderWidth<br>图层边框宽度</p>
-</li>
-<li><p>6、 @property CGRect bounds<br>图层大小</p>
-</li>
-<li><p>7、 @property(nullable, strong) id contents<br>图层显示内容，例如可以将图片作为图层内容显示</p>
-</li>
-<li><p>8、 @property CGRect contentsRect<br>图层显示内容的大小和位置</p>
-</li>
-<li><p>9、 @property CGFloat cornerRadius<br>圆角半径</p>
-</li>
-<li><p>10、 @property(getter=isDoubleSided) BOOL doubleSided<br>图层背景是否显示，默认是YES</p>
-</li>
-<li><p>11、 @property CGRect frame<br>图层大小和位置，不支持隐式动画，所以CALyaer中很少使用frame，通常使用bound和position代替</p>
-</li>
-<li><p>12、 @property(getter=isHidden) BOOL hidden<br>是否隐藏</p>
-</li>
-<li><p>13、 @property(nullable, strong) CALayer *mask<br>图层蒙版</p>
-</li>
-<li><p>14、 @property BOOL masksToBounds<br>子图层是否剪切图层边界，默认是NO</p>
-</li>
-<li><p>15、 @property float opacit;<br>图层透明度，类似与UIView的alpha</p>
-</li>
-<li><p>16、 @property(nullable) CGColorRef shadowColor<br>阴影颜色</p>
-</li>
-<li><p>17、 @property CGSize shadowOffset<br>阴影偏移量</p>
-</li>
-<li><p>18、 @property float shadowOpacity<br>阴影透明度，注意默认为0，如果设置阴影必须设置此属性</p>
-</li>
-<li><p>19、 @property(nullable) CGPathRef shadowPath<br>阴影形状</p>
-</li>
-<li><p>20、 @property CGFloat shadowRadius<br>阴影模糊半径</p>
-</li>
-<li><p>21、 @property(nullable, copy) NSArray</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="二、CALayer不常用属性"><a href="#二、CALayer不常用属性" class="headerlink" title="二、CALayer不常用属性"></a>二、CALayer不常用属性</h2><blockquote>
-<ul>
-<li><p>1、 @property CGFloat zPosition<br>图层中心点在z轴中的位置</p>
-</li>
-<li><p>2、 @property CGFloat anchorPointZ<br>图层在z轴中的锚点；</p>
-</li>
-<li><p>3、 - (CGAffineTransform)affineTransform</p>
-</li>
-<li><p>4、- (void)setAffineTransform:(CGAffineTransform)m<br>以上属性为图层形变；该属性值指定一个CGAffineTransform对象，该对象代表对CALayer执行X、Y两个维度（也就是平面）上的旋转、缩放、位移、斜切、镜像等变换矩阵</p>
-</li>
-<li><p>5、 @property(nullable, readonly) CALayer *superlayer<br>图层的父图层</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="三、CALayer图层操作"><a href="#三、CALayer图层操作" class="headerlink" title="三、CALayer图层操作"></a>三、CALayer图层操作</h2><blockquote>
-<ul>
-<li><p>1、 - (void)addSublayer:(CALayer *)layer<br>添加子图层</p>
-</li>
-<li><p>2、 - (void)removeFromSuperlayer<br>将自己从父图层中移除</p>
-</li>
-<li><p>3、 - (void)insertSublayer:(CALayer *)layer atIndex:(unsigned)idx<br>在自己子图层数组中的第idx位置添加图层</p>
-</li>
-<li><p>4、 - (void)insertSublayer:(CALayer )layer below:(nullable CALayer )sibling<br>将图层layer添加在子图层sibling的下面</p>
-</li>
-<li><p>5、 - (void)insertSublayer:(CALayer )layer above:(nullable CALayer )sibling<br>将图层layer添加在子图层sibling的上面</p>
-</li>
-<li><p>6、 - (void)replaceSublayer:(CALayer )layer with:(CALayer )layer2<br>将图层layer替换layer2；</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="四、CALayer动画操作"><a href="#四、CALayer动画操作" class="headerlink" title="四、CALayer动画操作"></a>四、CALayer动画操作</h2><blockquote>
-<ul>
-<li><p>1、 - (void)addAnimation:(CAAnimation )anim forKey:(nullable NSString )key<br>图层添加某一属性的动画</p>
-</li>
-<li><p>2、 - (nullable NSArray&lt; NSString &gt; )animationKeys<br>获取所有动画的属性</p>
-</li>
-<li><p>3、 - (nullable CAAnimation )animationForKey:(NSString )key<br>获取某一属性的动画</p>
-</li>
-<li><p>4、 - (void)removeAnimationForKey:(NSString *)key<br>移除某一属性动画</p>
-</li>
-<li><p>5、 - (void)removeAllAnimations<br>移除所有动画</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="五、CALayer子类其他说明"><a href="#五、CALayer子类其他说明" class="headerlink" title="五、CALayer子类其他说明"></a>五、CALayer子类其他说明</h2><table>
-<thead>
-<tr>
-<th>子类名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CAEmitterLayer</td>
-<td>发射器层，用来控制粒子效果</td>
-</tr>
-<tr>
-<td>CAGradientLayer</td>
-<td>梯度层，颜色渐变</td>
-</tr>
-<tr>
-<td>CAEAGLayer</td>
-<td>用OpenGL ES绘制的层</td>
-</tr>
-<tr>
-<td>CAReplicationLayer</td>
-<td>用来自动复制sublayer</td>
-</tr>
-<tr>
-<td>CAShapeLayer</td>
-<td>绘制立体的贝塞尔曲线</td>
-</tr>
-<tr>
-<td>CAScrollLayer</td>
-<td>用来管理可滑动的区域</td>
-</tr>
-<tr>
-<td>CATextLayer</td>
-<td>可以绘制AttributeString</td>
-</tr>
-<tr>
-<td>CATiledLayer</td>
-<td>用来管理一副可以被分割的大图</td>
-</tr>
-<tr>
-<td>CATransformLayer</td>
-<td>用来渲染3D layer的层次结构</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1-CAShapeLayer"><a href="#1-CAShapeLayer" class="headerlink" title="1. CAShapeLayer"></a>1. CAShapeLayer</h3><p>CAShapeLayer属于QuartzCore框架，继承自CALayer。CAShapeLayer是在坐标系内绘制贝塞尔曲线的，通过绘制贝塞尔曲线，设置shape(形状)的path(路径)，从而绘制各种各样的图形以及不规则图形。因此，使用CAShapeLayer需要与UIBezierPath一起使用。<br>UIBezierPath类允许你在自定义的 View 中绘制和渲染由直线和曲线组成的路径.。你可以在初始化的时候直接为你的UIBezierPath指定一个几何图形。<br>通俗点就是UIBezierPath用来指定绘制图形路径，而CAShapeLayer就是根据路径来绘图的。</p>
-<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><blockquote>
-<ul>
-<li><p>1、@property(nullable) CGPathRef path;  呈现的形状的路径</p>
-</li>
-<li><p>2、@property(nullable) CGColorRef fillColor;填充路径的颜色  </p>
-</li>
-<li><p>3、@property(copy) CAShapeLayerFillRule fillRule;   当在填充颜色的时候则就需要这种填充规则，值有两种，非零和奇偶数，但默认是非零值。</p>
-</li>
-<li><p>4、@property(nullable) CGColorRef strokeColor;设置描边色，默认无色。</p>
-</li>
-<li><p>5、@property CGFloat strokeStart; 绘制边线轮廓路径的子区域。该值必须在[0,1]范围，0代表路径的开始，1代表路径的结束。 默认为0</p>
-</li>
-<li><p>6、@property CGFloat strokeEnd; 默认为1</p>
-</li>
-<li><p>7、@property CGFloat lineWidth; 线的宽度 默认为1</p>
-</li>
-<li><p>8、@property CGFloat miterLimit;最大斜接长度。斜接长度指的是在两条线交汇处和外交之间的距离。只有lineJoin属性为kCALineJoinMiter时miterLimit才有效。边角的角度越小，斜接长度就会越大。为了避免斜接长度过长，我们可以使用miterLimit属性。如果斜接长度超过miterLimit的值，边角会以lineJoin的“bevel”即kCALineJoinBevel类型来显示。</p>
-</li>
-<li><p>9、@property(copy) CAShapeLayerLineCap lineCap; 线端点类型，值有三个类型，分别为kCALineCapButt 、kCALineCapRound 、kCALineCapSquare，默认值为Butt；</p>
-</li>
-<li><p>10、@property(copy) CAShapeLayerLineJoin lineJoin;lineJoin为线连接类型，其值也有三个类型，分别为kCALineJoinMiter、kCALineJoinRound、kCALineJoinBevel，默认值是Miter。</p>
-</li>
-<li><p>11、@property CGFloat lineDashPhase;为线型模版的起始位置；lineDashPattern为线性模版，这是一个NSNumber的数组，索引从1开始记，奇数位数值表示实线长度，偶数位数值表示空白长度。<br>注：fillColor与strokeColor都是在有UIBezierPath参数配置的情况下才能发生作用</p>
-</li>
-<li><p>12、@property(nullable, copy) NSArray<nsnumber *=""> *lineDashPattern;</nsnumber></p>
-</li>
-</ul>
-</blockquote>
-<h3 id="2-CAReplicationLayer"><a href="#2-CAReplicationLayer" class="headerlink" title="2.CAReplicationLayer"></a>2.CAReplicationLayer</h3><h4 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h4><blockquote>
-<ul>
-<li><p>1、@property NSInteger instanceCount;  复制subLayer个数，默认为1</p>
-</li>
-<li><p>2、@property BOOL preservesDepth; 是否将3D例子系统平面化到一个图层（默认值）或者可以在3D空间中混合其他的图层</p>
-</li>
-<li><p>3、@property CFTimeInterval instanceDelay; 设置复制子层的延迟动画时长</p>
-</li>
-<li><p>4、@property CATransform3D instanceTransform; 设置复制子层的相对位置</p>
-</li>
-<li><p>5、@property(nullable) CGColorRef instanceColor; 子层颜色，会和原生子层背景色冲突，因此二者选其一设置</p>
-</li>
-<li><p>6、@property float instanceRedOffset;<br>设置每个复制图层相对上一个复制图层的红色偏移量</p>
-</li>
-<li>7、@property float instanceRedOffset;<br>设置每个复制图层相对上一个复制图层的绿色偏移量</li>
-<li><p>8、@property float instanceBlueOffset;设置每个复制图层相对上一个复制图层的蓝色偏移量</p>
-</li>
-<li><p>9、@property float instanceAlphaOffset;设置每个复制图层相对上一个复制图层的透明度偏移量</p>
-</li>
-</ul>
-</blockquote>
+        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-0c2f7bf66b38a01a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
+<h3 id="类的单个属性观察"><a href="#类的单个属性观察" class="headerlink" title="类的单个属性观察"></a>类的单个属性观察</h3><p>观察值的4中模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  NSKeyValueObservingOptionNew     新值</span><br><span class="line"> *  NSKeyValueObservingOptionOld     旧值</span><br><span class="line"> *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知</span><br><span class="line"> *  NSKeyValueObservingOptionPrior   改变之前发送通知，改变后发送通知</span><br><span class="line"> */</span><br></pre></td></tr></table></figure></p>
+<p>针对<code>Person</code>类里面的<code>name</code>属性进行观察<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[person addObserver:self forKeyPath:@&quot;name&quot; options:NSKeyValueObservingOptionNew context:nil];</span><br></pre></td></tr></table></figure></p>
+<p>查看观察<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, change);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打印效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 09:20:16.875033+0800 KVO[1844:81256] &#123;</span><br><span class="line">    kind = 1;</span><br><span class="line">    new = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="类的里面嵌套其他的属性观察"><a href="#类的里面嵌套其他的属性观察" class="headerlink" title="类的里面嵌套其他的属性观察"></a>类的里面嵌套其他的属性观察</h3><p>观察<code>Person</code>里面<code>Dog</code>类的<code>age</code>，通过点语法直接监听<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[person addObserver:self forKeyPath:@&quot;dog.age&quot; options:NSKeyValueObservingOptionNew context:nil];</span><br></pre></td></tr></table></figure></p>
+<p>输入结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 09:23:25.854859+0800 KVO[1876:84141] &#123;</span><br><span class="line">    kind = 1;</span><br><span class="line">    new = 11;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="一次性观察多个值"><a href="#一次性观察多个值" class="headerlink" title="一次性观察多个值"></a>一次性观察多个值</h3><p>例如观察<code>Person</code>里面的<code>Dog</code>的<code>age</code>和<code>level</code>，则在<code>Person</code>类中重新<code>+ (NSSet&lt;NSString *&gt; *)keyPathsForValuesAffectingValueForKey:(NSString *)key</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+ (NSSet&lt;NSString *&gt; *)keyPathsForValuesAffectingValueForKey:(NSString *)key &#123;</span><br><span class="line">    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];</span><br><span class="line">    if ([key isEqualToString:@&quot;dog&quot;]) &#123;</span><br><span class="line">        NSArray *array = @[@&quot;_dog.name&quot;, @&quot;_dog.level&quot;];</span><br><span class="line">        keyPaths = [keyPaths setByAddingObjectsFromArray:array];</span><br><span class="line">    &#125;</span><br><span class="line">    return keyPaths;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>直接观察<code>Dog</code>类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[person addObserver:self forKeyPath:@&quot;dog&quot; options:NSKeyValueObservingOptionNew context:nil];</span><br></pre></td></tr></table></figure></p>
+<p>打印结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 09:27:11.485240+0800 KVO[1929:87568] &#123;</span><br><span class="line">    kind = 1;</span><br><span class="line">    new = &quot;&lt;Dog: 0x6000027c0b80&gt;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="手动模式"><a href="#手动模式" class="headerlink" title="手动模式"></a>手动模式</h3><p>在Person类中重写<code>+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key &#123;</span><br><span class="line">    // 修改为手动模式</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>手动触发<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[self.person willChangeValueForKey:@&quot;name&quot;];</span><br><span class="line">[self.person didChangeValueForKey:@&quot;name&quot;];</span><br></pre></td></tr></table></figure></p>
+<h3 id="观察容器类"><a href="#观察容器类" class="headerlink" title="观察容器类"></a>观察容器类</h3><p>需要利用<code>KVC</code><br>例如观察<code>person</code>中的<code>array</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[self.person mutableArrayValueForKey:@&quot;array&quot;] addObject:@&quot;obj&quot;];</span><br></pre></td></tr></table></figure></p>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 11:02:13.996095+0800 KVO[5521:170395] &#123;</span><br><span class="line">    indexes = &quot;&lt;_NSCachedIndexSet: 0x600002216160&gt;[number of indexes: 1 (in 1 ranges), indexes: (0)]&quot;;</span><br><span class="line">    kind = 2;</span><br><span class="line">    new =     (</span><br><span class="line">        obj</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="KVO的底层实现"><a href="#KVO的底层实现" class="headerlink" title="KVO的底层实现"></a>KVO的底层实现</h3><p>实质：观察值的setter方法<br>通过runtime，新建一个子类继承于观察类（NSKVONotifing_类名），动态的修改了观察类的类型为子类的类型,在子类里面重写set方法，调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)setName:(NSString *)name &#123;</span><br><span class="line">    [self willChangeValueForKey:@&quot;name&quot;];</span><br><span class="line">    [super setName:name];</span><br><span class="line">    [self didChangeValueForKey:@&quot;name&quot;];   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -582,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/23/CAAniamtion的属性和使用/" rel="next" title="CAAniamtion的属性和使用">
-                <i class="fa fa-chevron-left"></i> CAAniamtion的属性和使用
+              <a href="/2019/03/21/iOS-3D Touch/" rel="next" title="iOS-3D Touch">
+                <i class="fa fa-chevron-left"></i> iOS-3D Touch
               </a>
             
           </div>
@@ -592,8 +424,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/03/RxSwift学习日常（基础介绍）/" rel="prev" title="RxSwift学习日常">
-                RxSwift学习日常 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/26/Block/" rel="prev" title="Block">
+                Block <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -744,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、CALayer的常用属性"><span class="nav-number">1.</span> <span class="nav-text">一、CALayer的常用属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、CALayer不常用属性"><span class="nav-number">2.</span> <span class="nav-text">二、CALayer不常用属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、CALayer图层操作"><span class="nav-number">3.</span> <span class="nav-text">三、CALayer图层操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、CALayer动画操作"><span class="nav-number">4.</span> <span class="nav-text">四、CALayer动画操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、CALayer子类其他说明"><span class="nav-number">5.</span> <span class="nav-text">五、CALayer子类其他说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-CAShapeLayer"><span class="nav-number">5.1.</span> <span class="nav-text">1. CAShapeLayer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性"><span class="nav-number">5.1.1.</span> <span class="nav-text">属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CAReplicationLayer"><span class="nav-number">5.2.</span> <span class="nav-text">2.CAReplicationLayer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">属性</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的单个属性观察"><span class="nav-number">1.</span> <span class="nav-text">类的单个属性观察</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的里面嵌套其他的属性观察"><span class="nav-number">2.</span> <span class="nav-text">类的里面嵌套其他的属性观察</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一次性观察多个值"><span class="nav-number">3.</span> <span class="nav-text">一次性观察多个值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动模式"><span class="nav-number">4.</span> <span class="nav-text">手动模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察容器类"><span class="nav-number">5.</span> <span class="nav-text">观察容器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO的底层实现"><span class="nav-number">6.</span> <span class="nav-text">KVO的底层实现</span></a></li></ol></div>
             
 
           </div>
