@@ -88,21 +88,20 @@
 
 
 
-<meta name="description" content="最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中DZNEmptyDataSet是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）一、封装代码：利用UIScrollView的分类实现1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSU">
+<meta name="description" content="@property默认格式：@syntheszie var = _var; ARC中，默认修饰  基本数据类型@property (atomic, assign) 对象数据类型@property (atomic, strong)  修饰词解释 nonatomic 非原子性访问，不对set方法加锁，不是安全线程，但是性能高。  atomic 原子性访问，对生成的 set 方法加互斥锁 @synch">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS自定义控件：空数据占位图">
-<meta property="og:url" content="https://wudan-ios.github.io/2018/08/10/iOS自定义控件：空数据占位图/index.html">
+<meta property="og:title" content="属性修饰词">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/03/27/属性修饰词/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
-<meta property="og:description" content="最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中DZNEmptyDataSet是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）一、封装代码：利用UIScrollView的分类实现1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSU">
+<meta property="og:description" content="@property默认格式：@syntheszie var = _var; ARC中，默认修饰  基本数据类型@property (atomic, assign) 对象数据类型@property (atomic, strong)  修饰词解释 nonatomic 非原子性访问，不对set方法加锁，不是安全线程，但是性能高。  atomic 原子性访问，对生成的 set 方法加互斥锁 @synch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-9a4a4958fdf67cb6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-9aecbb692ded171f.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-10-20T02:10:00.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-f0679730c4864b7b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-27T02:19:32.272Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS自定义控件：空数据占位图">
-<meta name="twitter:description" content="最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中DZNEmptyDataSet是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）一、封装代码：利用UIScrollView的分类实现1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;NS_ASSU">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-9a4a4958fdf67cb6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="属性修饰词">
+<meta name="twitter:description" content="@property默认格式：@syntheszie var = _var; ARC中，默认修饰  基本数据类型@property (atomic, assign) 对象数据类型@property (atomic, strong)  修饰词解释 nonatomic 非原子性访问，不对set方法加锁，不是安全线程，但是性能高。  atomic 原子性访问，对生成的 set 方法加互斥锁 @synch">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-f0679730c4864b7b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -132,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://wudan-ios.github.io/2018/08/10/iOS自定义控件：空数据占位图/">
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/03/27/属性修饰词/">
 
 
 
 
 
-  <title>iOS自定义控件：空数据占位图 | 一个孤独的搬码猿</title>
+  <title>属性修饰词 | 一个孤独的搬码猿</title>
   
 
 
@@ -255,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2018/08/10/iOS自定义控件：空数据占位图/">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/03/27/属性修饰词/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wudan">
@@ -272,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS自定义控件：空数据占位图</h1>
+          <h1 class="post-title" itemprop="name headline">属性修饰词</h1>
         
 
         <div class="post-meta">
@@ -284,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T10:12:00+08:00">
-                2018-08-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-27T10:19:31+08:00">
+                2019-03-27
               </time>
             
 
@@ -302,7 +301,7 @@
 
           
           
-             <span id="/2018/08/10/iOS自定义控件：空数据占位图/" class="leancloud_visitors" data-flag-title="iOS自定义控件：空数据占位图">
+             <span id="/2019/03/27/属性修饰词/" class="leancloud_visitors" data-flag-title="属性修饰词">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -328,7 +327,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  506
+                  1.5k
                 </span>
               
 
@@ -344,7 +343,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -365,13 +364,91 @@
       
 
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-9a4a4958fdf67cb6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼图.jpg"></p>
-<p>最近由于业务需求，需要封装这样的一个提示页面。看了网上方法感觉都大同小异，其中<a href="https://link.jianshu.com/?t=https://github.com/dzenbot/DZNEmptyDataSet" target="_blank" rel="noopener">DZNEmptyDataSet</a>是很好的一个库，但是对我个人而言有点大财小用了。所以就借鉴一下其方法，自己封装一个。感觉有更高的自定义性吧。（我是初学者，请大佬爱护，勿喷）<br>一、封装代码：利用UIScrollView的分类实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@interface UIScrollView (WD_NoData)</span><br><span class="line">// 需要显示的占位页面</span><br><span class="line">@property (nonatomic, strong) UIView *noDataView;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure></p>
-<p>实现代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UIScrollView+WD_NoData.h&quot;</span><br><span class="line">#import &lt;objc/runtime.h&gt;</span><br><span class="line"></span><br><span class="line">static char *noDataViewKey = &quot;noDataViewKey&quot;;</span><br><span class="line"></span><br><span class="line">@implementation UIScrollView (WD_NoData)</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 交换方法</span><br><span class="line"></span><br><span class="line"> @param sel1 原方法</span><br><span class="line"> @param sel2 自定义方法</span><br><span class="line"> @param cls 类</span><br><span class="line"> */</span><br><span class="line">void exchangeSelector(SEL sel1, SEL sel2, Class cls) &#123;</span><br><span class="line">    Class class = [cls class];</span><br><span class="line">    Method originalMethod = class_getInstanceMethod(class, sel1);</span><br><span class="line">    Method swizzledMethod = class_getInstanceMethod(class, sel2);</span><br><span class="line">    BOOL success = class_addMethod(class, sel1, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));</span><br><span class="line">    if (success) &#123;</span><br><span class="line">        class_replaceMethod(class, sel2, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        method_exchangeImplementations(originalMethod, swizzledMethod);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== Setter ===============</span><br><span class="line">- (void)setNoDataView:(UIView *)noDataView &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        exchangeSelector(@selector(reloadData), @selector(wd_reloadData), [self class]);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    objc_setAssociatedObject(self, noDataViewKey, noDataView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== Getter ===============</span><br><span class="line">- (UIView *)noDataView &#123;</span><br><span class="line">    UIView *noDataView = objc_getAssociatedObject(self, noDataViewKey);</span><br><span class="line">    noDataView.frame = self.frame;</span><br><span class="line">    return noDataView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)wd_reloadData &#123;</span><br><span class="line">    [self wd_reloadData];</span><br><span class="line">    [self wd_checkData];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark =============== 获取数据 ===============</span><br><span class="line">- (void)wd_checkData &#123;</span><br><span class="line">    NSInteger items = 0;</span><br><span class="line">    </span><br><span class="line">    if (![self respondsToSelector:@selector(dataSource)]) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // UITableView support</span><br><span class="line">    if ([self isKindOfClass:[UITableView class]]) &#123;</span><br><span class="line">        </span><br><span class="line">        UITableView *tableView = (UITableView *)self;</span><br><span class="line">        id &lt;UITableViewDataSource&gt; dataSource = tableView.dataSource;</span><br><span class="line">        </span><br><span class="line">        NSInteger sections = 1;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]) &#123;</span><br><span class="line">            sections = [dataSource numberOfSectionsInTableView:tableView];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(tableView:numberOfRowsInSection:)]) &#123;</span><br><span class="line">            for (NSInteger section = 0; section &lt; sections; section++) &#123;</span><br><span class="line">                items += [dataSource tableView:tableView numberOfRowsInSection:section];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // UICollectionView support</span><br><span class="line">    else if ([self isKindOfClass:[UICollectionView class]]) &#123;</span><br><span class="line">        </span><br><span class="line">        UICollectionView *collectionView = (UICollectionView *)self;</span><br><span class="line">        id &lt;UICollectionViewDataSource&gt; dataSource = collectionView.dataSource;</span><br><span class="line">        </span><br><span class="line">        NSInteger sections = 1;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) &#123;</span><br><span class="line">            sections = [dataSource numberOfSectionsInCollectionView:collectionView];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (dataSource &amp;&amp; [dataSource respondsToSelector:@selector(collectionView:numberOfItemsInSection:)]) &#123;</span><br><span class="line">            for (NSInteger section = 0; section &lt; sections; section++) &#123;</span><br><span class="line">                items += [dataSource collectionView:collectionView numberOfItemsInSection:section];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if ( items == 0 ) &#123;</span><br><span class="line">        [self.superview addSubview:self.noDataView];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        [self.noDataView removeFromSuperview];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
-<p>二、使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UIScrollView+WD_NoData.h&quot;</span><br><span class="line">// 自定义页面</span><br><span class="line">#import &quot;WDTestEmptyView.h&quot;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//示例的视图</span><br><span class="line"> WDTestEmptyView *view = [NSBundle.mainBundle loadNibNamed:@&quot;WDTestEmptyView&quot; owner:self options:nil].firstObject;</span><br><span class="line">// 设置视图</span><br><span class="line">self.tableView.noDataView = view;</span><br></pre></td></tr></table></figure>
-<p>三、效果图</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3334769-9aecbb692ded171f.gif?imageMogr2/auto-orient/strip" alt="效果图.gif"></p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-f0679730c4864b7b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
+<h3 id="property"><a href="#property" class="headerlink" title="@property"></a>@property</h3><p>默认格式：<code>@syntheszie var = _var;</code></p>
+<p><code>ARC</code>中，默认修饰<br></p>
+<ul>
+<li>基本数据类型<code>@property (atomic, assign)</code><br></li>
+<li>对象数据类型<code>@property (atomic, strong)</code></li>
+</ul>
+<h3 id="修饰词解释"><a href="#修饰词解释" class="headerlink" title="修饰词解释"></a>修饰词解释</h3><ul>
+<li><p><code>nonatomic</code> 非原子性访问，不对set方法加锁，不是安全线程，但是性能高。</p>
+</li>
+<li><p><code>atomic</code> 原子性访问，对生成的 set 方法加互斥锁 @synchronized(锁对象），安全线程（不是绝对安全线程）,性能差。</p>
+</li>
+<li><code>strong</code>ARC中使用，修饰OC对象，<code>拥有关系</code>，引用计数器+1。</li>
+<li><code>reatain</code>MRC中使用，修饰OC对象，<code>拥有关系</code>，引用计数器+1。</li>
+<li><code>assign</code>修饰基础数据类型，直接赋值，<code>非拥有关系</code>，不使用引用计数器。</li>
+<li><code>weak</code>修饰协议，控件，<code>非拥有关系</code>，指向的对象销毁，指针会自动置为nil，不使用引用计数器。</li>
+<li><code>unsafe_unretained</code>与weak类似，不会自动nil化，如果所指向的内存区域被释放了，这个指针就是一个野指针。</li>
+<li><code>copy</code>在 MRC 时是这样做的 release 旧对象( 旧对象的引用计数器 -1 ) , copy 新对象( 新对象的引用计数器 +1 ) , 然后指向新对象 .（新对象是指最终指向的那个对象，不管深拷贝还是浅拷贝），在 ARC 时是这么干的 copy 新对象( 新对象的引用计数器 +1 ) , 然后指向新对象。</li>
+<li><code>readonly</code>只生成get方法，不想把暴露的属性被人随便替换时 , 可以使用。</li>
+<li><code>readwrite</code>生成get/set方法。</li>
+</ul>
+<h3 id="dynamic"><a href="#dynamic" class="headerlink" title="@dynamic"></a>@dynamic</h3><p>告诉编译器:属性的 setter 与 getter 方法由用户自己实现,不自动生成。(当然对于 readonly 的属性只需提供 getter 即可)</p>
+<h3 id="synthesize"><a href="#synthesize" class="headerlink" title="@synthesize"></a>@synthesize</h3><p>如果你没有手动实现 setter 方法和 getter 方法,那么编译器会自动为你加上这两个方法。</p>
+<h3 id="synchronized"><a href="#synchronized" class="headerlink" title="@synchronized"></a>@synchronized</h3><p>线程同步锁</p>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>（1）什么情况使用 weak 关键字？相比 assign 有什么不同?</p>
+<ul>
+<li>使用<blockquote>
+<ol>
+<li>协议声明使用weak</li>
+<li>IBOutlet 使用weak</li>
+</ol>
+</blockquote>
+</li>
+<li>weak 和 assign 的不同点:<blockquote>
+<p>weak 策略在属性所指的对象遭到摧毁时,系统会将 weak 修饰的属性对象的指针指向 nil,在 OC 给 nil 发消息是不会有什么问题的;如果使用 assign 策略在属性所指的对象遭到摧毁时,属性对象指针还指向原来的对象,由于对象已经被销毁,这时候就产生了野指针,如果这时候在给此对象发送消息,很容造成程序奔溃assigin 可以用于修饰非 OC 对象,而 weak 必须用于 OC 对象。</p>
+</blockquote>
+</li>
+</ul>
+<p>（2）使用 atomic 一定是线程安全的吗?</p>
+<ul>
+<li>不是,atomic 的本意是指属性的存取方法是线程安全的,并不保证整个对象是线程安全的。<blockquote>
+<p>例如： 声明一个 NSMutableArray 的原子属性 stuff,此时 self.stuff 和 self.stuff =othersulf 都是线程安全的。但是,使用[self.stuff objectAtIndex:index]就不是线程安全的,需要用互斥锁来保证线程安全性。</p>
+</blockquote>
+</li>
+</ul>
+<p>（3）@synthesize 和 @dynamic 分别有什么作用</p>
+<ul>
+<li><p>@property 有两个对应的词,一个是@synthesize,一个是@dynamic。<br>如果@synthesize 和@dynamic 都没写,那么默认的就是<br>@syntheszie var = _var;</p>
+</li>
+<li><p>@synthesize 的语义是如果你没有手动实现 setter 方法和 getter 方法,那么编译器会自动为你加上这两个方法。</p>
+</li>
+<li>@dynamic 告诉编译器:属性的 setter 与 getter 方法由用户自己实现,不自动生成。(当然对于 readonly 的属性只需提供 getter 即可)</li>
+<li>假如一个属性被声明为@dynamic var；然后你没有提供@setter 方法和@getter 方法,编译的时候没问题,但是当程序运行到 instance.var = someVar,由于缺 setter方法会导致程序崩溃;<br>或者当运行到 someVar = instance.var 时,由于缺 getter 方法同样会导致崩溃。</li>
+</ul>
+<p>（4）ARC 下,不显式指定任何属性关键字时,默认的关键字都有哪些?</p>
+<ul>
+<li><p>基本数据：  <code>atomic,readwrite,assign</code></p>
+</li>
+<li><p>普通的 OC 对象: <code>atomic,readwrite,strong</code></p>
+</li>
+</ul>
+<p>（5）用@property 声明的 NSString(或 NSArray,NSDictionary)经常使用 copy 关键字,为什么?如果改用 strong 关键字,可能造成什么问题?</p>
+<blockquote>
+<p>因为父类指针可以指向子类对象,使用 copy 的目的是为了让本对象的属性不受外界影响,使用 copy 无论给我传入是一个可变对象还是不可对象,我本身持有的就是一个不可变的副本.</p>
+<p>如果我们使用是 strong,那么这个属性就有可能指向一个可变对象,如果这个可变对象在外部被修改了,那么会影响该属性.</p>
+</blockquote>
+<p>（6）这个写法会出什么问题: @property(copy)NSMutableArray *array;</p>
+<blockquote>
+<p>因为 copy 策略拷贝出来的是一个不可变对象,然而却把它当成可变对象使用,很容易造成程序奔溃这里还有一个问题,该属性使用了同步锁,会在创建时生成一些额外的代码用于帮助编写多线程程序,这会带来性能问题,通过声明 nonatomic 可以节省这些虽然<br>很小但是不必要额外开销,在 iOS 开发中应该使用 nonatomic 替代 atomic.</p>
+</blockquote>
+<p>（7）如何让自定义类可以用 copy 修饰符?如何重写带 copy 关键字的 setter?</p>
+<blockquote>
+<p>若想令自己所写的对象具有拷贝功能,则需实现 NSCopying 协议。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 实现不可变版本拷贝</span><br><span class="line">- (id)copyWithZone:(NSZone *)zone; // 实现可变版本拷贝</span><br><span class="line">- (id)mutableCopyWithZone:(NSZone *)zone;</span><br><span class="line">// 重写带 copy 关键字的 setter</span><br><span class="line">- (void)setName:(NSString *)name &#123;</span><br><span class="line">    _name = [name copy];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="深拷贝和浅拷贝"><a href="#深拷贝和浅拷贝" class="headerlink" title="深拷贝和浅拷贝"></a>深拷贝和浅拷贝</h3><h4 id="copy-和-mutableCopy"><a href="#copy-和-mutableCopy" class="headerlink" title="copy 和 mutableCopy"></a>copy 和 mutableCopy</h4><ul>
+<li><p><code>copy</code>拷贝出来的对象类型总是不可变类型(例如, NSString, NSDictionary, NSArray等等)</p>
+</li>
+<li><p><code>mutableCopy</code>拷贝出来的对象类型总是可变类型(例如, NSMutableString, NSMutableDictionary, NSMutableArray等等)</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><code>copy</code> 对于可变对象为深拷贝，对于不可变对象为浅拷贝</li>
+<li><code>mutableCopy</code> 始终是深拷贝</li>
+</ul>
 
       
     </div>
@@ -406,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/10/数据存储：NSUserDefault/" rel="next" title="数据存储：NSUserDefaults">
-                <i class="fa fa-chevron-left"></i> 数据存储：NSUserDefaults
+              <a href="/2019/03/26/Block/" rel="next" title="Block">
+                <i class="fa fa-chevron-left"></i> Block
               </a>
             
           </div>
@@ -415,10 +492,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/15/数据存储：归档、解档/" rel="prev" title="数据存储：归档、解档">
-                数据存储：归档、解档 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,8 +548,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -549,6 +631,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#property"><span class="nav-number">1.</span> <span class="nav-text">@property</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰词解释"><span class="nav-number">2.</span> <span class="nav-text">修饰词解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dynamic"><span class="nav-number">3.</span> <span class="nav-text">@dynamic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synthesize"><span class="nav-number">4.</span> <span class="nav-text">@synthesize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized"><span class="nav-number">5.</span> <span class="nav-text">@synchronized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题："><span class="nav-number">6.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深拷贝和浅拷贝"><span class="nav-number">7.</span> <span class="nav-text">深拷贝和浅拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#copy-和-mutableCopy"><span class="nav-number">7.1.</span> <span class="nav-text">copy 和 mutableCopy</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
