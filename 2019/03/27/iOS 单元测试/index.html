@@ -88,20 +88,23 @@
 
 
 
-<meta name="description" content="类的单个属性观察观察值的4中模式123456/** *  NSKeyValueObservingOptionNew     新值 *  NSKeyValueObservingOptionOld     旧值 *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知 *  NSKeyValueObservingOptionPrior   改变之前发送通知">
+<meta name="description" content="单元测试以测试ViewController为例。 ViewController.h文件1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;@interface ViewController : UIViewController/** 逻辑测试 */- (int)getSumWithNum1:(int)a num2:(int)b;/** 异步测试 */- (void">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KVO">
-<meta property="og:url" content="https://wudan-ios.github.io/2019/03/26/KVO/index.html">
+<meta property="og:title" content="iOS 单元测试">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/03/27/iOS 单元测试/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
-<meta property="og:description" content="类的单个属性观察观察值的4中模式123456/** *  NSKeyValueObservingOptionNew     新值 *  NSKeyValueObservingOptionOld     旧值 *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知 *  NSKeyValueObservingOptionPrior   改变之前发送通知">
+<meta property="og:description" content="单元测试以测试ViewController为例。 ViewController.h文件1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;@interface ViewController : UIViewController/** 逻辑测试 */- (int)getSumWithNum1:(int)a num2:(int)b;/** 异步测试 */- (void">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-0c2f7bf66b38a01a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-26T02:45:40.608Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-7bb4651d5a48524e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-c0d1455212a740ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-96f0facc7307a744.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-0dc163b565bdcbf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-27T07:58:09.623Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KVO">
-<meta name="twitter:description" content="类的单个属性观察观察值的4中模式123456/** *  NSKeyValueObservingOptionNew     新值 *  NSKeyValueObservingOptionOld     旧值 *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知 *  NSKeyValueObservingOptionPrior   改变之前发送通知">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-0c2f7bf66b38a01a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS 单元测试">
+<meta name="twitter:description" content="单元测试以测试ViewController为例。 ViewController.h文件1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;@interface ViewController : UIViewController/** 逻辑测试 */- (int)getSumWithNum1:(int)a num2:(int)b;/** 异步测试 */- (void">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-7bb4651d5a48524e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -131,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://wudan-ios.github.io/2019/03/26/KVO/">
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/03/27/iOS 单元测试/">
 
 
 
 
 
-  <title>KVO | 一个孤独的搬码猿</title>
+  <title>iOS 单元测试 | 一个孤独的搬码猿</title>
   
 
 
@@ -254,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/03/26/KVO/">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/03/27/iOS 单元测试/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wudan">
@@ -271,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">KVO</h1>
+          <h1 class="post-title" itemprop="name headline">iOS 单元测试</h1>
         
 
         <div class="post-meta">
@@ -283,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-26T10:45:39+08:00">
-                2019-03-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-27T15:58:09+08:00">
+                2019-03-27
               </time>
             
 
@@ -301,7 +304,7 @@
 
           
           
-             <span id="/2019/03/26/KVO/" class="leancloud_visitors" data-flag-title="KVO">
+             <span id="/2019/03/27/iOS 单元测试/" class="leancloud_visitors" data-flag-title="iOS 单元测试">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -327,7 +330,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  492
+                  374
                 </span>
               
 
@@ -343,7 +346,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -364,22 +367,37 @@
       
 
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-0c2f7bf66b38a01a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
-<h3 id="类的单个属性观察"><a href="#类的单个属性观察" class="headerlink" title="类的单个属性观察"></a>类的单个属性观察</h3><p>观察值的4中模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  NSKeyValueObservingOptionNew     新值</span><br><span class="line"> *  NSKeyValueObservingOptionOld     旧值</span><br><span class="line"> *  NSKeyValueObservingOptionInitial 注册发送通知，改变时发送通知</span><br><span class="line"> *  NSKeyValueObservingOptionPrior   改变之前发送通知，改变后发送通知</span><br><span class="line"> */</span><br></pre></td></tr></table></figure></p>
-<p>针对<code>Person</code>类里面的<code>name</code>属性进行观察<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[person addObserver:self forKeyPath:@&quot;name&quot; options:NSKeyValueObservingOptionNew context:nil];</span><br></pre></td></tr></table></figure></p>
-<p>查看观察<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, change);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>打印效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 09:20:16.875033+0800 KVO[1844:81256] &#123;</span><br><span class="line">    kind = 1;</span><br><span class="line">    new = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="类的里面嵌套其他的属性观察"><a href="#类的里面嵌套其他的属性观察" class="headerlink" title="类的里面嵌套其他的属性观察"></a>类的里面嵌套其他的属性观察</h3><p>观察<code>Person</code>里面<code>Dog</code>类的<code>age</code>，通过点语法直接监听<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[person addObserver:self forKeyPath:@&quot;dog.age&quot; options:NSKeyValueObservingOptionNew context:nil];</span><br></pre></td></tr></table></figure></p>
-<p>输入结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 09:23:25.854859+0800 KVO[1876:84141] &#123;</span><br><span class="line">    kind = 1;</span><br><span class="line">    new = 11;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="一次性观察多个值"><a href="#一次性观察多个值" class="headerlink" title="一次性观察多个值"></a>一次性观察多个值</h3><p>例如观察<code>Person</code>里面的<code>Dog</code>的<code>age</code>和<code>level</code>，则在<code>Person</code>类中重新<code>+ (NSSet&lt;NSString *&gt; *)keyPathsForValuesAffectingValueForKey:(NSString *)key</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+ (NSSet&lt;NSString *&gt; *)keyPathsForValuesAffectingValueForKey:(NSString *)key &#123;</span><br><span class="line">    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];</span><br><span class="line">    if ([key isEqualToString:@&quot;dog&quot;]) &#123;</span><br><span class="line">        NSArray *array = @[@&quot;_dog.name&quot;, @&quot;_dog.level&quot;];</span><br><span class="line">        keyPaths = [keyPaths setByAddingObjectsFromArray:array];</span><br><span class="line">    &#125;</span><br><span class="line">    return keyPaths;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>直接观察<code>Dog</code>类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[person addObserver:self forKeyPath:@&quot;dog&quot; options:NSKeyValueObservingOptionNew context:nil];</span><br></pre></td></tr></table></figure></p>
-<p>打印结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 09:27:11.485240+0800 KVO[1929:87568] &#123;</span><br><span class="line">    kind = 1;</span><br><span class="line">    new = &quot;&lt;Dog: 0x6000027c0b80&gt;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="手动模式"><a href="#手动模式" class="headerlink" title="手动模式"></a>手动模式</h3><p>在Person类中重写<code>+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key &#123;</span><br><span class="line">    // 修改为手动模式</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>手动触发<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[self.person willChangeValueForKey:@&quot;name&quot;];</span><br><span class="line">[self.person didChangeValueForKey:@&quot;name&quot;];</span><br></pre></td></tr></table></figure></p>
-<h3 id="观察容器类"><a href="#观察容器类" class="headerlink" title="观察容器类"></a>观察容器类</h3><p>需要利用<code>KVC</code><br>例如观察<code>person</code>中的<code>array</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[self.person mutableArrayValueForKey:@&quot;array&quot;] addObject:@&quot;obj&quot;];</span><br></pre></td></tr></table></figure></p>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2019-03-22 11:02:13.996095+0800 KVO[5521:170395] &#123;</span><br><span class="line">    indexes = &quot;&lt;_NSCachedIndexSet: 0x600002216160&gt;[number of indexes: 1 (in 1 ranges), indexes: (0)]&quot;;</span><br><span class="line">    kind = 2;</span><br><span class="line">    new =     (</span><br><span class="line">        obj</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-7bb4651d5a48524e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>以测试ViewController为例。</p>
+<h5 id="ViewController-h文件"><a href="#ViewController-h文件" class="headerlink" title="ViewController.h文件"></a>ViewController.h文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@interface ViewController : UIViewController</span><br><span class="line">/** 逻辑测试 */</span><br><span class="line">- (int)getSumWithNum1:(int)a num2:(int)b;</span><br><span class="line">/** 异步测试 */</span><br><span class="line">- (void)loadDataComplete:(void(^)(id info))complete;</span><br><span class="line">/** 性能测试 */</span><br><span class="line">- (void)openCamera;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h5 id="ViewController-m文件"><a href="#ViewController-m文件" class="headerlink" title="ViewController.m文件"></a>ViewController.m文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">- (int)getSumWithNum1:(int)a num2:(int)b &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)loadDataComplete:(void (^)(id))complete &#123;    </span><br><span class="line">    dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</span><br><span class="line">        sleep(2);</span><br><span class="line">        NSString *data = @&quot;😝&quot;;</span><br><span class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            complete(data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)openCamera &#123;</span><br><span class="line">    for(int i = 0; i &lt; 1000; ++i) &#123;</span><br><span class="line">        NSLog(@&quot;这是一个字符串%d&quot;, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了进行单元化测试，所以新建一个<code>ViewControllerTest</code>文件。<br>步骤<br><img src="https://upload-images.jianshu.io/upload_images/3334769-c0d1455212a740ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建文件"></p>
+<ul>
+<li>导入测试头文件<code>#import &quot;ViewController.h&quot;</code></li>
+<li>声明属性<code>@property (nonatomic, strong) ViewController *vc;</code></li>
+<li>在<code>- (void)setUp;</code>进行初始化代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)setUp &#123;</span><br><span class="line">    self.vc = [[ViewController alloc] init];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1、逻辑测试"><a href="#1、逻辑测试" class="headerlink" title="1、逻辑测试"></a>1、逻辑测试</h3><ol>
+<li>给出测试数据</li>
+<li>进行测试</li>
+<li>使用断言进行判定<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (void)testSum &#123;</span><br><span class="line">    // 1. given</span><br><span class="line">    int a = 10;</span><br><span class="line">    int b = 22;</span><br><span class="line">    // 2. when</span><br><span class="line">    int sum = [self.vc getSumWithNum1:a num2:b];</span><br><span class="line">    // 3. then</span><br><span class="line">    XCTAssertEqual(sum, 32, @&quot;错误&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2、异步测试"><a href="#2、异步测试" class="headerlink" title="2、异步测试"></a>2、异步测试</h3><ol>
+<li>创建<code>XCTestExpectation</code>，设置错误提示</li>
+<li>调用方法，在异步中调用<code>fulfill</code></li>
+<li>进行判断时间，是否在预期时间内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">XCTestExpectation *exp = [self expectationWithDescription:@&quot;超过预期时间&quot;];</span><br><span class="line">[self.vc loadDataComplete:^(id info) &#123;</span><br><span class="line">    XCTAssertNil(info, @&quot;数据为空&quot;);</span><br><span class="line">    [exp fulfill];</span><br><span class="line">&#125;];</span><br><span class="line">[self waitForExpectationsWithTimeout:4 handler:^(NSError * _Nullable error) &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, error);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="3、性能测试"><a href="#3、性能测试" class="headerlink" title="3、性能测试"></a>3、性能测试</h3><p><img src="https://upload-images.jianshu.io/upload_images/3334769-96f0facc7307a744.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="性能测试"></p>
+<ol>
+<li>设置Baseline时间</li>
+<li>Max STDDEV 最大样本标准偏差比例</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)testPerformanceExample &#123;</span><br><span class="line">    [self measureBlock:^&#123;</span><br><span class="line">        [self.vc openCamera];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="KVO的底层实现"><a href="#KVO的底层实现" class="headerlink" title="KVO的底层实现"></a>KVO的底层实现</h3><p>实质：观察值的setter方法<br>通过runtime，新建一个子类继承于观察类（NSKVONotifing_类名），动态的修改了观察类的类型为子类的类型,在子类里面重写set方法，调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)setName:(NSString *)name &#123;</span><br><span class="line">    [self willChangeValueForKey:@&quot;name&quot;];</span><br><span class="line">    [super setName:name];</span><br><span class="line">    [self didChangeValueForKey:@&quot;name&quot;];   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="UI测试"><a href="#UI测试" class="headerlink" title="UI测试"></a>UI测试</h2><p><img src="https://upload-images.jianshu.io/upload_images/3334769-0dc163b565bdcbf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="脚本录制"><br>1、录制脚本<br><br>2、编辑脚本<br><br>3、自动化测试</p>
 
       
     </div>
@@ -414,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/21/iOS-3D Touch/" rel="next" title="iOS-3D Touch">
-                <i class="fa fa-chevron-left"></i> iOS-3D Touch
+              <a href="/2019/03/27/属性修饰词/" rel="next" title="属性修饰词">
+                <i class="fa fa-chevron-left"></i> 属性修饰词
               </a>
             
           </div>
@@ -423,10 +441,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/26/Block/" rel="prev" title="Block">
-                Block <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -576,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的单个属性观察"><span class="nav-number">1.</span> <span class="nav-text">类的单个属性观察</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的里面嵌套其他的属性观察"><span class="nav-number">2.</span> <span class="nav-text">类的里面嵌套其他的属性观察</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一次性观察多个值"><span class="nav-number">3.</span> <span class="nav-text">一次性观察多个值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动模式"><span class="nav-number">4.</span> <span class="nav-text">手动模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察容器类"><span class="nav-number">5.</span> <span class="nav-text">观察容器类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO的底层实现"><span class="nav-number">6.</span> <span class="nav-text">KVO的底层实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ViewController-h文件"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">ViewController.h文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ViewController-m文件"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">ViewController.m文件</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#1、逻辑测试"><span class="nav-number">1.1.</span> <span class="nav-text">1、逻辑测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、异步测试"><span class="nav-number">1.2.</span> <span class="nav-text">2、异步测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、性能测试"><span class="nav-number">1.3.</span> <span class="nav-text">3、性能测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI测试"><span class="nav-number">2.</span> <span class="nav-text">UI测试</span></a></li></div>
             
 
           </div>
