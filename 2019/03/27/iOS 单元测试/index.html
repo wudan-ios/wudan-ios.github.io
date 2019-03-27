@@ -96,15 +96,18 @@
 <meta property="og:site_name" content="一个孤独的搬码猿">
 <meta property="og:description" content="单元测试以测试ViewController为例。 ViewController.h文件1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;@interface ViewController : UIViewController/** 逻辑测试 */- (int)getSumWithNum1:(int)a num2:(int)b;/** 异步测试 */- (void">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-7bb4651d5a48524e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-4eef772205a43353.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-c0d1455212a740ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-96f0facc7307a744.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-0dc163b565bdcbf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-27T07:58:09.623Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-4a5476214d38ea7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-b1b529d4111e737b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-01e76835566d7ae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-27T08:14:28.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 单元测试">
 <meta name="twitter:description" content="单元测试以测试ViewController为例。 ViewController.h文件1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;@interface ViewController : UIViewController/** 逻辑测试 */- (int)getSumWithNum1:(int)a num2:(int)b;/** 异步测试 */- (void">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-7bb4651d5a48524e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-4eef772205a43353.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -330,7 +333,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  374
+                  401
                 </span>
               
 
@@ -367,7 +370,7 @@
       
 
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-7bb4651d5a48524e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/3334769-4eef772205a43353.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
 <h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>以测试ViewController为例。</p>
 <h5 id="ViewController-h文件"><a href="#ViewController-h文件" class="headerlink" title="ViewController.h文件"></a>ViewController.h文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@interface ViewController : UIViewController</span><br><span class="line">/** 逻辑测试 */</span><br><span class="line">- (int)getSumWithNum1:(int)a num2:(int)b;</span><br><span class="line">/** 异步测试 */</span><br><span class="line">- (void)loadDataComplete:(void(^)(id info))complete;</span><br><span class="line">/** 性能测试 */</span><br><span class="line">- (void)openCamera;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
 <h5 id="ViewController-m文件"><a href="#ViewController-m文件" class="headerlink" title="ViewController.m文件"></a>ViewController.m文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">- (int)getSumWithNum1:(int)a num2:(int)b &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)loadDataComplete:(void (^)(id))complete &#123;    </span><br><span class="line">    dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</span><br><span class="line">        sleep(2);</span><br><span class="line">        NSString *data = @&quot;😝&quot;;</span><br><span class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            complete(data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)openCamera &#123;</span><br><span class="line">    for(int i = 0; i &lt; 1000; ++i) &#123;</span><br><span class="line">        NSLog(@&quot;这是一个字符串%d&quot;, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -381,7 +384,7 @@
 <h3 id="1、逻辑测试"><a href="#1、逻辑测试" class="headerlink" title="1、逻辑测试"></a>1、逻辑测试</h3><ol>
 <li>给出测试数据</li>
 <li>进行测试</li>
-<li>使用断言进行判定<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (void)testSum &#123;</span><br><span class="line">    // 1. given</span><br><span class="line">    int a = 10;</span><br><span class="line">    int b = 22;</span><br><span class="line">    // 2. when</span><br><span class="line">    int sum = [self.vc getSumWithNum1:a num2:b];</span><br><span class="line">    // 3. then</span><br><span class="line">    XCTAssertEqual(sum, 32, @&quot;错误&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>使用断言进行判定<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (void)testSum &#123;</span><br><span class="line">// 1. given</span><br><span class="line">int a = 10;</span><br><span class="line">int b = 22;</span><br><span class="line">// 2. when</span><br><span class="line">int sum = [self.vc getSumWithNum1:a num2:b];</span><br><span class="line">// 3. then</span><br><span class="line">XCTAssertEqual(sum, 32, @&quot;错误&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="2、异步测试"><a href="#2、异步测试" class="headerlink" title="2、异步测试"></a>2、异步测试</h3><ol>
@@ -398,6 +401,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)testPerformanceExample &#123;</span><br><span class="line">    [self measureBlock:^&#123;</span><br><span class="line">        [self.vc openCamera];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="UI测试"><a href="#UI测试" class="headerlink" title="UI测试"></a>UI测试</h2><p><img src="https://upload-images.jianshu.io/upload_images/3334769-0dc163b565bdcbf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="脚本录制"><br>1、录制脚本<br><br>2、编辑脚本<br><br>3、自动化测试</p>
+<h2 id="获取代码覆盖率"><a href="#获取代码覆盖率" class="headerlink" title="获取代码覆盖率"></a>获取代码覆盖率</h2><p>1、点击<code>Edit Secheme</code><br><img src="https://upload-images.jianshu.io/upload_images/3334769-4a5476214d38ea7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Edit Secheme"><br>2、选择<code>Test</code>-&gt;<code>Options</code>-&gt;<code>Code Coverage</code>勾起<br><img src="https://upload-images.jianshu.io/upload_images/3334769-b1b529d4111e737b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Code Coverage"><br>3、运行代码查看结果<br><img src="https://upload-images.jianshu.io/upload_images/3334769-01e76835566d7ae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="查看结果"></p>
 
       
     </div>
@@ -590,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ViewController-h文件"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">ViewController.h文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ViewController-m文件"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">ViewController.m文件</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#1、逻辑测试"><span class="nav-number">1.1.</span> <span class="nav-text">1、逻辑测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、异步测试"><span class="nav-number">1.2.</span> <span class="nav-text">2、异步测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、性能测试"><span class="nav-number">1.3.</span> <span class="nav-text">3、性能测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI测试"><span class="nav-number">2.</span> <span class="nav-text">UI测试</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ViewController-h文件"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">ViewController.h文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ViewController-m文件"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">ViewController.m文件</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#1、逻辑测试"><span class="nav-number">1.1.</span> <span class="nav-text">1、逻辑测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、异步测试"><span class="nav-number">1.2.</span> <span class="nav-text">2、异步测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、性能测试"><span class="nav-number">1.3.</span> <span class="nav-text">3、性能测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI测试"><span class="nav-number">2.</span> <span class="nav-text">UI测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取代码覆盖率"><span class="nav-number">3.</span> <span class="nav-text">获取代码覆盖率</span></a></li></div>
             
 
           </div>
@@ -633,7 +637,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">32.6k</span>
+    <span title="Site words total count">32.7k</span>
   
 </div>
 
@@ -649,7 +653,7 @@
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共32.6k字</span>
+  <span class="post-count">博客全站共32.7k字</span>
 </div>
         
 
