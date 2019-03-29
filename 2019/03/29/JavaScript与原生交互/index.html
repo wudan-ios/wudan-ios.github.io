@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一个孤独的搬码猿" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码1234567891011121314151617181920212223">
+<meta name="keywords" content="iOS, Swift, Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript与原生交互">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/03/29/JavaScript与原生交互/index.html">
+<meta property="og:site_name" content="一个孤独的搬码猿">
+<meta property="og:description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码1234567891011121314151617181920212223">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-b397461b46272052.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-29T01:19:56.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript与原生交互">
+<meta name="twitter:description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码1234567891011121314151617181920212223">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-b397461b46272052.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/03/29/JavaScript与原生交互/">
+
+
+
+
+
+  <title>JavaScript与原生交互 | 一个孤独的搬码猿</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一个孤独的搬码猿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">虽然代码虐我千百遍，我对代码如初恋。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/03/29/JavaScript与原生交互/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wudan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/HeaderImage.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一个孤独的搬码猿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript与原生交互</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-29T09:19:55+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/29/JavaScript与原生交互/" class="leancloud_visitors" data-flag-title="JavaScript与原生交互">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> <img src="https://upload-images.jianshu.io/upload_images/3334769-b397461b46272052.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="实例样式"></p>
+<p>原生页面与HTML页面进行相互调用<br>方式 | 适用对象<br>—|—<br>拦截URL | <code>UIWebView</code>和<code>WKWebView</code><br>JavaScriptCore | <code>UIWebView</code><br>MessageHandler | <code>WKWebView</code><br>WebViewJavascriptBridge| <code>UIWebView</code>和<code>WKWebView</code></p>
+<h3 id="实例HTML代码"><a href="#实例HTML代码" class="headerlink" title="实例HTML代码"></a>实例HTML代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h2&gt;按钮点击&lt;/h2&gt;</span><br><span class="line">    &lt;button type=&quot;submit&quot; onclick=&quot;buttonEvent()&quot; id=&quot;submitButto&quot;&gt;提交&lt;/button&gt;</span><br><span class="line">    &lt;h2&gt;文件上传&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; /&gt;</span><br><span class="line">    &lt;h2&gt;原生注入数据&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; id=&quot;textField&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; onclick=&quot;getTextEvent()&quot; value=&quot;开始注入&quot;&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        function loadURL(url) &#123;</span><br><span class="line">            var iFrame;</span><br><span class="line">            iFrame = document.createElement(&quot;iframe&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;src&quot;, url);</span><br><span class="line">            iFrame.setAttribute(&quot;style&quot;, &quot;display:none;&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;height&quot;, &quot;0px&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;width&quot;, &quot;0px&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;frameborder&quot;, &quot;0&quot;);</span><br><span class="line">            document.body.appendChild(iFrame);</span><br><span class="line">            iFrame.parentNode.removeChild(iFrame);</span><br><span class="line">            iFrame = null;</span><br><span class="line">        &#125;</span><br><span class="line">        function buttonEvent()&#123;</span><br><span class="line">            loadURL(&quot;/buttonEvent&quot;);</span><br><span class="line">            buttonDidPapped();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        function getTextEvent() &#123;</span><br><span class="line">            loadURL(&quot;/getText&quot;);</span><br><span class="line">            getTextButtonDidPapped();</span><br><span class="line">        &#125;</span><br><span class="line">        function getText(text)&#123;</span><br><span class="line">            document.getElementById(&quot;textField&quot;).value = text;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="拦截URL"><a href="#拦截URL" class="headerlink" title="拦截URL"></a>拦截URL</h2><h4 id="UIWebView"><a href="#UIWebView" class="headerlink" title="UIWebView"></a>UIWebView</h4><p>遵循<code>UIWebViewDelegate</code>调用<code>- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType</code>方法，判断获取的Url地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 调用JS</span><br><span class="line">if ([request.URL.absoluteString hasSuffix:@&quot;buttonEvent&quot;]) &#123;</span><br><span class="line">    UIAlertController *vc = [UIAlertControlleralertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">        [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">    &#125;]];</span><br><span class="line">    [self presentViewController:vc animated:true completion:nil];  </span><br><span class="line">    return NO;</span><br><span class="line">&#125; </span><br><span class="line">// 注入数据给JS</span><br><span class="line">if ([request.URL.absoluteString hasSuffix:@&quot;getText&quot;]) &#123; </span><br><span class="line">    [webView stringByEvaluatingJavaScriptFromString:@&quot;getText(&apos;哈哈&apos;)&quot;];</span><br><span class="line">     return NO;</span><br><span class="line">&#125;</span><br><span class="line">return YES;</span><br></pre></td></tr></table></figure></p>
+<h4 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a>WKWebView</h4><p>遵循<code>WKNavigationDelegate</code>调用<code>- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler</code>方法判断获取的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NSString *strRequest = [navigationAction.request.URL.absoluteString stringByRemovingPercentEncoding];</span><br><span class="line">// 调用JS</span><br><span class="line">if ([strRequest hasSuffix:@&quot;buttonEvent&quot;]) &#123;</span><br><span class="line">    UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">    [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">    &#125;]];</span><br><span class="line">    [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">    decisionHandler(WKNavigationActionPolicyCancel);</span><br><span class="line">&#125; else if ([strRequest hasSuffix:@&quot;getText&quot;]) &#123; // 注入数据给JS</span><br><span class="line">    [webView evaluateJavaScript:@&quot;getText(&apos;哈哈&apos;)&quot; completionHandler:^(id _Nullable info, NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@&quot;Error--%@, info--%@&quot;, error, info);</span><br><span class="line">    &#125;];</span><br><span class="line">    decisionHandler(WKNavigationActionPolicyCancel);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    decisionHandler(WKNavigationActionPolicyAllow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h2><ol>
+<li>导入<code>&lt;JavaScriptCore/JavaScriptCore.h&gt;</code></li>
+<li>遵循<code>&lt;UIWebViewDelegate&gt;</code>并实现<code>- (void)webViewDidFinishLoad:(UIWebView *)webView</code>方法。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 对JSContext对象进行初始化</span><br><span class="line">JSContext *context = [self.webView valueForKeyPath:@&quot;documentView.webView.mainFrame.javaScriptContext&quot;];</span><br><span class="line">// 验证JSContext对象是否初始化成功</span><br><span class="line">context.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue)&#123;</span><br><span class="line">    context.exception = exceptionValue;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// 调用JS  </span><br><span class="line">context[@&quot;buttonDidPapped&quot;] = ^&#123;</span><br><span class="line">    UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">    [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">    &#125;]];</span><br><span class="line">    [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// 注入数据给JS   </span><br><span class="line">context[@&quot;getTextButtonDidPapped&quot;] = ^&#123;</span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">      [self.webView stringByEvaluatingJavaScriptFromString:@&quot;getText(&apos;哈哈&apos;)&quot;];</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="MessageHandler"><a href="#MessageHandler" class="headerlink" title="MessageHandler"></a>MessageHandler</h2><ol>
+<li><p>修改js中的方法， 通过<code>window.webkit.messageHandlers</code>+操作方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function buttonEvent()&#123;</span><br><span class="line">    window.webkit.messageHandlers.buttonEvent.postMessage(null);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">function getTextEvent() &#123;</span><br><span class="line">    window.webkit.messageHandlers.getTextEvent.postMessage(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遵循<code>WKScriptMessageHandler</code></p>
+</li>
+<li>在<code>- (void)viewWillAppear:(BOOL)animated</code>中添加<code>scriptMessageHandler</code></li>
+<li>在<code>- (void)viewWillDisappear:(BOOL)animated</code>中移除<code>scriptMessageHandler</code></li>
+<li>实现<code>WKScriptMessageHandler</code>方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewWillAppear:(BOOL)animated &#123;</span><br><span class="line">    [super viewWillAppear:animated];</span><br><span class="line">    [self.webView.configuration.userContentController addScriptMessageHandler:self name:@&quot;buttonEvent&quot;];</span><br><span class="line">    [self.webView.configuration.userContentController addScriptMessageHandler:self name:@&quot;getTextEvent&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewWillDisappear:(BOOL)animated &#123;</span><br><span class="line">    [super viewWillDisappear:animated];</span><br><span class="line">    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@&quot;buttonEvent&quot;];</span><br><span class="line">    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@&quot;getTextEvent&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - WKScriptMessageHandler Method</span><br><span class="line">- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message &#123;</span><br><span class="line">    // 调用JS</span><br><span class="line">    if ([message.name isEqualToString:@&quot;buttonEvent&quot;]) &#123;</span><br><span class="line">        UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">        [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;]];</span><br><span class="line">        [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 注入数据给JS</span><br><span class="line">    if  ([message.name isEqualToString:@&quot;getTextEvent&quot;]) &#123;</span><br><span class="line">        [self.webView evaluateJavaScript:@&quot;getText(&apos;哈哈&apos;)&quot; completionHandler:^(id _Nullable info, NSError * _Nullable error) &#123;</span><br><span class="line">            NSLog(@&quot;Error--%@, info--%@&quot;, error, info);</span><br><span class="line">        &#125;];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="WebViewJavascriptBridge"><a href="#WebViewJavascriptBridge" class="headerlink" title="WebViewJavascriptBridge"></a>WebViewJavascriptBridge</h2><p>HTML代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h2&gt;按钮点击&lt;/h2&gt;</span><br><span class="line">    &lt;input id = &apos;submitBtn&apos; type=&quot;button&quot; value=&quot;提交按钮&quot; onclick=&quot;submitClick()&quot;/&gt;</span><br><span class="line">    &lt;h2&gt;文件选择&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; id=&quot;image&quot;&gt;</span><br><span class="line">    &lt;h2&gt;注入数据&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; id=&quot;getTextField&quot; /&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;开始获取&quot; id = &apos;startGet&apos; onclick=&quot;getTextClick()&quot;/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        function setupWebViewJavascriptBridge(callback) &#123;</span><br><span class="line">	        if (window.WebViewJavascriptBridge) &#123; return callback(WebViewJavascriptBridge); &#125;</span><br><span class="line">	        if (window.WVJBCallbacks) &#123; return window.WVJBCallbacks.push(callback); &#125;</span><br><span class="line">        	window.WVJBCallbacks = [callback];</span><br><span class="line">	        var WVJBIframe = document.createElement(&apos;iframe&apos;);</span><br><span class="line">        	WVJBIframe.style.display = &apos;none&apos;;</span><br><span class="line">        	WVJBIframe.src = &apos;https://__bridge_loaded__&apos;;</span><br><span class="line">        	document.documentElement.appendChild(WVJBIframe);</span><br><span class="line">	        setTimeout(function() &#123; document.documentElement.removeChild(WVJBIframe) &#125;, 0)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setupWebViewJavascriptBridge(function(bridge) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        function submitClick() &#123;</span><br><span class="line">            WebViewJavascriptBridge.callHandler(&apos;submitClick&apos;, null, function(response) &#123;</span><br><span class="line">                </span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        function getTextClick() &#123;</span><br><span class="line">            WebViewJavascriptBridge.callHandler(&apos;getTextClick&apos;, null, function(response) &#123;</span><br><span class="line">                document.getElementById(&quot;getTextField&quot;).value = response;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<p>第三方库：<a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">地址</a></p>
+<ol>
+<li>添加<code>WebViewJavascriptBridge</code>库</li>
+<li>导入头文件<code>#import &lt;WebViewJavascriptBridge.h&gt;</code></li>
+<li>声明方法<code>@property WebViewJavascriptBridge* bridge;</code></li>
+<li><p>与WebView关联</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];</span><br><span class="line"></span><br><span class="line">[_bridge setWebViewDelegate:self];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[_bridge registerHandler:@&quot;submitClick&quot; handler:^(id data, WVJBResponseCallback responseCallback) &#123;</span><br><span class="line">        UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">        [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;]];</span><br><span class="line">        [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注入数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[_bridge registerHandler:@&quot;getTextClick&quot; handler:^(id data, WVJBResponseCallback responseCallback) &#123;</span><br><span class="line">        responseCallback(@&quot;哈哈哈&quot;);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/27/iOS 单元测试/" rel="next" title="iOS 单元测试">
+                <i class="fa fa-chevron-left"></i> iOS 单元测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjQxMS8xODk1OA"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/HeaderImage.png" alt="wudan">
+            
+              <p class="site-author-name" itemprop="name">wudan</p>
+              <p class="site-description motion-element" itemprop="description">一只孤独的搬码猿，iOS开发的小菜。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wudan-ios" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6688638997" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/3ac0dc8a6a68" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例HTML代码"><span class="nav-number">1.</span> <span class="nav-text">实例HTML代码</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截URL"><span class="nav-number"></span> <span class="nav-text">拦截URL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UIWebView"><span class="nav-number">0.1.</span> <span class="nav-text">UIWebView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WKWebView"><span class="nav-number">0.2.</span> <span class="nav-text">WKWebView</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScriptCore"><span class="nav-number"></span> <span class="nav-text">JavaScriptCore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MessageHandler"><span class="nav-number"></span> <span class="nav-text">MessageHandler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebViewJavascriptBridge"><span class="nav-number"></span> <span class="nav-text">WebViewJavascriptBridge</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wudan</span>
+<!--
+  
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<!--
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">33.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+-->
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共33.8k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </div></footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("kEALmoqFpNRmWSOUDeGrEA1A-gzGzoHsz", "DzKgNH2UfSQaCGpT76P6QuVI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
