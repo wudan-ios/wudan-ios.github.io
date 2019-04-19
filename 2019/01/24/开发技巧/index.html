@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="1、PrefixHeader导入位置写法1$(SRCROOT)/$(PROJECT_NAME)/&amp;lt;#文件所在文件夹名称#&amp;gt;/PrefixHeader.pch 2、隐藏导航栏的两种方式1234567891011121314151617181920212223242526272829//方式一 《推荐》//在需要隐藏的viewController中遵循&amp;lt;UINavigationCon">
+<meta name="description" content="1、PrefixHeader导入位置写法 $(SRCROOT)/$(PROJECT_NAME)/&amp;lt;#文件所在文件夹名称#&amp;gt;/PrefixHeader.pch 2、隐藏导航栏的两种方式 //方式一 《推荐》 //在需要隐藏的viewController中遵循&amp;lt;UINavigationControllerDelegate&amp;gt; - (void)viewDidLoad {     [">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发技巧-不断更新中">
 <meta property="og:url" content="https://wudan-ios.github.io/2019/01/24/开发技巧/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
-<meta property="og:description" content="1、PrefixHeader导入位置写法1$(SRCROOT)/$(PROJECT_NAME)/&amp;lt;#文件所在文件夹名称#&amp;gt;/PrefixHeader.pch 2、隐藏导航栏的两种方式1234567891011121314151617181920212223242526272829//方式一 《推荐》//在需要隐藏的viewController中遵循&amp;lt;UINavigationCon">
+<meta property="og:description" content="1、PrefixHeader导入位置写法 $(SRCROOT)/$(PROJECT_NAME)/&amp;lt;#文件所在文件夹名称#&amp;gt;/PrefixHeader.pch 2、隐藏导航栏的两种方式 //方式一 《推荐》 //在需要隐藏的viewController中遵循&amp;lt;UINavigationControllerDelegate&amp;gt; - (void)viewDidLoad {     [">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-01T01:30:06.052Z">
+<meta property="og:updated_time" content="2019-04-19T08:28:20.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发技巧-不断更新中">
-<meta name="twitter:description" content="1、PrefixHeader导入位置写法1$(SRCROOT)/$(PROJECT_NAME)/&amp;lt;#文件所在文件夹名称#&amp;gt;/PrefixHeader.pch 2、隐藏导航栏的两种方式1234567891011121314151617181920212223242526272829//方式一 《推荐》//在需要隐藏的viewController中遵循&amp;lt;UINavigationCon">
+<meta name="twitter:description" content="1、PrefixHeader导入位置写法 $(SRCROOT)/$(PROJECT_NAME)/&amp;lt;#文件所在文件夹名称#&amp;gt;/PrefixHeader.pch 2、隐藏导航栏的两种方式 //方式一 《推荐》 //在需要隐藏的viewController中遵循&amp;lt;UINavigationControllerDelegate&amp;gt; - (void)viewDidLoad {     [">
 
 
 
@@ -362,22 +362,270 @@
       
 
       
-        <p>1、PrefixHeader导入位置写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(SRCROOT)/$(PROJECT_NAME)/&lt;#文件所在文件夹名称#&gt;/PrefixHeader.pch</span><br></pre></td></tr></table></figure></p>
-<p>2、隐藏导航栏的两种方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//方式一 《推荐》</span><br><span class="line">//在需要隐藏的viewController中遵循&lt;UINavigationControllerDelegate&gt;</span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line"> // 设置导航控制器的代理为self</span><br><span class="line">    self.navigationController.delegate = self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - UINavigationControllerDelegate</span><br><span class="line">// 将要显示控制器</span><br><span class="line">- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated &#123;</span><br><span class="line">    // 判断要显示的控制器是否是自己</span><br><span class="line">    BOOL isShowHomePage = [viewController isKindOfClass:[self class]];</span><br><span class="line">    </span><br><span class="line">    [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//方式二</span><br><span class="line">- (void)viewWillAppear:(BOOL)animated &#123;</span><br><span class="line">    [super viewWillAppear:animated];</span><br><span class="line"></span><br><span class="line">    [self.navigationController setNavigationBarHidden:YES animated:YES];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewWillDisappear:(BOOL)animated &#123;</span><br><span class="line">    [super viewWillDisappear:animated];</span><br><span class="line"></span><br><span class="line">    [self.navigationController setNavigationBarHidden:NO animated:YES];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3、TabBarItem要求只显示图片不显示文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// self 表示需要设置样式的控制器</span><br><span class="line">[self.tabBarItem setImageInsets:UIEdgeInsetsMake(6, 0, -6, 0)];</span><br></pre></td></tr></table></figure></p>
-<p>4、TableView或CollectionView单选<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--步骤一、 声明一个全局变量--&gt;</span><br><span class="line">@property (nonatomic, assign) NSInteger selectedIndex;</span><br><span class="line">&lt;!--步骤二、TableView或CollectionView点击事件的方法中保存点击的index，并刷新--&gt;</span><br><span class="line">self.selectedIndex = indexPath.row;</span><br><span class="line">[collectionView reloadData];或[tableView reloadData];</span><br><span class="line">&lt;!--步骤三、在cellForItemAtIndexPath或cellForRowAtIndexPath方法中判断是否是所保存的index--&gt;</span><br><span class="line">if (self.selectedIndex == indexPath.row) &#123;</span><br><span class="line">    // 设置选中样式</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    // 设置成默认样式    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>5、怎么区分真机还是模拟器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#if TARGET_IPHONE_SIMULATOR  </span><br><span class="line">    NSLog(@&quot;run on simulator&quot;);  </span><br><span class="line">#define SIMULATOR_TEST</span><br><span class="line">#else  </span><br><span class="line">//不定义SIMULATOR_TEST这个宏</span><br><span class="line">    NSLog(@&quot;run on device&quot;);  </span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></p>
-<p>6、if Debug<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#ifdef DEBUG    </span><br><span class="line">// do sth</span><br><span class="line">#else   </span><br><span class="line">// do sth</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></p>
-<p>7、一键清理所有模拟器安装过的APP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 先关闭所有模拟器 在终端中输入下面命令即可</span><br><span class="line">xcrun simctl erase all</span><br></pre></td></tr></table></figure></p>
-<p>8、SDWebImage清理缓存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)didReceiveMemoryWarning &#123;</span><br><span class="line">    [super didReceiveMemoryWarning];</span><br><span class="line">    [[[SDWebImageManager sharedManager] imageCache] clearMemory];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>9、UITableView的HeaderView下拉放大<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1、View1:作为显示View</span><br><span class="line">2、View2:作为tableView的tableHeaderView，并添加View1，View2的大小和View1大小相同.</span><br><span class="line">3、在UIScrollViewDelegate方法中进行设计</span><br><span class="line">- (void)scrollViewDidScroll:(UIScrollView *)scrollView &#123;</span><br><span class="line">    CGFloat width = UIScreen.mainScreen.bounds.size.width;</span><br><span class="line">    CGFloat viewHeight = kScreenWidth * 0.5; // View1的初始高度</span><br><span class="line">    CGFloat yOffset = scrollView.contentOffset.y;</span><br><span class="line">    if (yOffset &lt; 0) &#123;</span><br><span class="line">        CGFloat totalOffset = viewHeight + ABS(yOffset);</span><br><span class="line">        CGFloat f = totalOffset / viewHeight;</span><br><span class="line">        self.headerView.frame = CGRectMake(- (width * f - width) / 2, yOffset, width * f, totalOffset);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>10、Masonry制作就宫格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">//Objective-C ----&gt; Masonry</span><br><span class="line">/**</span><br><span class="line"> 多视图布局</span><br><span class="line"></span><br><span class="line"> @param viewArray 视图数组</span><br><span class="line"> @param column 列数</span><br><span class="line"> @param tbSpeace 视图上下间距</span><br><span class="line"> @param lrSpeace 视图左右间距</span><br><span class="line"> @param topSpeace 和父视图上间距</span><br><span class="line"> @param lrSuperViewSpeace 父视图左右间距</span><br><span class="line"> @param superView 父视图</span><br><span class="line"> @param viewHeight 视图高度</span><br><span class="line"> */</span><br><span class="line">- (void)wd_masLayoutSubViewsWithViewArray:(NSArray&lt;UIView *&gt; *)viewArray</span><br><span class="line">                              columnOfRow:(NSInteger)column</span><br><span class="line">                    topBottomOfItemSpeace:(CGFloat)tbSpeace</span><br><span class="line">                      leftRightItemSpeace:(CGFloat)lrSpeace</span><br><span class="line">                     topOfSuperViewSpeace:(CGFloat)topSpeace</span><br><span class="line">                 leftRightSuperViewSpeace:(CGFloat)lrSuperViewSpeace</span><br><span class="line">                          addToSubperView:(UIView *)superView</span><br><span class="line">                               viewHeight:(CGFloat)viewHeight&#123;</span><br><span class="line">  </span><br><span class="line">                    CGFloat viewWidth = superView.bounds.size.width;</span><br><span class="line">                    CGFloat itemWidth = (viewWidth - lrSuperViewSpeace * 2 - (column - 1) * lrSpeace) / column * 1.0f;</span><br><span class="line">                    CGFloat itemHeight = viewHeight;</span><br><span class="line">                    UIView *last = nil;</span><br><span class="line">  </span><br><span class="line">                    for (int i = 0; i &lt; viewArray.count; i++) &#123;</span><br><span class="line">                        UIView *item = viewArray[i];</span><br><span class="line">                        [superView addSubview:item];</span><br><span class="line"></span><br><span class="line">                        [item mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line">                            make.width.mas_equalTo(itemWidth);</span><br><span class="line">                            make.height.mas_equalTo(itemHeight);</span><br><span class="line">                          </span><br><span class="line">                            CGFloat top = topSpeace + (i / column) * (itemHeight + tbSpeace);</span><br><span class="line">                            make.top.mas_offset(top);</span><br><span class="line">                            if (!last || (i % column) == 0) &#123;</span><br><span class="line">                                make.left.mas_offset(lrSuperViewSpeace);</span><br><span class="line">                            &#125;else&#123;</span><br><span class="line">                                make.left.mas_equalTo(last.mas_right).mas_offset(lrSpeace);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;];</span><br><span class="line">                      </span><br><span class="line">                        last = item;</span><br><span class="line">                    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>11、Snapkit制作九宫格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">//Swift ----&gt; SnapKit</span><br><span class="line">    </span><br><span class="line">    /// 多视图布局</span><br><span class="line">    ///</span><br><span class="line">    /// - Parameters:</span><br><span class="line">    ///   - viewArray: 视图数组</span><br><span class="line">    ///   - columnOfRow: 列数</span><br><span class="line">    ///   - topBottomOfItemSpeace: 视图上下间距</span><br><span class="line">    ///   - leftRightItemSpeace: 视图左右间距</span><br><span class="line">    ///   - topOfSuperViewSpeace: 和父视图上间距</span><br><span class="line">    ///   - leftRightSuperViewSpeace: 父视图左右间距</span><br><span class="line">    ///   - addToSubperView: 父视图</span><br><span class="line">    ///   - viewHeight: 视图高度</span><br><span class="line">    func wd_masLayoutSubViews(viewArray:Array&lt;UIView&gt;,</span><br><span class="line">                              columnOfRow:Int,</span><br><span class="line">                              topBottomOfItemSpeace:CGFloat,</span><br><span class="line">                              leftRightItemSpeace:CGFloat,</span><br><span class="line">                              topOfSuperViewSpeace:CGFloat,</span><br><span class="line">                              leftRightSuperViewSpeace:CGFloat,</span><br><span class="line">                              addToSubperView:UIView,</span><br><span class="line">                              viewHeight:CGFloat) -&gt; Void &#123;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        let viewWidth = addToSubperView.bounds.width</span><br><span class="line">        let tempW = leftRightSuperViewSpeace * 2 + CGFloat(columnOfRow - 1) * leftRightItemSpeace</span><br><span class="line">        let itemWidth = (viewWidth - tempW) / CGFloat(columnOfRow)</span><br><span class="line">        let itemHeight = viewHeight</span><br><span class="line">        </span><br><span class="line">        print(leftRightSuperViewSpeace,leftRightItemSpeace,itemWidth)</span><br><span class="line">        </span><br><span class="line">        var lastView:UIView?</span><br><span class="line">        </span><br><span class="line">        for (index) in viewArray.enumerated() &#123;</span><br><span class="line">            </span><br><span class="line">            let item = viewArray[i]</span><br><span class="line">            addToSubperView.addSubview(item)</span><br><span class="line">            </span><br><span class="line">            item.snp.makeConstraints &#123; (make) in</span><br><span class="line">                make.width.equalTo(itemWidth)</span><br><span class="line">                make.height.equalTo(itemHeight)</span><br><span class="line">                let top = topOfSuperViewSpeace + CGFloat(i / columnOfRow) * (itemHeight + topBottomOfItemSpeace)</span><br><span class="line">                make.top.equalTo(top)</span><br><span class="line">                </span><br><span class="line">                if !(lastView != nil) || i%columnOfRow == 0 &#123;</span><br><span class="line">                    make.left.equalTo(leftRightSuperViewSpeace)</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    make.left.equalTo((lastView?.snp.right)!).offset(leftRightItemSpeace)</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                lastView = item</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>12、沉浸式TableView(ScrollView、CollectionView)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (@available(iOS 11.0, *)) &#123;</span><br><span class="line">    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    self.automaticallyAdjustsScrollViewInsets = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>13、通过身份证计算年龄<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">/** 通过身份证计算年龄 */</span><br><span class="line">- (NSString *)calculationAgeWithBirthday: (NSString *)birthday &#123;</span><br><span class="line">    NSCalendar *calendar = [NSCalendar currentCalendar];</span><br><span class="line">    NSDate *nowDate = [NSDate date];</span><br><span class="line">    NSString *birth = birthday;</span><br><span class="line">    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];</span><br><span class="line">    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd&quot;];</span><br><span class="line">    NSDate *birthDay = [dateFormatter dateFromString:birth];</span><br><span class="line">    unsigned int unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;</span><br><span class="line">    NSDateComponents *date = [calendar components:unitFlags fromDate:birthDay toDate:nowDate options:0];</span><br><span class="line">    if ([date year] &gt; 0) &#123;</span><br><span class="line">        return [NSString stringWithFormat:@&quot;%ld岁&quot;, (long)[date year]];</span><br><span class="line">    &#125; else if([date month] &gt; 0) &#123;</span><br><span class="line">        return [NSString stringWithFormat:@&quot;%ld月&quot;, (long)[date month]];</span><br><span class="line">    &#125;  else if([date day] &gt; 0)&#123;</span><br><span class="line">        return [NSString stringWithFormat:@&quot;%ld天&quot;, (long)[date day]];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return @&quot;0天&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSString *)ageStrFromIdentityCard:(NSString *)numberStr &#123;</span><br><span class="line">    NSString *dateSt;</span><br><span class="line">    NSMutableString *dateS;</span><br><span class="line">    if (numberStr.length &gt; 15) &#123;</span><br><span class="line">        dateSt = [numberStr substringWithRange:NSMakeRange(6, 8)];</span><br><span class="line">        dateS = [NSMutableString stringWithFormat:@&quot;%@&quot;, dateSt];</span><br><span class="line">        [dateS insertString:@&quot;-&quot; atIndex:4];</span><br><span class="line">        [dateS insertString:@&quot;-&quot; atIndex:7];</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">        // 只考虑 19开头的15位的身份证号</span><br><span class="line">        dateSt = [NSString stringWithFormat:@&quot;19%@&quot;,[numberStr substringWithRange:NSMakeRange(6, 6)]];</span><br><span class="line">        dateS = [NSMutableString stringWithFormat:@&quot;%@&quot;, dateSt];</span><br><span class="line">        [dateS insertString:@&quot;-&quot; atIndex:4];</span><br><span class="line">        [dateS insertString:@&quot;-&quot; atIndex:7];</span><br><span class="line">    &#125;</span><br><span class="line">    return [self calculationAgeWithBirthday:dateS];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>14、利用<code>runtime</code>自动归档<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 导入头文件</span><br><span class="line">#import &lt;objc/runtime.h&gt;</span><br><span class="line">// 遵循协议</span><br><span class="line">&lt;NSCoding&gt;</span><br><span class="line">// 实现方法</span><br><span class="line">- (id)initWithCoder:(NSCoder *)aDecoder &#123;</span><br><span class="line">    if (self = [super init]) &#123;</span><br><span class="line">        unsigned int outCount;</span><br><span class="line">        Ivar * ivars = class_copyIvarList([self class], &amp;outCount);</span><br><span class="line">        for (int i = 0; i &lt; outCount; i ++) &#123;</span><br><span class="line">            Ivar ivar = ivars[i];</span><br><span class="line">            NSString * key = [NSString stringWithUTF8String:ivar_getName(ivar)];</span><br><span class="line">            [self setValue:[aDecoder decodeObjectForKey:key] forKey:key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)encodeWithCoder:(NSCoder *)aCoder &#123;</span><br><span class="line">    unsigned int outCount;</span><br><span class="line">    Ivar * ivars = class_copyIvarList([self class], &amp;outCount);</span><br><span class="line">    for (int i = 0; i &lt; outCount; i ++) &#123;</span><br><span class="line">        Ivar ivar = ivars[i];</span><br><span class="line">        NSString * key = [NSString stringWithUTF8String:ivar_getName(ivar)];</span><br><span class="line">        [aCoder encodeObject:[self valueForKey:key] forKey:key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>15、优化Snipkit 没有<code>distributeViewsAlong</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+        <p>1、PrefixHeader导入位置写法</p>
+<pre><code>$(SRCROOT)/$(PROJECT_NAME)/&lt;#文件所在文件夹名称#&gt;/PrefixHeader.pch
+</code></pre><p>2、隐藏导航栏的两种方式</p>
+<pre><code>//方式一 《推荐》
+//在需要隐藏的viewController中遵循&lt;UINavigationControllerDelegate&gt;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+ // 设置导航控制器的代理为self
+    self.navigationController.delegate = self;
+}
 
+#pragma mark - UINavigationControllerDelegate
+// 将要显示控制器
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 判断要显示的控制器是否是自己
+    BOOL isShowHomePage = [viewController isKindOfClass:[self class]];
+
+    [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];
+}
+
+//方式二
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+</code></pre><p>3、TabBarItem要求只显示图片不显示文字</p>
+<pre><code> // self 表示需要设置样式的控制器
+ [self.tabBarItem setImageInsets:UIEdgeInsetsMake(6, 0, -6, 0)];
+</code></pre><p>4、TableView或CollectionView单选</p>
+<pre><code>&lt;!--步骤一、 声明一个全局变量--&gt;
+@property (nonatomic, assign) NSInteger selectedIndex;
+&lt;!--步骤二、TableView或CollectionView点击事件的方法中保存点击的index，并刷新--&gt;
+self.selectedIndex = indexPath.row;
+[collectionView reloadData];或[tableView reloadData];
+&lt;!--步骤三、在cellForItemAtIndexPath或cellForRowAtIndexPath方法中判断是否是所保存的index--&gt;
+if (self.selectedIndex == indexPath.row) {
+    // 设置选中样式
+} else {
+    // 设置成默认样式    
+}
+
+</code></pre><p>5、怎么区分真机还是模拟器</p>
+<pre><code>#if TARGET_IPHONE_SIMULATOR  
+    NSLog(@&quot;run on simulator&quot;);  
+#define SIMULATOR_TEST
+#else  
+//不定义SIMULATOR_TEST这个宏
+    NSLog(@&quot;run on device&quot;);  
+#endif
+</code></pre><p>6、if Debug</p>
+<pre><code>#ifdef DEBUG    
+// do sth
+#else   
+// do sth
+#endif
+</code></pre><p>7、一键清理所有模拟器安装过的APP</p>
+<pre><code>// 先关闭所有模拟器 在终端中输入下面命令即可
+xcrun simctl erase all
+</code></pre><p>8、SDWebImage清理缓存</p>
+<pre><code>- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    [[[SDWebImageManager sharedManager] imageCache] clearMemory];
+}
+</code></pre><p>9、UITableView的HeaderView下拉放大</p>
+<pre><code>1、View1:作为显示View
+2、View2:作为tableView的tableHeaderView，并添加View1，View2的大小和View1大小相同.
+3、在UIScrollViewDelegate方法中进行设计
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat width = UIScreen.mainScreen.bounds.size.width;
+    CGFloat viewHeight = kScreenWidth * 0.5; // View1的初始高度
+    CGFloat yOffset = scrollView.contentOffset.y;
+    if (yOffset &lt; 0) {
+        CGFloat totalOffset = viewHeight + ABS(yOffset);
+        CGFloat f = totalOffset / viewHeight;
+        self.headerView.frame = CGRectMake(- (width * f - width) / 2, yOffset, width * f, totalOffset);
+    }
+}
+</code></pre><p>10、Masonry制作就宫格</p>
+<pre><code>//Objective-C ----&gt; Masonry
+/**
+ 多视图布局
+
+ @param viewArray 视图数组
+ @param column 列数
+ @param tbSpeace 视图上下间距
+ @param lrSpeace 视图左右间距
+ @param topSpeace 和父视图上间距
+ @param lrSuperViewSpeace 父视图左右间距
+ @param superView 父视图
+ @param viewHeight 视图高度
+ */
+- (void)wd_masLayoutSubViewsWithViewArray:(NSArray&lt;UIView *&gt; *)viewArray
+                              columnOfRow:(NSInteger)column
+                    topBottomOfItemSpeace:(CGFloat)tbSpeace
+                      leftRightItemSpeace:(CGFloat)lrSpeace
+                     topOfSuperViewSpeace:(CGFloat)topSpeace
+                 leftRightSuperViewSpeace:(CGFloat)lrSuperViewSpeace
+                          addToSubperView:(UIView *)superView
+                               viewHeight:(CGFloat)viewHeight{
+
+                    CGFloat viewWidth = superView.bounds.size.width;
+                    CGFloat itemWidth = (viewWidth - lrSuperViewSpeace * 2 - (column - 1) * lrSpeace) / column * 1.0f;
+                    CGFloat itemHeight = viewHeight;
+                    UIView *last = nil;
+
+                    for (int i = 0; i &lt; viewArray.count; i++) {
+                        UIView *item = viewArray[i];
+                        [superView addSubview:item];
+
+                        [item mas_makeConstraints:^(MASConstraintMaker *make) {
+                            make.width.mas_equalTo(itemWidth);
+                            make.height.mas_equalTo(itemHeight);
+
+                            CGFloat top = topSpeace + (i / column) * (itemHeight + tbSpeace);
+                            make.top.mas_offset(top);
+                            if (!last || (i % column) == 0) {
+                                make.left.mas_offset(lrSuperViewSpeace);
+                            }else{
+                                make.left.mas_equalTo(last.mas_right).mas_offset(lrSpeace);
+                            }
+                        }];
+
+                        last = item;
+                    }
+}
+</code></pre><p>11、Snapkit制作九宫格</p>
+<pre><code>//Swift ----&gt; SnapKit
+
+    /// 多视图布局
+    ///
+    /// - Parameters:
+    ///   - viewArray: 视图数组
+    ///   - columnOfRow: 列数
+    ///   - topBottomOfItemSpeace: 视图上下间距
+    ///   - leftRightItemSpeace: 视图左右间距
+    ///   - topOfSuperViewSpeace: 和父视图上间距
+    ///   - leftRightSuperViewSpeace: 父视图左右间距
+    ///   - addToSubperView: 父视图
+    ///   - viewHeight: 视图高度
+    func wd_masLayoutSubViews(viewArray:Array&lt;UIView&gt;,
+                              columnOfRow:Int,
+                              topBottomOfItemSpeace:CGFloat,
+                              leftRightItemSpeace:CGFloat,
+                              topOfSuperViewSpeace:CGFloat,
+                              leftRightSuperViewSpeace:CGFloat,
+                              addToSubperView:UIView,
+                              viewHeight:CGFloat) -&gt; Void {
+
+
+        let viewWidth = addToSubperView.bounds.width
+        let tempW = leftRightSuperViewSpeace * 2 + CGFloat(columnOfRow - 1) * leftRightItemSpeace
+        let itemWidth = (viewWidth - tempW) / CGFloat(columnOfRow)
+        let itemHeight = viewHeight
+
+        print(leftRightSuperViewSpeace,leftRightItemSpeace,itemWidth)
+
+        var lastView:UIView?
+
+        for (index) in viewArray.enumerated() {
+
+            let item = viewArray[i]
+            addToSubperView.addSubview(item)
+
+            item.snp.makeConstraints { (make) in
+                make.width.equalTo(itemWidth)
+                make.height.equalTo(itemHeight)
+                let top = topOfSuperViewSpeace + CGFloat(i / columnOfRow) * (itemHeight + topBottomOfItemSpeace)
+                make.top.equalTo(top)
+
+                if !(lastView != nil) || i%columnOfRow == 0 {
+                    make.left.equalTo(leftRightSuperViewSpeace)
+                } else {
+                    make.left.equalTo((lastView?.snp.right)!).offset(leftRightItemSpeace)
+                }
+
+                lastView = item
+            }
+        }
+    }
+
+</code></pre><p>12、沉浸式TableView(ScrollView、CollectionView)</p>
+<pre><code>if (@available(iOS 11.0, *)) {
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+} else {
+    self.automaticallyAdjustsScrollViewInsets = false;
+}
+</code></pre><p>13、通过身份证计算年龄</p>
+<pre><code>/** 通过身份证计算年龄 */
+- (NSString *)calculationAgeWithBirthday: (NSString *)birthday {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nowDate = [NSDate date];
+    NSString *birth = birthday;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd&quot;];
+    NSDate *birthDay = [dateFormatter dateFromString:birth];
+    unsigned int unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents *date = [calendar components:unitFlags fromDate:birthDay toDate:nowDate options:0];
+    if ([date year] &gt; 0) {
+        return [NSString stringWithFormat:@&quot;%ld岁&quot;, (long)[date year]];
+    } else if([date month] &gt; 0) {
+        return [NSString stringWithFormat:@&quot;%ld月&quot;, (long)[date month]];
+    }  else if([date day] &gt; 0){
+        return [NSString stringWithFormat:@&quot;%ld天&quot;, (long)[date day]];
+    } else {
+        return @&quot;0天&quot;;
+    }
+}
+
+- (NSString *)ageStrFromIdentityCard:(NSString *)numberStr {
+    NSString *dateSt;
+    NSMutableString *dateS;
+    if (numberStr.length &gt; 15) {
+        dateSt = [numberStr substringWithRange:NSMakeRange(6, 8)];
+        dateS = [NSMutableString stringWithFormat:@&quot;%@&quot;, dateSt];
+        [dateS insertString:@&quot;-&quot; atIndex:4];
+        [dateS insertString:@&quot;-&quot; atIndex:7];
+        } else {
+        // 只考虑 19开头的15位的身份证号
+        dateSt = [NSString stringWithFormat:@&quot;19%@&quot;,[numberStr substringWithRange:NSMakeRange(6, 6)]];
+        dateS = [NSMutableString stringWithFormat:@&quot;%@&quot;, dateSt];
+        [dateS insertString:@&quot;-&quot; atIndex:4];
+        [dateS insertString:@&quot;-&quot; atIndex:7];
+    }
+    return [self calculationAgeWithBirthday:dateS];
+}
+
+</code></pre><p>14、利用<code>runtime</code>自动归档</p>
+<pre><code>// 导入头文件
+#import &lt;objc/runtime.h&gt;
+// 遵循协议
+&lt;NSCoding&gt;
+// 实现方法
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        unsigned int outCount;
+        Ivar * ivars = class_copyIvarList([self class], &amp;outCount);
+        for (int i = 0; i &lt; outCount; i ++) {
+            Ivar ivar = ivars[i];
+            NSString * key = [NSString stringWithUTF8String:ivar_getName(ivar)];
+            [self setValue:[aDecoder decodeObjectForKey:key] forKey:key];
+        }
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    unsigned int outCount;
+    Ivar * ivars = class_copyIvarList([self class], &amp;outCount);
+    for (int i = 0; i &lt; outCount; i ++) {
+        Ivar ivar = ivars[i];
+        NSString * key = [NSString stringWithUTF8String:ivar_getName(ivar)];
+        [aCoder encodeObject:[self valueForKey:key] forKey:key];
+    }
+}
+</code></pre><p>15、优化Snipkit 没有<code>distributeViewsAlong</code></p>
+<pre><code>
+</code></pre>
       
     </div>
     
@@ -498,7 +746,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -591,7 +839,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.3k</span>
+    <span title="Site words total count">34.8k</span>
   
 </div>
 
@@ -607,7 +855,7 @@
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34.3k字</span>
+  <span class="post-count">博客全站共34.8k字</span>
 </div>
         
 
@@ -896,5 +1144,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

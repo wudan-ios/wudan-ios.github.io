@@ -88,19 +88,19 @@
 
 
 
-<meta name="description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码1234567891011121314151617181920212223">
+<meta name="description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码    &amp;lt;body&amp;gt;         &amp;lt;h2&amp;gt;按钮">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript与原生交互">
 <meta property="og:url" content="https://wudan-ios.github.io/2019/03/29/JavaScript与原生交互/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
-<meta property="og:description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码1234567891011121314151617181920212223">
+<meta property="og:description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码    &amp;lt;body&amp;gt;         &amp;lt;h2&amp;gt;按钮">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-b397461b46272052.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-29T01:19:56.483Z">
+<meta property="og:updated_time" content="2019-04-19T08:27:18.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript与原生交互">
-<meta name="twitter:description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码1234567891011121314151617181920212223">
+<meta name="twitter:description" content="原生页面与HTML页面进行相互调用方式 | 适用对象—|—拦截URL | UIWebView和WKWebViewJavaScriptCore | UIWebViewMessageHandler | WKWebViewWebViewJavascriptBridge| UIWebView和WKWebView 实例HTML代码    &amp;lt;body&amp;gt;         &amp;lt;h2&amp;gt;按钮">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-b397461b46272052.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -327,7 +327,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.1k
                 </span>
               
 
@@ -343,7 +343,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  5
                 </span>
               
             </div>
@@ -366,40 +366,169 @@
       
         <p> <img src="https://upload-images.jianshu.io/upload_images/3334769-b397461b46272052.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="实例样式"></p>
 <p>原生页面与HTML页面进行相互调用<br>方式 | 适用对象<br>—|—<br>拦截URL | <code>UIWebView</code>和<code>WKWebView</code><br>JavaScriptCore | <code>UIWebView</code><br>MessageHandler | <code>WKWebView</code><br>WebViewJavascriptBridge| <code>UIWebView</code>和<code>WKWebView</code></p>
-<h3 id="实例HTML代码"><a href="#实例HTML代码" class="headerlink" title="实例HTML代码"></a>实例HTML代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h2&gt;按钮点击&lt;/h2&gt;</span><br><span class="line">    &lt;button type=&quot;submit&quot; onclick=&quot;buttonEvent()&quot; id=&quot;submitButto&quot;&gt;提交&lt;/button&gt;</span><br><span class="line">    &lt;h2&gt;文件上传&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; /&gt;</span><br><span class="line">    &lt;h2&gt;原生注入数据&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; id=&quot;textField&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; onclick=&quot;getTextEvent()&quot; value=&quot;开始注入&quot;&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        function loadURL(url) &#123;</span><br><span class="line">            var iFrame;</span><br><span class="line">            iFrame = document.createElement(&quot;iframe&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;src&quot;, url);</span><br><span class="line">            iFrame.setAttribute(&quot;style&quot;, &quot;display:none;&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;height&quot;, &quot;0px&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;width&quot;, &quot;0px&quot;);</span><br><span class="line">            iFrame.setAttribute(&quot;frameborder&quot;, &quot;0&quot;);</span><br><span class="line">            document.body.appendChild(iFrame);</span><br><span class="line">            iFrame.parentNode.removeChild(iFrame);</span><br><span class="line">            iFrame = null;</span><br><span class="line">        &#125;</span><br><span class="line">        function buttonEvent()&#123;</span><br><span class="line">            loadURL(&quot;/buttonEvent&quot;);</span><br><span class="line">            buttonDidPapped();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        function getTextEvent() &#123;</span><br><span class="line">            loadURL(&quot;/getText&quot;);</span><br><span class="line">            getTextButtonDidPapped();</span><br><span class="line">        &#125;</span><br><span class="line">        function getText(text)&#123;</span><br><span class="line">            document.getElementById(&quot;textField&quot;).value = text;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="拦截URL"><a href="#拦截URL" class="headerlink" title="拦截URL"></a>拦截URL</h2><h4 id="UIWebView"><a href="#UIWebView" class="headerlink" title="UIWebView"></a>UIWebView</h4><p>遵循<code>UIWebViewDelegate</code>调用<code>- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType</code>方法，判断获取的Url地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 调用JS</span><br><span class="line">if ([request.URL.absoluteString hasSuffix:@&quot;buttonEvent&quot;]) &#123;</span><br><span class="line">    UIAlertController *vc = [UIAlertControlleralertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">        [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">    &#125;]];</span><br><span class="line">    [self presentViewController:vc animated:true completion:nil];  </span><br><span class="line">    return NO;</span><br><span class="line">&#125; </span><br><span class="line">// 注入数据给JS</span><br><span class="line">if ([request.URL.absoluteString hasSuffix:@&quot;getText&quot;]) &#123; </span><br><span class="line">    [webView stringByEvaluatingJavaScriptFromString:@&quot;getText(&apos;哈哈&apos;)&quot;];</span><br><span class="line">     return NO;</span><br><span class="line">&#125;</span><br><span class="line">return YES;</span><br></pre></td></tr></table></figure></p>
-<h4 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a>WKWebView</h4><p>遵循<code>WKNavigationDelegate</code>调用<code>- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler</code>方法判断获取的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NSString *strRequest = [navigationAction.request.URL.absoluteString stringByRemovingPercentEncoding];</span><br><span class="line">// 调用JS</span><br><span class="line">if ([strRequest hasSuffix:@&quot;buttonEvent&quot;]) &#123;</span><br><span class="line">    UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">    [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">    &#125;]];</span><br><span class="line">    [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">    decisionHandler(WKNavigationActionPolicyCancel);</span><br><span class="line">&#125; else if ([strRequest hasSuffix:@&quot;getText&quot;]) &#123; // 注入数据给JS</span><br><span class="line">    [webView evaluateJavaScript:@&quot;getText(&apos;哈哈&apos;)&quot; completionHandler:^(id _Nullable info, NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@&quot;Error--%@, info--%@&quot;, error, info);</span><br><span class="line">    &#125;];</span><br><span class="line">    decisionHandler(WKNavigationActionPolicyCancel);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    decisionHandler(WKNavigationActionPolicyAllow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h2><ol>
+<h3 id="实例HTML代码"><a href="#实例HTML代码" class="headerlink" title="实例HTML代码"></a>实例HTML代码</h3><pre><code>    &lt;body&gt;
+        &lt;h2&gt;按钮点击&lt;/h2&gt;
+        &lt;button type=&quot;submit&quot; onclick=&quot;buttonEvent()&quot; id=&quot;submitButto&quot;&gt;提交&lt;/button&gt;
+        &lt;h2&gt;文件上传&lt;/h2&gt;
+        &lt;input type=&quot;file&quot; /&gt;
+        &lt;h2&gt;原生注入数据&lt;/h2&gt;
+        &lt;input type=&quot;text&quot; id=&quot;textField&quot;&gt;
+        &lt;input type=&quot;button&quot; onclick=&quot;getTextEvent()&quot; value=&quot;开始注入&quot;&gt;
+        &lt;script&gt;
+            function loadURL(url) {
+                var iFrame;
+                iFrame = document.createElement(&quot;iframe&quot;);
+                iFrame.setAttribute(&quot;src&quot;, url);
+                iFrame.setAttribute(&quot;style&quot;, &quot;display:none;&quot;);
+                iFrame.setAttribute(&quot;height&quot;, &quot;0px&quot;);
+                iFrame.setAttribute(&quot;width&quot;, &quot;0px&quot;);
+                iFrame.setAttribute(&quot;frameborder&quot;, &quot;0&quot;);
+                document.body.appendChild(iFrame);
+                iFrame.parentNode.removeChild(iFrame);
+                iFrame = null;
+            }
+            function buttonEvent(){
+                loadURL(&quot;/buttonEvent&quot;);
+                buttonDidPapped();
+            }
+
+            function getTextEvent() {
+                loadURL(&quot;/getText&quot;);
+                getTextButtonDidPapped();
+            }
+            function getText(text){
+                document.getElementById(&quot;textField&quot;).value = text;
+            }
+        &lt;/script&gt;
+    &lt;/body&gt;       
+</code></pre><h2 id="拦截URL"><a href="#拦截URL" class="headerlink" title="拦截URL"></a>拦截URL</h2><h4 id="UIWebView"><a href="#UIWebView" class="headerlink" title="UIWebView"></a>UIWebView</h4><p>遵循<code>UIWebViewDelegate</code>调用<code>- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType</code>方法，判断获取的Url地址</p>
+<pre><code>// 调用JS
+if ([request.URL.absoluteString hasSuffix:@&quot;buttonEvent&quot;]) {
+    UIAlertController *vc = [UIAlertControlleralertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];
+        [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    }]];
+    [self presentViewController:vc animated:true completion:nil];  
+    return NO;
+} 
+// 注入数据给JS
+if ([request.URL.absoluteString hasSuffix:@&quot;getText&quot;]) { 
+    [webView stringByEvaluatingJavaScriptFromString:@&quot;getText(&#39;哈哈&#39;)&quot;];
+     return NO;
+}
+return YES;
+</code></pre><h4 id="WKWebView"><a href="#WKWebView" class="headerlink" title="WKWebView"></a>WKWebView</h4><p>遵循<code>WKNavigationDelegate</code>调用<code>- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler</code>方法判断获取的地址</p>
+<pre><code>NSString *strRequest = [navigationAction.request.URL.absoluteString stringByRemovingPercentEncoding];
+// 调用JS
+if ([strRequest hasSuffix:@&quot;buttonEvent&quot;]) {
+    UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];
+    [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    }]];
+    [self presentViewController:vc animated:true completion:nil];
+    decisionHandler(WKNavigationActionPolicyCancel);
+} else if ([strRequest hasSuffix:@&quot;getText&quot;]) { // 注入数据给JS
+    [webView evaluateJavaScript:@&quot;getText(&#39;哈哈&#39;)&quot; completionHandler:^(id _Nullable info, NSError * _Nullable error) {
+        NSLog(@&quot;Error--%@, info--%@&quot;, error, info);
+    }];
+    decisionHandler(WKNavigationActionPolicyCancel);
+} else {
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+</code></pre><h2 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h2><ol>
 <li>导入<code>&lt;JavaScriptCore/JavaScriptCore.h&gt;</code></li>
-<li>遵循<code>&lt;UIWebViewDelegate&gt;</code>并实现<code>- (void)webViewDidFinishLoad:(UIWebView *)webView</code>方法。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 对JSContext对象进行初始化</span><br><span class="line">JSContext *context = [self.webView valueForKeyPath:@&quot;documentView.webView.mainFrame.javaScriptContext&quot;];</span><br><span class="line">// 验证JSContext对象是否初始化成功</span><br><span class="line">context.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue)&#123;</span><br><span class="line">    context.exception = exceptionValue;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// 调用JS  </span><br><span class="line">context[@&quot;buttonDidPapped&quot;] = ^&#123;</span><br><span class="line">    UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">    [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">    &#125;]];</span><br><span class="line">    [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// 注入数据给JS   </span><br><span class="line">context[@&quot;getTextButtonDidPapped&quot;] = ^&#123;</span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">      [self.webView stringByEvaluatingJavaScriptFromString:@&quot;getText(&apos;哈哈&apos;)&quot;];</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
+<li>遵循<code>&lt;UIWebViewDelegate&gt;</code>并实现<code>- (void)webViewDidFinishLoad:(UIWebView *)webView</code>方法。<br><code>`</code><br>// 对JSContext对象进行初始化<br>JSContext <em>context = [self.webView valueForKeyPath:@”documentView.webView.mainFrame.javaScriptContext”];<br>// 验证JSContext对象是否初始化成功<br>context.exceptionHandler = ^(JSContext </em>context, JSValue *exceptionValue){<br> context.exception = exceptionValue;<br>};</li>
 </ol>
-<h2 id="MessageHandler"><a href="#MessageHandler" class="headerlink" title="MessageHandler"></a>MessageHandler</h2><ol>
-<li><p>修改js中的方法， 通过<code>window.webkit.messageHandlers</code>+操作方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function buttonEvent()&#123;</span><br><span class="line">    window.webkit.messageHandlers.buttonEvent.postMessage(null);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">function getTextEvent() &#123;</span><br><span class="line">    window.webkit.messageHandlers.getTextEvent.postMessage(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>// 调用JS<br>context[@”buttonDidPapped”] = ^{<br>    UIAlertController <em>vc = [UIAlertController alertControllerWithTitle:@”温馨提示” message:@”点击了提交按钮” preferredStyle:UIAlertControllerStyleAlert];<br>    [vc addAction:[UIAlertAction actionWithTitle:@”确定” style:UIAlertActionStyleDefault handler:^(UIAlertAction </em> _Nonnull action) {</p>
+<pre><code>}]];
+[self presentViewController:vc animated:true completion:nil];
+</code></pre><p>};</p>
+<p>// 注入数据给JS<br>context[@”getTextButtonDidPapped”] = ^{<br>    dispatch_async(dispatch_get_main_queue(), ^{<br>      [self.webView stringByEvaluatingJavaScriptFromString:@”getText(‘哈哈’)”];<br>        });<br>};</p>
+<pre><code>
+## MessageHandler
+1. 修改js中的方法， 通过`window.webkit.messageHandlers`+操作方法
+</code></pre><p>function buttonEvent(){<br>    window.webkit.messageHandlers.buttonEvent.postMessage(null);<br>}</p>
+<p>function getTextEvent() {<br>    window.webkit.messageHandlers.getTextEvent.postMessage(null);<br>}</p>
+<pre><code>2. 遵循`WKScriptMessageHandler`
+3. 在`- (void)viewWillAppear:(BOOL)animated `中添加`scriptMessageHandler`
+4. 在`- (void)viewWillDisappear:(BOOL)animated`中移除`scriptMessageHandler`
+5. 实现`WKScriptMessageHandler`方法
+</code></pre><ul>
+<li><p>(void)viewWillAppear:(BOOL)animated {<br>  [super viewWillAppear:animated];<br>  [self.webView.configuration.userContentController addScriptMessageHandler:self name:@”buttonEvent”];<br>  [self.webView.configuration.userContentController addScriptMessageHandler:self name:@”getTextEvent”];<br>}</p>
 </li>
-<li><p>遵循<code>WKScriptMessageHandler</code></p>
+<li><p>(void)viewWillDisappear:(BOOL)animated {<br>  [super viewWillDisappear:animated];<br>  [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@”buttonEvent”];<br>  [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@”getTextEvent”];<br>}</p>
 </li>
-<li>在<code>- (void)viewWillAppear:(BOOL)animated</code>中添加<code>scriptMessageHandler</code></li>
-<li>在<code>- (void)viewWillDisappear:(BOOL)animated</code>中移除<code>scriptMessageHandler</code></li>
-<li>实现<code>WKScriptMessageHandler</code>方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewWillAppear:(BOOL)animated &#123;</span><br><span class="line">    [super viewWillAppear:animated];</span><br><span class="line">    [self.webView.configuration.userContentController addScriptMessageHandler:self name:@&quot;buttonEvent&quot;];</span><br><span class="line">    [self.webView.configuration.userContentController addScriptMessageHandler:self name:@&quot;getTextEvent&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewWillDisappear:(BOOL)animated &#123;</span><br><span class="line">    [super viewWillDisappear:animated];</span><br><span class="line">    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@&quot;buttonEvent&quot;];</span><br><span class="line">    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@&quot;getTextEvent&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - WKScriptMessageHandler Method</span><br><span class="line">- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message &#123;</span><br><span class="line">    // 调用JS</span><br><span class="line">    if ([message.name isEqualToString:@&quot;buttonEvent&quot;]) &#123;</span><br><span class="line">        UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">        [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;]];</span><br><span class="line">        [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 注入数据给JS</span><br><span class="line">    if  ([message.name isEqualToString:@&quot;getTextEvent&quot;]) &#123;</span><br><span class="line">        [self.webView evaluateJavaScript:@&quot;getText(&apos;哈哈&apos;)&quot; completionHandler:^(id _Nullable info, NSError * _Nullable error) &#123;</span><br><span class="line">            NSLog(@&quot;Error--%@, info--%@&quot;, error, info);</span><br><span class="line">        &#125;];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</ul>
+<p>#pragma mark - WKScriptMessageHandler Method</p>
+<ul>
+<li><p>(void)userContentController:(WKUserContentController <em>)userContentController didReceiveScriptMessage:(WKScriptMessage </em>)message {<br>  // 调用JS<br>  if ([message.name isEqualToString:@”buttonEvent”]) {</p>
+<pre><code>  UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];
+  [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+  }]];
+  [self presentViewController:vc animated:true completion:nil];
+  return;
+</code></pre><p>  }</p>
+<p>  // 注入数据给JS<br>  if  ([message.name isEqualToString:@”getTextEvent”]) {</p>
+<pre><code>  [self.webView evaluateJavaScript:@&quot;getText(&#39;哈哈&#39;)&quot; completionHandler:^(id _Nullable info, NSError * _Nullable error) {
+      NSLog(@&quot;Error--%@, info--%@&quot;, error, info);
+  }];
+  return;
+</code></pre><p>  }<br>}<br><code>`</code></p>
 </li>
-</ol>
-<h2 id="WebViewJavascriptBridge"><a href="#WebViewJavascriptBridge" class="headerlink" title="WebViewJavascriptBridge"></a>WebViewJavascriptBridge</h2><p>HTML代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h2&gt;按钮点击&lt;/h2&gt;</span><br><span class="line">    &lt;input id = &apos;submitBtn&apos; type=&quot;button&quot; value=&quot;提交按钮&quot; onclick=&quot;submitClick()&quot;/&gt;</span><br><span class="line">    &lt;h2&gt;文件选择&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;file&quot; id=&quot;image&quot;&gt;</span><br><span class="line">    &lt;h2&gt;注入数据&lt;/h2&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; id=&quot;getTextField&quot; /&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;开始获取&quot; id = &apos;startGet&apos; onclick=&quot;getTextClick()&quot;/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        function setupWebViewJavascriptBridge(callback) &#123;</span><br><span class="line">	        if (window.WebViewJavascriptBridge) &#123; return callback(WebViewJavascriptBridge); &#125;</span><br><span class="line">	        if (window.WVJBCallbacks) &#123; return window.WVJBCallbacks.push(callback); &#125;</span><br><span class="line">        	window.WVJBCallbacks = [callback];</span><br><span class="line">	        var WVJBIframe = document.createElement(&apos;iframe&apos;);</span><br><span class="line">        	WVJBIframe.style.display = &apos;none&apos;;</span><br><span class="line">        	WVJBIframe.src = &apos;https://__bridge_loaded__&apos;;</span><br><span class="line">        	document.documentElement.appendChild(WVJBIframe);</span><br><span class="line">	        setTimeout(function() &#123; document.documentElement.removeChild(WVJBIframe) &#125;, 0)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setupWebViewJavascriptBridge(function(bridge) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        function submitClick() &#123;</span><br><span class="line">            WebViewJavascriptBridge.callHandler(&apos;submitClick&apos;, null, function(response) &#123;</span><br><span class="line">                </span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        function getTextClick() &#123;</span><br><span class="line">            WebViewJavascriptBridge.callHandler(&apos;getTextClick&apos;, null, function(response) &#123;</span><br><span class="line">                document.getElementById(&quot;getTextField&quot;).value = response;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
-<p>第三方库：<a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">地址</a></p>
+</ul>
+<h2 id="WebViewJavascriptBridge"><a href="#WebViewJavascriptBridge" class="headerlink" title="WebViewJavascriptBridge"></a>WebViewJavascriptBridge</h2><p>HTML代码</p>
+<pre><code>&lt;body&gt;
+    &lt;h2&gt;按钮点击&lt;/h2&gt;
+    &lt;input id = &#39;submitBtn&#39; type=&quot;button&quot; value=&quot;提交按钮&quot; onclick=&quot;submitClick()&quot;/&gt;
+    &lt;h2&gt;文件选择&lt;/h2&gt;
+    &lt;input type=&quot;file&quot; id=&quot;image&quot;&gt;
+    &lt;h2&gt;注入数据&lt;/h2&gt;
+    &lt;input type=&quot;text&quot; id=&quot;getTextField&quot; /&gt;
+    &lt;input type=&quot;button&quot; value=&quot;开始获取&quot; id = &#39;startGet&#39; onclick=&quot;getTextClick()&quot;/&gt;
+    &lt;script&gt;
+        function setupWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+            if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+            window.WVJBCallbacks = [callback];
+            var WVJBIframe = document.createElement(&#39;iframe&#39;);
+            WVJBIframe.style.display = &#39;none&#39;;
+            WVJBIframe.src = &#39;https://__bridge_loaded__&#39;;
+            document.documentElement.appendChild(WVJBIframe);
+            setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+        }
+
+        setupWebViewJavascriptBridge(function(bridge) {
+
+        })
+
+        function submitClick() {
+            WebViewJavascriptBridge.callHandler(&#39;submitClick&#39;, null, function(response) {
+
+            });
+        }
+        function getTextClick() {
+            WebViewJavascriptBridge.callHandler(&#39;getTextClick&#39;, null, function(response) {
+                document.getElementById(&quot;getTextField&quot;).value = response;
+            });
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre><p>第三方库：<a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">地址</a></p>
 <ol>
 <li>添加<code>WebViewJavascriptBridge</code>库</li>
 <li>导入头文件<code>#import &lt;WebViewJavascriptBridge.h&gt;</code></li>
 <li>声明方法<code>@property WebViewJavascriptBridge* bridge;</code></li>
-<li><p>与WebView关联</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];</span><br><span class="line"></span><br><span class="line">[_bridge setWebViewDelegate:self];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>调用js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[_bridge registerHandler:@&quot;submitClick&quot; handler:^(id data, WVJBResponseCallback responseCallback) &#123;</span><br><span class="line">        UIAlertController *vc = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;点击了提交按钮&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">        [vc addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;]];</span><br><span class="line">        [self presentViewController:vc animated:true completion:nil];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>注入数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[_bridge registerHandler:@&quot;getTextClick&quot; handler:^(id data, WVJBResponseCallback responseCallback) &#123;</span><br><span class="line">        responseCallback(@&quot;哈哈哈&quot;);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></li>
+<li>与WebView关联<br><code>`</code><br>_bridge = [WebViewJavascriptBridge bridgeForWebView:self.webView];</li>
 </ol>
+<p>[_bridge setWebViewDelegate:self];</p>
+<pre><code>5. 调用js
+</code></pre><p>[_bridge registerHandler:@”submitClick” handler:^(id data, WVJBResponseCallback responseCallback) {<br>        UIAlertController <em>vc = [UIAlertController alertControllerWithTitle:@”温馨提示” message:@”点击了提交按钮” preferredStyle:UIAlertControllerStyleAlert];<br>        [vc addAction:[UIAlertAction actionWithTitle:@”确定” style:UIAlertActionStyleDefault handler:^(UIAlertAction </em> _Nonnull action) {</p>
+<pre><code>    }]];
+    [self presentViewController:vc animated:true completion:nil];
+</code></pre><p>}];</p>
+<pre><code>6. 注入数据
+</code></pre><p>[_bridge registerHandler:@”getTextClick” handler:^(id data, WVJBResponseCallback responseCallback) {<br>        responseCallback(@”哈哈哈”);<br>}];<br><code>`</code></p>
 
       
     </div>
@@ -443,6 +572,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/19/iOS自定义控件图片浏览器/" rel="prev" title="iOS自定义控件图片浏览器">
+                iOS自定义控件图片浏览器 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -526,7 +659,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -592,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例HTML代码"><span class="nav-number">1.</span> <span class="nav-text">实例HTML代码</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截URL"><span class="nav-number"></span> <span class="nav-text">拦截URL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UIWebView"><span class="nav-number">0.1.</span> <span class="nav-text">UIWebView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WKWebView"><span class="nav-number">0.2.</span> <span class="nav-text">WKWebView</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScriptCore"><span class="nav-number"></span> <span class="nav-text">JavaScriptCore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MessageHandler"><span class="nav-number"></span> <span class="nav-text">MessageHandler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebViewJavascriptBridge"><span class="nav-number"></span> <span class="nav-text">WebViewJavascriptBridge</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例HTML代码"><span class="nav-number">1.</span> <span class="nav-text">实例HTML代码</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截URL"><span class="nav-number"></span> <span class="nav-text">拦截URL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UIWebView"><span class="nav-number">0.1.</span> <span class="nav-text">UIWebView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WKWebView"><span class="nav-number">0.2.</span> <span class="nav-text">WKWebView</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScriptCore"><span class="nav-number"></span> <span class="nav-text">JavaScriptCore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebViewJavascriptBridge"><span class="nav-number"></span> <span class="nav-text">WebViewJavascriptBridge</span></a></li></div>
             
 
           </div>
@@ -635,7 +768,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.3k</span>
+    <span title="Site words total count">34.8k</span>
   
 </div>
 
@@ -651,7 +784,7 @@
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34.3k字</span>
+  <span class="post-count">博客全站共34.8k字</span>
 </div>
         
 
@@ -940,5 +1073,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
