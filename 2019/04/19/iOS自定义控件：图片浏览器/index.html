@@ -91,16 +91,16 @@
 <meta name="description" content="一直想写一个自己的图片浏览器，但是自己能力又不是很够，所以一直拖这，最近趁自己时间充裕，自己研究了一下这方面的知识。感觉有以下几个难点：  显示和消失的转场动画 手势拖拽 图片加载  加载方式和转场动画 通过Controller加载：需要使用ViewController实现UIViewControllerAnimatedTransitioning实现转场效果 通过View加载：使用UIView动画">
 <meta name="keywords" content="iOS, Swift, Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS自定义控件图片浏览器">
-<meta property="og:url" content="https://wudan-ios.github.io/2019/04/19/iOS自定义控件图片浏览器/index.html">
+<meta property="og:title" content="iOS自定义控件：图片浏览器">
+<meta property="og:url" content="https://wudan-ios.github.io/2019/04/19/iOS自定义控件：图片浏览器/index.html">
 <meta property="og:site_name" content="一个孤独的搬码猿">
 <meta property="og:description" content="一直想写一个自己的图片浏览器，但是自己能力又不是很够，所以一直拖这，最近趁自己时间充裕，自己研究了一下这方面的知识。感觉有以下几个难点：  显示和消失的转场动画 手势拖拽 图片加载  加载方式和转场动画 通过Controller加载：需要使用ViewController实现UIViewControllerAnimatedTransitioning实现转场效果 通过View加载：使用UIView动画">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-32704538aebd1e35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-daf79ce9d51e3359.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2019-04-19T08:39:20.643Z">
+<meta property="og:updated_time" content="2019-04-26T01:45:56.865Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS自定义控件图片浏览器">
+<meta name="twitter:title" content="iOS自定义控件：图片浏览器">
 <meta name="twitter:description" content="一直想写一个自己的图片浏览器，但是自己能力又不是很够，所以一直拖这，最近趁自己时间充裕，自己研究了一下这方面的知识。感觉有以下几个难点：  显示和消失的转场动画 手势拖拽 图片加载  加载方式和转场动画 通过Controller加载：需要使用ViewController实现UIViewControllerAnimatedTransitioning实现转场效果 通过View加载：使用UIView动画">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3334769-32704538aebd1e35.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="https://wudan-ios.github.io/2019/04/19/iOS自定义控件图片浏览器/">
+  <link rel="canonical" href="https://wudan-ios.github.io/2019/04/19/iOS自定义控件：图片浏览器/">
 
 
 
 
 
-  <title>iOS自定义控件图片浏览器 | 一个孤独的搬码猿</title>
+  <title>iOS自定义控件：图片浏览器 | 一个孤独的搬码猿</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/04/19/iOS自定义控件图片浏览器/">
+    <link itemprop="mainEntityOfPage" href="https://wudan-ios.github.io/2019/04/19/iOS自定义控件：图片浏览器/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wudan">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS自定义控件图片浏览器</h1>
+          <h1 class="post-title" itemprop="name headline">iOS自定义控件：图片浏览器</h1>
         
 
         <div class="post-meta">
@@ -302,7 +302,7 @@
 
           
           
-             <span id="/2019/04/19/iOS自定义控件图片浏览器/" class="leancloud_visitors" data-flag-title="iOS自定义控件图片浏览器">
+             <span id="/2019/04/19/iOS自定义控件：图片浏览器/" class="leancloud_visitors" data-flag-title="iOS自定义控件：图片浏览器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -328,7 +328,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  735
+                  783
                 </span>
               
 
@@ -378,102 +378,33 @@
 <p>转场动画必要元素</p>
 <ol>
 <li>显示时需要<code>fromView</code>的<code>frame</code></li>
-<li>消失时需要<code>toView</code>的<code>frame</code><h4 id="显示"><a href="#显示" class="headerlink" title="显示"></a>显示</h4>通过修改当前需要显示图片的<code>CollectionViewCell</code>中<code>ImageView</code>的<code>frame</code>，同时修改当期<code>View</code>的背景颜色透明度<pre><code>WDImageCollectionViewCell *cell = (WDImageCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:self.tappedIndex inSection:0]];
-CGRect fromFrame                = [self.originView convertRect:self.originView.bounds toView:cell.contentView];
-cell.imageView.frame            = fromFrame;
-[UIView animateWithDuration:0.5 animations:^{
- self.backgroundColor = [[UIColor alloc] initWithWhite:0 alpha:1];
- cell.imageView.frame = cell.contentView.bounds;
-}];
-</code></pre><h4 id="消失"><a href="#消失" class="headerlink" title="消失"></a>消失</h4>原理与显示相同<pre><code>CGRect toRect = [self.originView convertRect:self.originView.bounds toView:self.window];
-[UIView animateWithDuration:0.5 animations:^{
- cell.imageView.clipsToBounds = YES;
- cell.imageView.frame         = toRect;
- self.backgroundColor         = [[UIColor alloc] initWithWhite:0 alpha:0];
-} completion:^(BOOL finished) {
- [self removeFromSuperview];
-}];
-</code></pre><h2 id="拖拽的手势"><a href="#拖拽的手势" class="headerlink" title="拖拽的手势"></a>拖拽的手势</h2>将手势添加在<code>CollectionViewCell</code>中<code>ScrollView</code>上，并遵循<code>UIGestureRecognizerDelegate</code>协议，不然会<code>CollectionView</code>无法进行滚动操作。</li>
-<li>声明一个全局属性<pre><code>CGPoint firstTouchPoint;
-</code></pre></li>
-<li>实现代理<br><code>`</code><br>#pragma mark - UIGestureRecognizer Delegate Method</li>
+<li>消失时需要<code>toView</code>的<code>frame</code><h4 id="显示"><a href="#显示" class="headerlink" title="显示"></a>显示</h4>通过修改当前需要显示图片的<code>CollectionViewCell</code>中<code>ImageView</code>的<code>frame</code>，同时修改当期<code>View</code>的背景颜色透明度<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">WDImageCollectionViewCell</span> <span class="meta">*cell</span> <span class="string">=</span> <span class="string">(WDImageCollectionViewCell</span> <span class="string">*)[self.collectionView</span> <span class="attr">cellForItemAtIndexPath:[NSIndexPath</span> <span class="attr">indexPathForRow:self.tappedIndex</span> <span class="attr">inSection:0]];</span></span><br><span class="line"><span class="string">CGRect</span> <span class="string">fromFrame</span>                <span class="string">=</span> <span class="string">[self.originView</span> <span class="attr">convertRect:self.originView.bounds</span> <span class="attr">toView:cell.contentView];</span></span><br><span class="line"><span class="string">cell.imageView.frame</span>            <span class="string">=</span> <span class="string">fromFrame;</span></span><br><span class="line"><span class="string">[UIView</span> <span class="attr">animateWithDuration:0.5</span> <span class="attr">animations:^&#123;</span></span><br><span class="line">    <span class="string">self.backgroundColor</span> <span class="string">=</span> <span class="string">[[UIColor</span> <span class="string">alloc]</span> <span class="attr">initWithWhite:0</span> <span class="attr">alpha:1];</span></span><br><span class="line">    <span class="string">cell.imageView.frame</span> <span class="string">=</span> <span class="string">cell.contentView.bounds;</span></span><br><span class="line"><span class="string">&#125;];</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<ul>
-<li><p>(BOOL)gestureRecognizer:(UIGestureRecognizer <em>)gestureRecognizer shouldReceiveTouch:(UITouch </em>)touch {<br>  firstTouchPoint = [touch locationInView:self.window];<br>  return YES;<br>}</p>
-</li>
-<li><p>(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {<br>  CGPoint touchPoint = [gestureRecognizer locationInView:self.window];<br>  CGFloat dirTop = firstTouchPoint.y - touchPoint.y;<br>  if (dirTop &gt; -10 &amp;&amp; dirTop &lt; 10) {</p>
-<pre><code>  return NO;
-</code></pre><p>  }<br>  CGFloat dirLift = firstTouchPoint.x - touchPoint.x;<br>  if (dirLift &gt; -10 &amp;&amp; dirLift &lt; 10 &amp;&amp; self.scrollView.frame.size.height &gt; [[UIScreen mainScreen] bounds].size.height) {</p>
-<pre><code>  return NO;
-</code></pre><p>  }<br>  return YES;<br>}<br><code>`</code></p>
-</li>
-</ul>
+<h4 id="消失"><a href="#消失" class="headerlink" title="消失"></a>消失</h4><p>原理与显示相同<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CGRect toRect = [self.<span class="keyword">originView </span>convertRect:self.<span class="keyword">originView.bounds </span>toView:self.window]<span class="comment">;</span></span><br><span class="line">[UIView animateWithDuration:<span class="number">0</span>.<span class="number">5</span> animations:^&#123;</span><br><span class="line">    cell.imageView.clipsToBounds = YES<span class="comment">;</span></span><br><span class="line">    cell.imageView.frame         = toRect<span class="comment">;</span></span><br><span class="line">    self.<span class="keyword">backgroundColor </span>        = [[UIColor alloc] initWithWhite:<span class="number">0</span> alpha:<span class="number">0</span>]<span class="comment">;</span></span><br><span class="line">&#125; completion:^(<span class="keyword">BOOL </span>finished) &#123;</span><br><span class="line">    [self removeFromSuperview]<span class="comment">;</span></span><br><span class="line">&#125;]<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="拖拽的手势"><a href="#拖拽的手势" class="headerlink" title="拖拽的手势"></a>拖拽的手势</h2><p>将手势添加在<code>CollectionViewCell</code>中<code>ScrollView</code>上，并遵循<code>UIGestureRecognizerDelegate</code>协议，不然会<code>CollectionView</code>无法进行滚动操作。</p>
+<ol>
+<li>声明一个全局属性</li>
+</ol>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGPoint firstTouchPoint<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>实现代理</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#pragma mark - UIGestureRecognizer Delegate Method</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch &#123;</span><br><span class="line">    firstTouchPoint = [touch locationInView:<span class="keyword">self</span>.window];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizerShouldBegin:(<span class="built_in">UIGestureRecognizer</span> *)gestureRecognizer &#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> touchPoint = [gestureRecognizer locationInView:<span class="keyword">self</span>.window];</span><br><span class="line">    <span class="built_in">CGFloat</span> dirTop = firstTouchPoint.y - touchPoint.y;</span><br><span class="line">    <span class="keyword">if</span> (dirTop &gt; <span class="number">-10</span> &amp;&amp; dirTop &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">CGFloat</span> dirLift = firstTouchPoint.x - touchPoint.x;</span><br><span class="line">    <span class="keyword">if</span> (dirLift &gt; <span class="number">-10</span> &amp;&amp; dirLift &lt; <span class="number">10</span> &amp;&amp; <span class="keyword">self</span>.scrollView.frame.size.height &gt; [[<span class="built_in">UIScreen</span> mainScreen] bounds].size.height) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>拖动手势操作，同意代理传给<code>View</code></li>
 </ol>
 <ul>
-<li>协议方法<br><code>`</code><br>@class WDImageCollectionViewCell;<br>@protocol WDImageCollectionViewCellDelegate <nsobject></nsobject></li>
-<li>(void)collectionViewCell:(WDImageCollectionViewCell <em>)cell singleTapActionWithImageUrl:(NSString </em>)imageUrl;</li>
-<li>(void)collectionViewCell:(WDImageCollectionViewCell *)cell panActionWithPercent:(CGFloat)percent;</li>
-<li>(void)collectionViewCell:(WDImageCollectionViewCell <em>)cell dimssViewWithImageUrl:(NSString </em>)imageUrl;<br>@end<br><code>`</code></li>
-<li>拖动手势方法<br><code>`</code><br>#pragma mark - UIGestureRecognizer Target Event<br>/*<em> 滑动手势 </em>/</li>
-<li><p>(void)didRecognizedPanGuesture:(UIPanGestureRecognizer *)pan {<br>  CGPoint point = [pan translationInView:self.window];<br>  CGFloat scale = 1.0 - ABS(point.y) / [[UIScreen mainScreen] bounds].size.height;<br>  switch (pan.state) {</p>
-<pre><code>  case UIGestureRecognizerStateBegan: {}
-      break;
-  case UIGestureRecognizerStateChanged:
-  {
-      scale = MAX(scale, 0);
-      CGFloat s = MAX(scale, 0.5);
-      CGAffineTransform translation = CGAffineTransformMakeTranslation(point.x / s, point.y / s);
-      CGAffineTransform translationScale = CGAffineTransformMakeScale(s, s);
-      self.imageView.transform = CGAffineTransformConcat(translation, translationScale);
-      // 传出translationScale，修改背景颜色透明度
-      if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(collectionViewCell:panActionWithPercent:)]) {
-          [self.delegate collectionViewCell:self panActionWithPercent:scale];
-      }
-  }
-      break;
-  case  UIGestureRecognizerStateCancelled | UIGestureRecognizerStateFailed:
-  {
-      self.imageView.transform = CGAffineTransformIdentity;
-      // 回复初始样式，传出translationScale，修改背景颜色透明度
-      if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(collectionViewCell:panActionWithPercent:)]) {
-          [self.delegate collectionViewCell:self panActionWithPercent:1];
-      }
-  }
-      break;
-  case UIGestureRecognizerStateEnded:
-  {
-      [UIView animateWithDuration:0.5 animations:^{
-          CGAffineTransform transform1 = CGAffineTransformMakeTranslation(0,0);
-          self.imageView.transform = CGAffineTransformScale(transform1, 1, 1);
-      }];
-
-      // 回复初始样式，传出translationScale，修改背景颜色透明度
-      if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(collectionViewCell:panActionWithPercent:)]) {
-          [self.delegate collectionViewCell:self panActionWithPercent:scale];
-      }
-      if (scale &lt; 0.7) {
-          // 拖动结束，让页面消失
-          if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(collectionViewCell:dimssViewWithImageUrl:)]) {
-              [self.delegate collectionViewCell:self dimssViewWithImageUrl:self.imageUrl];
-          }
-      } else {
-          // 回复初始样式，传出translationScale，修改背景颜色透明度
-          if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(collectionViewCell:panActionWithPercent:)]) {
-              [self.delegate collectionViewCell:self panActionWithPercent:1];
-          }
-      }
-  }
-      break;
-  default:
-      break;
-</code></pre><p>  }<br>}<br><code>`</code></p>
+<li><p>协议方法</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"><span class="meta">@class</span> WDImageCollectionViewCell;</span><br><span class="line"><span class="meta">@protocol</span> WDImageCollectionViewCellDelegate &lt;NSObject&gt;</span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">collectionViewCell:</span>(WDImageCollectionViewCell *)cell <span class="string">singleTapActionWithImageUrl:</span>(NSString *)imageUrl;</span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">collectionViewCell:</span>(WDImageCollectionViewCell *)cell <span class="string">panActionWithPercent:</span>(CGFloat)percent;</span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">collectionViewCell:</span>(WDImageCollectionViewCell *)cell <span class="string">dimssViewWithImageUrl:</span>(NSString *)imageUrl;</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拖动手势方法</p>
+</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#pragma mark - UIGestureRecognizer Target Event</span></span><br><span class="line"><span class="comment">/** 滑动手势 */</span></span><br><span class="line">- (<span class="keyword">void</span>)didRecognizedPanGuesture:(<span class="built_in">UIPanGestureRecognizer</span> *)pan &#123;</span><br><span class="line">    <span class="built_in">CGPoint</span> point = [pan translationInView:<span class="keyword">self</span>.window];</span><br><span class="line">    <span class="built_in">CGFloat</span> scale = <span class="number">1.0</span> - ABS(point.y) / [[<span class="built_in">UIScreen</span> mainScreen] bounds].size.height;</span><br><span class="line">    <span class="keyword">switch</span> (pan.state) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateBegan</span>: &#123;&#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateChanged</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            scale = MAX(scale, <span class="number">0</span>);</span><br><span class="line">            <span class="built_in">CGFloat</span> s = MAX(scale, <span class="number">0.5</span>);</span><br><span class="line">            <span class="built_in">CGAffineTransform</span> translation = <span class="built_in">CGAffineTransformMakeTranslation</span>(point.x / s, point.y / s);</span><br><span class="line">            <span class="built_in">CGAffineTransform</span> translationScale = <span class="built_in">CGAffineTransformMakeScale</span>(s, s);</span><br><span class="line">            <span class="keyword">self</span>.imageView.transform = <span class="built_in">CGAffineTransformConcat</span>(translation, translationScale);</span><br><span class="line">            <span class="comment">// 传出translationScale，修改背景颜色透明度</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(collectionViewCell:panActionWithPercent:)]) &#123;</span><br><span class="line">                [<span class="keyword">self</span>.delegate collectionViewCell:<span class="keyword">self</span> panActionWithPercent:scale];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span>  <span class="built_in">UIGestureRecognizerStateCancelled</span> | <span class="built_in">UIGestureRecognizerStateFailed</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">self</span>.imageView.transform = <span class="built_in">CGAffineTransformIdentity</span>;</span><br><span class="line">            <span class="comment">// 回复初始样式，传出translationScale，修改背景颜色透明度</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(collectionViewCell:panActionWithPercent:)]) &#123;</span><br><span class="line">                [<span class="keyword">self</span>.delegate collectionViewCell:<span class="keyword">self</span> panActionWithPercent:<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateEnded</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.5</span> animations:^&#123;</span><br><span class="line">                <span class="built_in">CGAffineTransform</span> transform1 = <span class="built_in">CGAffineTransformMakeTranslation</span>(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">self</span>.imageView.transform = <span class="built_in">CGAffineTransformScale</span>(transform1, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">            &#125;];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 回复初始样式，传出translationScale，修改背景颜色透明度</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(collectionViewCell:panActionWithPercent:)]) &#123;</span><br><span class="line">                [<span class="keyword">self</span>.delegate collectionViewCell:<span class="keyword">self</span> panActionWithPercent:scale];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (scale &lt; <span class="number">0.7</span>) &#123;</span><br><span class="line">                <span class="comment">// 拖动结束，让页面消失</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(collectionViewCell:dimssViewWithImageUrl:)]) &#123;</span><br><span class="line">                    [<span class="keyword">self</span>.delegate collectionViewCell:<span class="keyword">self</span> dimssViewWithImageUrl:<span class="keyword">self</span>.imageUrl];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 回复初始样式，传出translationScale，修改背景颜色透明度</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(collectionViewCell:panActionWithPercent:)]) &#123;</span><br><span class="line">                    [<span class="keyword">self</span>.delegate collectionViewCell:<span class="keyword">self</span> panActionWithPercent:<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h2><p>使用<code>SDWebImage</code>获取图片，通过<code>FLAnimatedImageView</code>加载<code>gif</code>图</p>
 <h2 id="Github地址"><a href="#Github地址" class="headerlink" title="Github地址"></a>Github地址</h2><p><a href="https://github.com/wudan-ios/WDImageBrowser.git" target="_blank" rel="noopener">项目地址</a></p>
 <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="https://upload-images.jianshu.io/upload_images/3334769-daf79ce9d51e3359.gif?imageMogr2/auto-orient/strip" alt=""></p>
-</li>
-</ul>
 
       
     </div>
@@ -709,7 +640,7 @@ cell.imageView.frame            = fromFrame;
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.8k</span>
+    <span title="Site words total count">34k</span>
   
 </div>
 
@@ -725,7 +656,7 @@ cell.imageView.frame            = fromFrame;
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34.8k字</span>
+  <span class="post-count">博客全站共34k字</span>
 </div>
         
 
@@ -769,8 +700,6 @@ cell.imageView.frame            = fromFrame;
   
 
 
-  
-
 
 
 
@@ -809,11 +738,6 @@ cell.imageView.frame            = fromFrame;
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

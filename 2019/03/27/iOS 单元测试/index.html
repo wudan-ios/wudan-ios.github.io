@@ -103,7 +103,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-4a5476214d38ea7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-b1b529d4111e737b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3334769-01e76835566d7ae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-27T08:14:28.426Z">
+<meta property="og:updated_time" content="2019-04-26T01:15:22.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 单元测试">
 <meta name="twitter:description" content="单元测试以测试ViewController为例。 ViewController.h文件1234567891011#import &amp;lt;UIKit/UIKit.h&amp;gt;@interface ViewController : UIViewController/** 逻辑测试 */- (int)getSumWithNum1:(int)a num2:(int)b;/** 异步测试 */- (void">
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  401
+                  389
                 </span>
               
 
@@ -372,25 +372,27 @@
       
         <p><img src="https://upload-images.jianshu.io/upload_images/3334769-4eef772205a43353.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="镇楼专用"></p>
 <h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>以测试ViewController为例。</p>
-<h5 id="ViewController-h文件"><a href="#ViewController-h文件" class="headerlink" title="ViewController.h文件"></a>ViewController.h文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@interface ViewController : UIViewController</span><br><span class="line">/** 逻辑测试 */</span><br><span class="line">- (int)getSumWithNum1:(int)a num2:(int)b;</span><br><span class="line">/** 异步测试 */</span><br><span class="line">- (void)loadDataComplete:(void(^)(id info))complete;</span><br><span class="line">/** 性能测试 */</span><br><span class="line">- (void)openCamera;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<h5 id="ViewController-m文件"><a href="#ViewController-m文件" class="headerlink" title="ViewController.m文件"></a>ViewController.m文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">- (int)getSumWithNum1:(int)a num2:(int)b &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)loadDataComplete:(void (^)(id))complete &#123;    </span><br><span class="line">    dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</span><br><span class="line">        sleep(2);</span><br><span class="line">        NSString *data = @&quot;😝&quot;;</span><br><span class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            complete(data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)openCamera &#123;</span><br><span class="line">    for(int i = 0; i &lt; 1000; ++i) &#123;</span><br><span class="line">        NSLog(@&quot;这是一个字符串%d&quot;, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="ViewController-h文件"><a href="#ViewController-h文件" class="headerlink" title="ViewController.h文件"></a>ViewController.h文件</h5><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> : <span class="title">UIViewController</span></span></span><br><span class="line"><span class="comment">/** 逻辑测试 */</span></span><br><span class="line">- (<span class="keyword">int</span>)getSumWithNum1:(<span class="keyword">int</span>)a num2:(<span class="keyword">int</span>)b;</span><br><span class="line"><span class="comment">/** 异步测试 */</span></span><br><span class="line">- (<span class="keyword">void</span>)loadDataComplete:(<span class="keyword">void</span>(^)(<span class="keyword">id</span> info))complete;</span><br><span class="line"><span class="comment">/** 性能测试 */</span></span><br><span class="line">- (<span class="keyword">void</span>)openCamera;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h5 id="ViewController-m文件"><a href="#ViewController-m文件" class="headerlink" title="ViewController.m文件"></a>ViewController.m文件</h5><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">int</span>)getSumWithNum1:(<span class="keyword">int</span>)a num2:(<span class="keyword">int</span>)b &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)loadDataComplete:(<span class="keyword">void</span> (^)(<span class="keyword">id</span>))complete &#123;    </span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">        sleep(<span class="number">2</span>);</span><br><span class="line">        <span class="built_in">NSString</span> *data = <span class="string">@"😝"</span>;</span><br><span class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            complete(data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)openCamera &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"这是一个字符串%d"</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>为了进行单元化测试，所以新建一个<code>ViewControllerTest</code>文件。<br>步骤<br><img src="https://upload-images.jianshu.io/upload_images/3334769-c0d1455212a740ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建文件"></p>
 <ul>
 <li>导入测试头文件<code>#import &quot;ViewController.h&quot;</code></li>
 <li>声明属性<code>@property (nonatomic, strong) ViewController *vc;</code></li>
-<li>在<code>- (void)setUp;</code>进行初始化代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)setUp &#123;</span><br><span class="line">    self.vc = [[ViewController alloc] init];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>在<code>- (void)setUp;</code>进行初始化代码</li>
 </ul>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)setUp &#123;</span><br><span class="line">    self.vc = <span class="comment">[<span class="comment">[ViewController alloc]</span> init]</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="1、逻辑测试"><a href="#1、逻辑测试" class="headerlink" title="1、逻辑测试"></a>1、逻辑测试</h3><ol>
 <li>给出测试数据</li>
 <li>进行测试</li>
-<li>使用断言进行判定<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (void)testSum &#123;</span><br><span class="line">// 1. given</span><br><span class="line">int a = 10;</span><br><span class="line">int b = 22;</span><br><span class="line">// 2. when</span><br><span class="line">int sum = [self.vc getSumWithNum1:a num2:b];</span><br><span class="line">// 3. then</span><br><span class="line">XCTAssertEqual(sum, 32, @&quot;错误&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>使用断言进行判定</li>
 </ol>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)testSum &#123;</span><br><span class="line"><span class="comment">// 1. given</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">22</span>;</span><br><span class="line"><span class="comment">// 2. when</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">sum</span> = [self.vc getSumWithNum1:a num2:b];</span><br><span class="line"><span class="comment">// 3. then</span></span><br><span class="line">XCTAssertEqual(<span class="keyword">sum</span>, <span class="number">32</span>, @<span class="string">"错误"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2、异步测试"><a href="#2、异步测试" class="headerlink" title="2、异步测试"></a>2、异步测试</h3><ol>
 <li>创建<code>XCTestExpectation</code>，设置错误提示</li>
-<li>调用方法，在异步中调用<code>fulfill</code></li>
-<li>进行判断时间，是否在预期时间内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">XCTestExpectation *exp = [self expectationWithDescription:@&quot;超过预期时间&quot;];</span><br><span class="line">[self.vc loadDataComplete:^(id info) &#123;</span><br><span class="line">    XCTAssertNil(info, @&quot;数据为空&quot;);</span><br><span class="line">    [exp fulfill];</span><br><span class="line">&#125;];</span><br><span class="line">[self waitForExpectationsWithTimeout:4 handler:^(NSError * _Nullable error) &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, error);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<li><p>调用方法，在异步中调用<code>fulfill</code></p>
+</li>
+<li><p>进行判断时间，是否在预期时间内容</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">XCTestExpectation</span> *exp = [<span class="keyword">self</span> expectationWithDescription:<span class="string">@"超过预期时间"</span>];</span><br><span class="line">[<span class="keyword">self</span>.vc loadDataComplete:^(<span class="keyword">id</span> info) &#123;</span><br><span class="line">    <span class="built_in">XCTAssertNil</span>(info, <span class="string">@"数据为空"</span>);</span><br><span class="line">    [exp fulfill];</span><br><span class="line">&#125;];</span><br><span class="line">[<span class="keyword">self</span> waitForExpectationsWithTimeout:<span class="number">4</span> handler:^(<span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, error);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="3、性能测试"><a href="#3、性能测试" class="headerlink" title="3、性能测试"></a>3、性能测试</h3><p><img src="https://upload-images.jianshu.io/upload_images/3334769-96f0facc7307a744.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="性能测试"></p>
@@ -398,7 +400,7 @@
 <li>设置Baseline时间</li>
 <li>Max STDDEV 最大样本标准偏差比例</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)testPerformanceExample &#123;</span><br><span class="line">    [self measureBlock:^&#123;</span><br><span class="line">        [self.vc openCamera];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="literal">void</span>)testPerformanceExample &#123;</span><br><span class="line">    <span class="meta">[</span><span class="built_in">self</span> measureBlock:^&#123;</span><br><span class="line">        <span class="meta">[</span><span class="built_in">self</span>.vc openCamera<span class="meta">]</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="UI测试"><a href="#UI测试" class="headerlink" title="UI测试"></a>UI测试</h2><p><img src="https://upload-images.jianshu.io/upload_images/3334769-0dc163b565bdcbf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="脚本录制"><br>1、录制脚本<br><br>2、编辑脚本<br><br>3、自动化测试</p>
 <h2 id="获取代码覆盖率"><a href="#获取代码覆盖率" class="headerlink" title="获取代码覆盖率"></a>获取代码覆盖率</h2><p>1、点击<code>Edit Secheme</code><br><img src="https://upload-images.jianshu.io/upload_images/3334769-4a5476214d38ea7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Edit Secheme"><br>2、选择<code>Test</code>-&gt;<code>Options</code>-&gt;<code>Code Coverage</code>勾起<br><img src="https://upload-images.jianshu.io/upload_images/3334769-b1b529d4111e737b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Code Coverage"><br>3、运行代码查看结果<br><img src="https://upload-images.jianshu.io/upload_images/3334769-01e76835566d7ae7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="查看结果"></p>
@@ -641,7 +643,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.8k</span>
+    <span title="Site words total count">34k</span>
   
 </div>
 
@@ -657,7 +659,7 @@
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34.8k字</span>
+  <span class="post-count">博客全站共34k字</span>
 </div>
         
 
@@ -701,8 +703,6 @@
   
 
 
-  
-
 
 
 
@@ -741,11 +741,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

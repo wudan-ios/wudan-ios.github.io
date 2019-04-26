@@ -362,8 +362,8 @@
       
 
       
-        <p>普通类型数据读取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 保存基本类型数据</span><br><span class="line"></span><br><span class="line"> @param obj 保存对象</span><br><span class="line"> @param key 键值</span><br><span class="line"> */</span><br><span class="line">- (void)lz_userDefaultsSetObject:(id)obj keyName:(NSString *)key &#123;</span><br><span class="line">     [[NSUserDefaults standardUserDefaults] setObject:obj forKey:key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 读取基本类型数据</span><br><span class="line"></span><br><span class="line"> @param key 键值</span><br><span class="line"> @return return value description</span><br><span class="line"> */</span><br><span class="line">- (id)lz_getUserUserDefaultsForKey:(NSString *)key &#123;</span><br><span class="line">    return [[NSUserDefaults standardUserDefaults] objectForKey:key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Model对象存储，需要使用规归档配合使用，所有必须是要遵循<nscoding>的对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> Model数据保存</span><br><span class="line"></span><br><span class="line"> @param obj 保存对象</span><br><span class="line"> @param key 键值</span><br><span class="line"> */</span><br><span class="line">- (void)lz_userDefaultsSetModel:(NSObject *)obj keyName:(NSString *)key &#123;</span><br><span class="line">    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj requiringSecureCoding:false error:nil];</span><br><span class="line">    [[NSUserDefaults standardUserDefaults] setObject:data forKey:key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> 读取基本类型数据</span><br><span class="line"></span><br><span class="line"> @param key 键值</span><br><span class="line"> @return return value description</span><br><span class="line"> */</span><br><span class="line">- (id)lz_getUserUserDefaultsForKey:(NSString *)key &#123;</span><br><span class="line">    return [[NSUserDefaults standardUserDefaults] objectForKey:key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></nscoding></p>
+        <p>普通类型数据读取<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 保存基本类型数据</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> <span class="doctag">@param</span> obj 保存对象</span></span><br><span class="line"><span class="comment"> <span class="doctag">@param</span> key 键值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">lz_userDefaultsSetObject:</span>(id)obj <span class="string">keyName:</span>(NSString *)key &#123;</span><br><span class="line">     [[NSUserDefaults standardUserDefaults] <span class="string">setObject:</span>obj <span class="string">forKey:</span>key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 读取基本类型数据</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> <span class="doctag">@param</span> key 键值</span></span><br><span class="line"><span class="comment"> <span class="doctag">@return</span> return value description</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">- (id)<span class="string">lz_getUserUserDefaultsForKey:</span>(NSString *)key &#123;</span><br><span class="line">    <span class="keyword">return</span> [[NSUserDefaults standardUserDefaults] <span class="string">objectForKey:</span>key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Model对象存储，需要使用规归档配合使用，所有必须是要遵循<nscoding>的对象<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> Model数据保存</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> <span class="doctag">@param</span> obj 保存对象</span></span><br><span class="line"><span class="comment"> <span class="doctag">@param</span> key 键值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">lz_userDefaultsSetModel:</span>(NSObject *)obj <span class="string">keyName:</span>(NSString *)key &#123;</span><br><span class="line">    NSData *data = [NSKeyedArchiver <span class="string">archivedDataWithRootObject:</span>obj <span class="string">requiringSecureCoding:</span><span class="literal">false</span> <span class="string">error:</span>nil];</span><br><span class="line">    [[NSUserDefaults standardUserDefaults] <span class="string">setObject:</span>data <span class="string">forKey:</span>key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 读取基本类型数据</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> <span class="doctag">@param</span> key 键值</span></span><br><span class="line"><span class="comment"> <span class="doctag">@return</span> return value description</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">- (id)<span class="string">lz_getUserUserDefaultsForKey:</span>(NSString *)key &#123;</span><br><span class="line">    <span class="keyword">return</span> [[NSUserDefaults standardUserDefaults] <span class="string">objectForKey:</span>key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></nscoding></p>
 
       
     </div>
@@ -578,7 +578,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.8k</span>
+    <span title="Site words total count">34k</span>
   
 </div>
 
@@ -594,7 +594,7 @@
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34.8k字</span>
+  <span class="post-count">博客全站共34k字</span>
 </div>
         
 
@@ -638,8 +638,6 @@
   
 
 
-  
-
 
 
 
@@ -678,11 +676,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

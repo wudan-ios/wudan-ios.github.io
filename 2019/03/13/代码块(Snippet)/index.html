@@ -330,7 +330,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  561
+                  583
                 </span>
               
 
@@ -378,84 +378,68 @@
 <li>Platform：可以使用的平台（如iOS、Mac OS）。 </li>
 <li>Language：可以在哪些语言中使用（如 Objective-C、Swift）。 </li>
 <li>Completion Shortcut：快捷方式，以字母开头（支持少数符号，如@）。 </li>
-<li><p>Completion Scopes：作用范围，一般写在正确的位置拖动即可，Xcode会自行选择好。</p>
-<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><pre><code>@property (nonatomic, strong) &lt;#ClassName#&gt; *&lt;#class#&gt;; ///&lt; &lt;#注释#&gt;
-@property (nonatomic, assign) &lt;#DataType#&gt; &lt;#name#&gt;; ///&lt; &lt;#注释#&gt;
-@property (nonatomic, copy) &lt;#ClassName#&gt; *&lt;#name#&gt;; ///&lt; &lt;#注释#&gt;
-@property (nonatomic, weak) id&lt;&lt;#delegateOrDataSouce#&gt;&gt; &lt;#delegateOrDataSouce#&gt;; ///&lt; &lt;#注释#&gt;
-@property (nonatomic, weak) &lt;#Class#&gt; *&lt;#name#&gt;; ///&lt; &lt;#注释#&gt;
-</code></pre><h4 id="常用注释"><a href="#常用注释" class="headerlink" title="常用注释"></a>常用注释</h4></li>
-<li><p>顶部注释</p>
-<pre><code>/** &lt;#属性注释#&gt; */
-</code></pre></li>
-<li>右侧注释<pre><code>///&lt; &lt;#注释#&gt;
-</code></pre></li>
-<li>简述顶部注释<pre><code>/** &lt;#简要描述#&gt;
-* &lt;#详细描述#&gt;
-*/
-</code></pre></li>
-<li>Pragma</li>
+<li>Completion Scopes：作用范围，一般写在正确的位置拖动即可，Xcode会自行选择好。<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) &lt;<span class="meta">#ClassName#&gt; *<span class="meta-string">&lt;#class#&gt;</span>; ///<span class="meta-string">&lt; &lt;#注释#&gt;</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) &lt;<span class="meta">#DataType#&gt; <span class="meta-string">&lt;#name#&gt;</span>; ///<span class="meta-string">&lt; &lt;#注释#&gt;</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) &lt;<span class="meta">#ClassName#&gt; *<span class="meta-string">&lt;#name#&gt;</span>; ///<span class="meta-string">&lt; &lt;#注释#&gt;</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="keyword">id</span>&lt;&lt;<span class="meta">#delegateOrDataSouce#&gt;&gt; <span class="meta-string">&lt;#delegateOrDataSouce#&gt;</span>; ///<span class="meta-string">&lt; &lt;#注释#&gt;</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) &lt;<span class="meta">#Class#&gt; *<span class="meta-string">&lt;#name#&gt;</span>; ///<span class="meta-string">&lt; &lt;#注释#&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<ul>
-<li>有分割线<pre><code>#pragma mark &lt;#mark#&gt;
-</code></pre></li>
-<li>无分割线<pre><code>#pragma mark - &lt;#mark&gt; 或 // MARK: &lt;#mark#&gt;
-</code></pre></li>
-</ul>
-<ol start="5">
-<li>Warning(警告)<pre><code>#warning &lt;#message#&gt;
-</code></pre></li>
-<li>???(不确定)<pre><code>// ???: &lt;#???#&gt;
-</code></pre></li>
-<li>!!!(警告)<pre><code>// !!!: &lt;#???#&gt;
-</code></pre></li>
-<li><p>FIXME(需要修改的地方)</p>
-<pre><code>// FIXME: &lt;#Fix详情#&gt;
-</code></pre></li>
-<li><p>常用方法<br><code>`</code><br>#pragma mark - 页面控件配置</p>
+<h4 id="常用注释"><a href="#常用注释" class="headerlink" title="常用注释"></a>常用注释</h4><ol>
+<li><p>顶部注释</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/** &lt;<span class="meta">#属性注释#&gt; */</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右侧注释</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span><span class="doctag">&lt; &lt;#注释#&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>简述顶部注释</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/** &lt;<span class="meta">#简要描述#&gt;</span></span><br><span class="line"> * &lt;<span class="meta">#详细描述#&gt;</span></span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Pragma</p>
 </li>
 </ol>
 <ul>
-<li>(void)setupSubViewsProperties {</li>
+<li><p>有分割线</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> &lt;#mark#&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无分割线</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - &lt;#mark&gt; 或 <span class="comment">// MARK: &lt;#mark#&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>}</p>
-<p>#pragma mark - 页面控件布局</p>
-<ul>
-<li>(void)setupSubViewsConstraint {</li>
-</ul>
-<p>}</p>
-<pre><code>
-10. 枚举
-</code></pre><p>typedef NS_ENUM(NSInteger, &lt;#TypeName#&gt;) {</p>
-<p>};</p>
-<p>typedef NS_OPTIONS(NSUInteger, &lt;#TypeName#&gt;) {</p>
-<p>};</p>
-<pre><code>11. IFDEBUG
-</code></pre><p>#if DEBUG<br>&lt;#TODO#&gt;</p>
-<p>#else<br>&lt;#TODO#&gt;</p>
-<p>#endif</p>
-<pre><code>12. 快捷初始化UILabel
-</code></pre><p>UILabel *l = [[UILabel alloc] init];<br>l.font = [UIFont &lt;#font#&gt;];<br>l.text = @”&lt;#conent#&gt;”;<br>l.textColor = [UIColor &lt;#textColor#&gt;];<br>l.numberOfLines = 0;<br>[&lt;#view#&gt; addSubview:l];</p>
-<pre><code>13. 快捷初始化UIButton
-</code></pre><p>UIButton <em>b = [UIButton buttonWithType:UIButtonTypeCustom];<br>b.backgroundColor = [UIColor &lt;#backgroundColor#&gt;];<br>b.titleLabel.font = [UIFont &lt;#font#&gt;];<br>[b setTitle:&lt;#title#&gt; forState:UIControlStateNormal];<br>[b setTitleColor:[UIColor &lt;#titleColor#&gt;] forState:UIControlStateNormal];<br>[b setImage:[UIImage imageNamed:&lt;#(nonnull NSString </em>)#&gt;] forState:UIControlStateNormal]<br>[b addTarget:self action:@selector(didTapped&lt;#Button Name#&gt;:) forControlEvents:UIControlEventTouchUpInside];<br>[&lt;#view#&gt; addSubview:b];</p>
-<pre><code>14. UIButton 点击事件
-</code></pre><p>/*<em> &lt;#ButtonName#&gt;点击事件 </em>/</p>
-<ul>
-<li>(void)didTapped&lt;#ButtonName#&gt;:(UIButton *)sender {</li>
-</ul>
-<p>}</p>
-<pre><code>15. Notification事件
-</code></pre><p>/*<em> &lt;#Notification Name#&gt;通知事件 </em>/</p>
-<ul>
-<li>(void)didReceive&lt;#Notification Name#&gt;:(NSNotification *)notification {</li>
-</ul>
-<p>}</p>
-<pre><code>16. UIGestureRecognizer触摸事件
-</code></pre><p>/*<em> &lt;#GestureRecognizer Name#&gt;触摸事件 </em>/</p>
-<ul>
-<li>(void)didRecognized&lt;#GestureRecognizer Name#&gt;:(UIGestureRecognizer *)recognizer {</li>
-</ul>
-<p>}<br><code>`</code></p>
+<ol start="5">
+<li><p>Warning(警告)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">warning</span> <span class="meta-string">&lt;#message#&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>???(不确定)</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> ???: &lt;<span class="comment">#???#&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>!!!(警告)</p>
+<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// !!!: &lt;#???#&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>FIXME(需要修改的地方)</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> FIXME: &lt;<span class="comment">#Fix详情#&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用方法</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - 页面控件配置</span><br><span class="line">- (void)setupSubViewsProperties &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#pragma</span> <span class="selector-tag">mark</span> - 页面控件布局</span><br><span class="line">- (void)setupSubViewsConstraint &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>枚举</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">typedef <span class="type">NS_ENUM</span>(<span class="type">NSInteger</span>, &lt;#<span class="type">TypeName</span>#&gt;) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef <span class="type">NS_OPTIONS</span>(<span class="type">NSUInteger</span>, &lt;#<span class="type">TypeName</span>#&gt;) &#123;</span><br><span class="line">                </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IFDEBUG</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">if</span> DEBUG</span><br><span class="line">&lt;#TODO#&gt;</span><br><span class="line">#else</span><br><span class="line">&lt;#TODO#&gt;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>快捷初始化UILabel</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UILabel *<span class="attr">l</span> = [[UILabel alloc] init];</span><br><span class="line">l.<span class="attr">font</span> = [UIFont &lt;<span class="comment">#font#&gt;];</span></span><br><span class="line">l.<span class="attr">text</span> = @<span class="string">"&lt;#conent#&gt;"</span>;</span><br><span class="line">l.<span class="attr">textColor</span> = [UIColor &lt;<span class="comment">#textColor#&gt;];</span></span><br><span class="line">l.<span class="attr">numberOfLines</span> = <span class="number">0</span>;</span><br><span class="line">[&lt;<span class="comment">#view#&gt; addSubview:l];</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>快捷初始化UIButton</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">UIButton *<span class="keyword">b </span>= [UIButton <span class="keyword">buttonWithType:UIButtonTypeCustom];</span></span><br><span class="line"><span class="keyword">b.backgroundColor </span>= [UIColor &lt;<span class="comment">#backgroundColor#&gt;];</span></span><br><span class="line"><span class="keyword">b.titleLabel.font </span>= [UIFont &lt;<span class="comment">#font#&gt;];</span></span><br><span class="line">[<span class="keyword">b </span>setTitle:&lt;<span class="comment">#title#&gt; forState:UIControlStateNormal];</span></span><br><span class="line">[<span class="keyword">b </span>setTitleColor:[UIColor &lt;<span class="comment">#titleColor#&gt;] forState:UIControlStateNormal];</span></span><br><span class="line">[<span class="keyword">b </span>setImage:[UIImage imageNamed:&lt;<span class="comment">#(nonnull NSString *)#&gt;] forState:UIControlStateNormal]</span></span><br><span class="line">[<span class="keyword">b </span><span class="keyword">addTarget:self </span>action:@selector(<span class="keyword">didTapped&lt;#Button </span>Name<span class="comment">#&gt;:) forControlEvents:UIControlEventTouchUpInside];</span></span><br><span class="line">[&lt;<span class="comment">#view#&gt; addSubview:b];</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>UIButton 点击事件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** &lt;#ButtonName#&gt;点击事件 */</span></span><br><span class="line"><span class="selector-tag">-</span> (<span class="selector-tag">void</span>)<span class="selector-tag">didTapped</span>&lt;<span class="selector-id">#ButtonName</span>#&gt;<span class="selector-pseudo">:(UIButton</span> *)<span class="selector-tag">sender</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Notification事件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** &lt;#Notification Name#&gt;通知事件 */</span></span><br><span class="line"><span class="selector-tag">-</span> (<span class="selector-tag">void</span>)<span class="selector-tag">didReceive</span>&lt;<span class="selector-id">#Notification</span> <span class="selector-tag">Name</span>#&gt;<span class="selector-pseudo">:(NSNotification</span> *)<span class="selector-tag">notification</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>UIGestureRecognizer触摸事件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** &lt;#GestureRecognizer Name#&gt;触摸事件 */</span></span><br><span class="line"><span class="selector-tag">-</span> (<span class="selector-tag">void</span>)<span class="selector-tag">didRecognized</span>&lt;<span class="selector-id">#GestureRecognizer</span> <span class="selector-tag">Name</span>#&gt;<span class="selector-pseudo">:(UIGestureRecognizer</span> *)<span class="selector-tag">recognizer</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <h4 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h4><p>这也是为了个人意见，其他还有很多可以做成代码块的，例如CGD，TableViewDataSource等等，希望短短的文章可以让你代码可以写的更好。</p>
 
       
@@ -696,7 +680,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.8k</span>
+    <span title="Site words total count">34k</span>
   
 </div>
 
@@ -712,7 +696,7 @@
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34.8k字</span>
+  <span class="post-count">博客全站共34k字</span>
 </div>
         
 
@@ -756,8 +740,6 @@
   
 
 
-  
-
 
 
 
@@ -796,11 +778,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
